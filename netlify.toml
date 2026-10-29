@@ -16,9 +16,10 @@
   to = "/index.html"
   status = 200
 
-# Ensure proper handling of static assets
+# Only Vite's content-hashed bundles are safe to cache forever. A catch-all "/*" rule would
+# also hit SPA routes such as /home (served from index.html) and pin a stale app shell.
 [[headers]]
-  for = "/*"
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
