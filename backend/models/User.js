@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
   },
   resetPasswordOTP: String,
   resetPasswordExpires: Date,
+  resetPasswordAttempts: {
+    type: Number,
+    default: 0
+  },
   profilePicture: {
     url: String,
     public_id: String,

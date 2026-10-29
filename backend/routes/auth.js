@@ -6,6 +6,8 @@ const rateLimit = require('express-rate-limit');
 const {
   validateSignup,
   validateLogin,
+  validateForgotPassword,
+  validateResetPassword,
   sanitizeInput
 } = require('../middleware/validation');
 const authController = require('../controllers/authController');
@@ -34,7 +36,16 @@ const resetPasswordLimiter = rateLimit({
   message: { message: 'Too many password reset attempts, please try again after an hour' }
 });
 
-router.get('/google', (req, res, next) => {
+const { isGoogleAuthConfigured } = require('../config/passport');
+
+const requireGoogleAuth = (req, res, next) => {
+  if (!isGoogleAuthConfigured) {
+    return res.status(503).json({ message: 'Google sign-in is not configured on this server' });
+  }
+  return next();
+};
+
+router.get('/google', requireGoogleAuth, (req, res, next) => {
   passport.authenticate('google', {
     scope: ['profile', 'email'],
     prompt: 'select_account'
@@ -43,6 +54,7 @@ router.get('/google', (req, res, next) => {
 
 router.get(
   '/google/callback',
+  requireGoogleAuth,
   (req, res, next) => {
     passport.authenticate('google', {
       session: false,
@@ -54,8 +66,26 @@ router.get(
 
 router.post('/signup', signupLimiter, sanitizeInput, validateSignup, authController.signup);
 router.post('/login', loginLimiter, sanitizeInput, validateLogin, authController.login);
-router.post('/forgot-password', forgotPasswordLimiter, authController.requestPasswordReset);
-router.post('/reset-password', resetPasswordLimiter, authController.resetPassword);
-router.post('/refresh', authController.refreshToken);
+const refreshLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { message: 'Too many token refresh requests, please try again later' }
+});
+
+router.post(
+  '/forgot-password',
+  forgotPasswordLimiter,
+  sanitizeInput,
+  validateForgotPassword,
+  authController.requestPasswordReset
+);
+router.post(
+  '/reset-password',
+  resetPasswordLimiter,
+  sanitizeInput,
+  validateResetPassword,
+  authController.resetPassword
+);
+router.post('/refresh', refreshLimiter, authController.refreshToken);
 
 module.exports = router;

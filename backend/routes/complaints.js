@@ -1,16 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const { authMiddleware, requireAdmin } = require('../middleware/auth');
-const { sanitizeInput, validateComplaint } = require('../middleware/validation');
+const {
+  sanitizeInput,
+  validateComplaint,
+  validateComplaintUpdate
+} = require('../middleware/validation');
 const { createMemoryUpload } = require('../middleware/uploads');
+const { createRateLimiter } = require('../middleware/rateLimit');
 const complaintsController = require('../controllers/complaintsController');
 
 const upload = createMemoryUpload();
+const writeLimiter = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { message: 'Too many requests, please try again later' }
+});
 
 router.get('/', authMiddleware, complaintsController.listComplaints);
 router.post(
   '/',
   authMiddleware,
+  writeLimiter,
   upload.array('images', 5),
   sanitizeInput,
   validateComplaint,
@@ -42,7 +53,15 @@ router.post(
   complaintsController.adminCleanupExpired
 );
 
-router.put('/:id', authMiddleware, upload.array('images', 5), complaintsController.updateComplaint);
-router.delete('/:id', authMiddleware, complaintsController.deleteComplaint);
+router.put(
+  '/:id',
+  authMiddleware,
+  writeLimiter,
+  upload.array('images', 5),
+  sanitizeInput,
+  validateComplaintUpdate,
+  complaintsController.updateComplaint
+);
+router.delete('/:id', authMiddleware, writeLimiter, complaintsController.deleteComplaint);
 
 module.exports = router;

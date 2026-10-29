@@ -28,7 +28,7 @@ const getUserProfile = async (userId) => {
 const getAdminUsers = async () => {
   const users = await userRepository
     .findAll()
-    .select('-password -resetPasswordOTP -resetPasswordExpires')
+    .select('-password -resetPasswordOTP -resetPasswordExpires -resetPasswordAttempts')
     .sort({ createdAt: 1 });
 
   return users.map(buildUserResponse);
@@ -73,7 +73,7 @@ const updateAdminUser = async (userId, updates) => {
 
   const updatedUser = await userRepository
     .updateById(userId, { $set: updateData }, { new: true, runValidators: true })
-    .select('-password -resetPasswordOTP -resetPasswordExpires');
+    .select('-password -resetPasswordOTP -resetPasswordExpires -resetPasswordAttempts');
 
   if (!updatedUser) {
     throw new ServiceError('User not found', 404);

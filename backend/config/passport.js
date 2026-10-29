@@ -15,10 +15,19 @@ const getCallbackURL = () => {
   return 'http://localhost:5000/api/auth/google/callback';
 };
 
-// Log the callback URL for debugging
-console.log('Google OAuth Callback URL:', getCallbackURL());
+// Google sign-in is optional: without credentials the server must still boot (email/password
+// auth keeps working) instead of crashing on the strategy constructor.
+const isGoogleAuthConfigured = Boolean(
+  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+);
 
-passport.use(
+if (isGoogleAuthConfigured) {
+  console.log('Google OAuth Callback URL:', getCallbackURL());
+} else if (process.env.NODE_ENV !== 'test') {
+  console.warn('Google OAuth is not configured (GOOGLE_CLIENT_ID/SECRET missing); Google sign-in is disabled.');
+}
+
+if (isGoogleAuthConfigured) passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -28,8 +37,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log('Google OAuth profile:', profile);
-        
         // Check if profile has emails
         if (!profile.emails || profile.emails.length === 0) {
           return done(new Error('No email found in Google profile'), null);
@@ -43,6 +50,11 @@ passport.use(
           user = await User.findOne({ email: profile.emails[0].value });
 
           if (user) {
+            // Only link to an existing account when Google vouches for the address; otherwise
+            // an unverified Google email could take over someone else's password account.
+            if (profile.emails[0].verified === false) {
+              return done(new Error('Google email is not verified'), null);
+            }
             // Link Google account to existing user
             user.googleId = profile.id;
             await user.save();
@@ -78,4 +90,5 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = passport; 
+module.exports = passport;
+module.exports.isGoogleAuthConfigured = isGoogleAuthConfigured; 

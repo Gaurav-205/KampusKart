@@ -46,6 +46,12 @@ const editMessage = async (req, res) => {
       userId: req.user._id,
       message: req.body.message
     });
+
+    const io = req.app.get('io');
+    if (io) {
+      io.to('global-chat').emit('message-updated', message);
+    }
+
     res.json(message);
   } catch (error) {
     handleServiceError(res, error, 'Error editing message');
@@ -99,6 +105,12 @@ const addReaction = async (req, res) => {
       userId: req.user._id,
       emoji: req.body.emoji
     });
+
+    const io = req.app.get('io');
+    if (io) {
+      io.to('global-chat').emit('message-updated', message);
+    }
+
     res.json(message);
   } catch (error) {
     handleServiceError(res, error, 'Error updating reaction');

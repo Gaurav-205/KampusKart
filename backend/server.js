@@ -97,6 +97,14 @@ const aiRoutes = require('./routes/ai');
 
 const app = express();
 
+// Render/Vercel/Netlify sit behind a reverse proxy. Without this, req.ip is the proxy's
+// address and every IP-based rate limiter shares one bucket across all users.
+// TRUST_PROXY accepts a hop count (default 1 in production) or 'false' to disable.
+const trustProxy = process.env.TRUST_PROXY ?? (process.env.NODE_ENV === 'production' ? '1' : 'false');
+if (trustProxy !== 'false') {
+  app.set('trust proxy', /^\d+$/.test(trustProxy) ? Number(trustProxy) : trustProxy);
+}
+
 // Request ID middleware and lightweight structured logger
 const requestId = require('./middleware/requestId');
 const logger = require('./utils/logger');
@@ -116,25 +124,18 @@ app.use(mongoSanitize()); // prevent NoSQL injection
 app.use(hpp()); // prevent HTTP parameter pollution
 
 // Middleware
-// Build allowed origins from env var (comma-separated) plus localhost defaults
-const getAllowedOrigins = () => {
-  const base = ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5173'];
-  const extra = process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(',')
-        .map((o) => o.trim())
-        .filter(Boolean)
-    : [];
-  return [...base, ...extra];
-};
+// Allowed origins come from ALLOWED_ORIGINS (comma-separated, `*` wildcards allowed) plus localhost
+const { isOriginAllowed } = require('./utils/corsOrigins');
 
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = getAllowedOrigins();
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
+    if (!isOriginAllowed(origin)) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+      const err = new Error(msg);
+      err.status = 403;
+      return callback(err, false);
     }
     return callback(null, true);
   },
@@ -196,6 +197,14 @@ app.get('/api/server-status', (req, res) => {
   });
 });
 
+// Sentry error handler (must be after all routes and before other error handlers)
+if (Sentry) {
+  app.use(Sentry.Handlers.errorHandler());
+}
+
+// Upload limit violations (file too large / too many files) are client errors
+app.use(require('./controllers/controllerUtils').handleUploadError);
+
 // Global error handling middleware
 app.use((err, req, res, _next) => {
   // Structured log with request id
@@ -211,18 +220,14 @@ app.use((err, req, res, _next) => {
 
   // Don't expose internal errors in production
   const isDevelopment = process.env.NODE_ENV === 'development';
+  const status = err.status || err.statusCode || 500;
 
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal server error',
+  res.status(status).json({
+    message: status < 500 || isDevelopment ? err.message || 'Internal server error' : 'Internal server error',
     ...(isDevelopment && { stack: err.stack }),
     ...(isDevelopment && { error: err }),
   });
 });
-
-// Sentry error handler (must be after all routes and before other error handlers)
-if (Sentry) {
-  app.use(Sentry.Handlers.errorHandler());
-}
 
 // 404 handler
 app.use((req, res) => {
@@ -298,9 +303,8 @@ const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
     origin: function (origin, callback) {
-      const allowedOrigins = getAllowedOrigins();
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
+      if (!isOriginAllowed(origin)) {
         const msg =
           'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
@@ -320,6 +324,11 @@ app.set('io', io);
 
 // Keep track of online users
 const onlineUsers = new Map();
+
+const MAX_CHAT_MESSAGE_LENGTH = 2000;
+// Per-socket sliding window for the send-message fallback (matches the REST limiter: 30/min)
+const SOCKET_MESSAGE_LIMIT = 30;
+const SOCKET_MESSAGE_WINDOW_MS = 60 * 1000;
 
 // Socket.IO authentication middleware
 io.use(async (socket, next) => {
@@ -397,12 +406,32 @@ io.on('connection', (socket) => {
   });
 
   // Handle new messages (this is a fallback, main message handling is via HTTP API)
+  const recentMessageTimes = [];
   socket.on('send-message', async (messageData) => {
     try {
-      if (!messageData || !messageData.message || !messageData.message.trim()) {
+      if (
+        !messageData ||
+        typeof messageData.message !== 'string' ||
+        !messageData.message.trim()
+      ) {
         socket.emit('error', 'Invalid message data');
         return;
       }
+
+      if (messageData.message.length > MAX_CHAT_MESSAGE_LENGTH) {
+        socket.emit('error', `Message cannot exceed ${MAX_CHAT_MESSAGE_LENGTH} characters`);
+        return;
+      }
+
+      const now = Date.now();
+      while (recentMessageTimes.length && now - recentMessageTimes[0] > SOCKET_MESSAGE_WINDOW_MS) {
+        recentMessageTimes.shift();
+      }
+      if (recentMessageTimes.length >= SOCKET_MESSAGE_LIMIT) {
+        socket.emit('error', 'Too many messages, please slow down');
+        return;
+      }
+      recentMessageTimes.push(now);
 
       // Always use the authenticated socket.userId, never trust client-provided senderId
       const chatMessage = new Chat({
@@ -424,25 +453,19 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Handle typing indicator
-  socket.on('typing', (userData) => {
-    try {
-      if (userData) {
-        socket.to('global-chat').emit('user-typing', userData);
-      }
-    } catch (error) {
-      console.error('Error handling typing event:', error);
+  // Handle typing indicators. Relay the server-side identity of the joined user rather than
+  // client-supplied data so one user cannot spoof typing events for another.
+  socket.on('typing', () => {
+    const userData = onlineUsers.get(socket.id);
+    if (userData) {
+      socket.to('global-chat').emit('user-typing', userData);
     }
   });
 
-  // Handle stop typing
-  socket.on('stop-typing', (userData) => {
-    try {
-      if (userData) {
-        socket.to('global-chat').emit('user-stop-typing', userData);
-      }
-    } catch (error) {
-      console.error('Error handling stop-typing event:', error);
+  socket.on('stop-typing', () => {
+    const userData = onlineUsers.get(socket.id);
+    if (userData) {
+      socket.to('global-chat').emit('user-stop-typing', userData);
     }
   });
 
