@@ -3,7 +3,7 @@ export interface Complaint {
   user?: {
     _id: string;
     name: string;
-    email: string;
+    email?: string;
   } | null;
   title: string;
   description: string;
@@ -28,6 +28,7 @@ export interface Complaint {
   createdAt: string;
   lastUpdated: string;
   images?: { url: string; public_id?: string }[];
+  upvotes?: number;
 }
 
 export interface ComplaintFilters {

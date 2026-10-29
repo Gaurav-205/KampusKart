@@ -48,7 +48,7 @@ const Facilities = () => {
     return suggestions;
   }, []);
 
-  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef } =
+  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef, markSuggestionSelection } =
     useSearchSuggestions<Facility>({
       searchInput: filters.search,
       items: facilities,
@@ -174,7 +174,11 @@ const Facilities = () => {
           showSuggestions={showSuggestions}
           setShowSuggestions={setShowSuggestions}
           searchRef={searchRef}
-          onSuggestionSelect={(val: string) => updateFilters({ search: val })}
+          onSuggestionSelect={(val: string) => {
+            if (val !== filters.search) markSuggestionSelection();
+            setShowSuggestions(false);
+            updateFilters({ search: val });
+          }}
         />
 
         {fetchError && (

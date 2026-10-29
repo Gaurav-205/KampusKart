@@ -51,7 +51,7 @@ const LostFound = () => {
     return suggestions;
   }, []);
 
-  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef } =
+  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef, markSuggestionSelection } =
     useSearchSuggestions<LostFoundItem>({
       searchInput: filters.search,
       items,
@@ -188,7 +188,13 @@ const LostFound = () => {
           showSuggestions={showSuggestions}
           setShowSuggestions={setShowSuggestions}
           searchRef={searchRef}
-          onSuggestionSelect={(val: string) => updateFilters({ search: val })}
+          onSuggestionSelect={(val: string) => {
+            // Picking a suggestion changes the search term, which would otherwise re-open
+            // the dropdown with the same suggestions.
+            if (val !== filters.search) markSuggestionSelection();
+            setShowSuggestions(false);
+            updateFilters({ search: val });
+          }}
         />
 
         {fetchError && (

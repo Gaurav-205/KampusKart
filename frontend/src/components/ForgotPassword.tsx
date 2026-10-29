@@ -89,7 +89,9 @@ const ForgotPassword = () => {
         setMessage('Password reset successful! Redirecting to login...');
         setTimeout(() => navigate('/login'), 2000);
       } else {
-        setError(data.message || 'Failed to reset password. Please check your OTP');
+        setError(
+          data.details?.[0]?.message || data.message || 'Failed to reset password. Please check your OTP'
+        );
       }
     } catch (err) {
       setError('An error occurred. Please try again');
