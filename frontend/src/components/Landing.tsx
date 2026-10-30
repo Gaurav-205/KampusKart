@@ -3,22 +3,21 @@ import { Link } from 'react-router-dom';
 import { FiMap, FiSearch, FiCalendar, FiFileText, FiAlertCircle, FiHome, FiUsers, FiMessageSquare } from 'react-icons/fi';
 import { ShuffleHero } from './ui/shuffle-grid';
 import { Footer } from './ui/footer';
-import { socialLinks } from '../utils/socialLinks';
 
 const features = [
   { name: 'Campus Map',        description: 'Explore the campus and find locations easily.',          icon: <FiMap className="w-6 h-6 sm:w-7 sm:h-7" />,           iconBg: 'bg-kk-ink' },
   { name: 'Lost & Found',      description: 'Report or find lost items on campus.',                   icon: <FiSearch className="w-6 h-6 sm:w-7 sm:h-7" />,        iconBg: 'bg-kk-ink' },
-  { name: 'Events',            description: 'Stay updated with campus events.',                       icon: <FiCalendar className="w-6 h-6 sm:w-7 sm:h-7" />,      iconBg: 'bg-kk-graphite' },
+  { name: 'Events',            description: 'Stay updated with campus events.',                       icon: <FiCalendar className="w-6 h-6 sm:w-7 sm:h-7" />,      iconBg: 'bg-kk-ink' },
   { name: 'News',              description: 'Read the latest campus news.',                           icon: <FiFileText className="w-6 h-6 sm:w-7 sm:h-7" />,      iconBg: 'bg-kk-ink' },
   { name: 'Complaints',        description: 'Raise and track campus complaints.',                     icon: <FiAlertCircle className="w-6 h-6 sm:w-7 sm:h-7" />,   iconBg: 'bg-kk-ink' },
-  { name: 'Facilities',        description: 'Discover campus facilities and services.',               icon: <FiHome className="w-6 h-6 sm:w-7 sm:h-7" />,          iconBg: 'bg-kk-graphite' },
+  { name: 'Facilities',        description: 'Discover campus facilities and services.',               icon: <FiHome className="w-6 h-6 sm:w-7 sm:h-7" />,          iconBg: 'bg-kk-ink' },
   { name: 'Global Chat',       description: 'Chat with other campus members in real-time.',           icon: <FiMessageSquare className="w-6 h-6 sm:w-7 sm:h-7" />, iconBg: 'bg-kk-ink' },
   { name: 'Clubs Recruitment', description: 'Apply to join campus clubs and societies.',              icon: <FiUsers className="w-6 h-6 sm:w-7 sm:h-7" />,         iconBg: 'bg-kk-ink' },
 ];
 
 const steps = [
   { iconBg: 'bg-kk-ink', number: '1', title: 'Explore Features', desc: 'Browse all the smart tools KampusKart offers for your campus life.' },
-  { iconBg: 'bg-kk-graphite', number: '2', title: 'Sign Up Instantly', desc: 'Create your account in seconds and personalize your experience.' },
+  { iconBg: 'bg-kk-ink', number: '2', title: 'Sign Up Instantly', desc: 'Create your account in seconds and personalize your experience.' },
   { iconBg: 'bg-kk-ink', number: '3', title: 'Enjoy Campus Life', desc: 'Access everything you need, stay updated, and connect with your campus.' },
 ];
 
@@ -56,7 +55,7 @@ const Landing: React.FC = () => {
                 type="button"
                 key={feature.name}
                 aria-label={`Learn more about ${feature.name}`}
-                className="bg-white rounded-lg border-2 border-gray-200 p-4 sm:p-5 md:p-6 flex flex-col items-start transition-all duration-200 hover:border-gray-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-kk-accent focus:ring-offset-2 group min-h-touch"
+                className="bg-white rounded-lg border-2 border-gray-200 p-4 sm:p-5 md:p-6 flex flex-col items-start text-left transition-all duration-200 hover:border-gray-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-kk-accent focus:ring-offset-2 group min-h-touch"
                 onClick={() => setSelectedFeature(feature)}
               >
                 <div className={`mb-3 md:mb-4 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center rounded-lg text-white ${feature.iconBg} transition-transform duration-200 group-hover:scale-110`}>
@@ -73,9 +72,9 @@ const Landing: React.FC = () => {
           {selectedFeature && (
             <div className="mt-5 rounded-lg border-2 border-kk-accent bg-kk-tint/40 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-[#00856F] uppercase tracking-wider mb-1">Preview selected</p>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Preview selected</p>
                 <h3 className="text-base sm:text-lg font-extrabold text-kk-accent">{selectedFeature.name}</h3>
-                <p className="text-sm text-[#00685A]">{selectedFeature.description}</p>
+                <p className="text-sm text-gray-700">{selectedFeature.description}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Link
@@ -139,24 +138,7 @@ const Landing: React.FC = () => {
         </section>
 
         {/* Footer */}
-        <Footer
-          logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-          brandName="KampusKart"
-          socialLinks={socialLinks}
-          mainLinks={[
-            { href: '/', label: 'Home' },
-            { href: '/login', label: 'Sign In' },
-            { href: '/signup', label: 'Sign Up' },
-          ]}
-          legalLinks={[
-            { href: '/privacy', label: 'Privacy' },
-            { href: '/terms', label: 'Terms' },
-          ]}
-          copyright={{
-            text: `© ${new Date().getFullYear()} KampusKart`,
-            license: 'All rights reserved.',
-          }}
-        />
+        <Footer />
 
       </div>
   );

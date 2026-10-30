@@ -2,6 +2,7 @@ import React from 'react';
 import { FiCalendar, FiMapPin } from 'react-icons/fi';
 import { Event } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import CardImage from '../../../components/common/CardImage';
 
 interface EventCardProps {
   event: Event;
@@ -46,20 +47,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onClick }) => {
       onClick={() => onClick(event)}
     >
       <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-        {event.image?.url ? (
-          <img 
-            src={event.image.url} 
-            alt={event.title} 
-            className="w-full h-full object-cover" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-50">
-            <div className="flex flex-col items-center justify-center text-gray-300">
-              <FiCalendar className="w-16 h-16" />
-              <span className="text-xs mt-2">No Image Available</span>
-            </div>
-          </div>
-        )}
+        <CardImage src={event.image?.url} alt={event.title} icon={<FiCalendar />} />
         <div className="absolute top-3 right-3 sm:top-4 sm:right-4 max-w-[calc(100%-1rem)]">
           {renderStatus(event.status)}
         </div>
@@ -97,7 +85,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onClick }) => {
               if (event.registerUrl) window.open(event.registerUrl, '_blank'); 
             }}
           >
-            {event.registerUrl ? 'Register Now' : 'Details Only'}
+            {event.registerUrl ? 'Register Now' : 'View details'}
           </button>
         </div>
       </div>

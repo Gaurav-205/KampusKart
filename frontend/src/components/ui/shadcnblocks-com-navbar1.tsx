@@ -367,7 +367,7 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
                     aria-label={`Go to ${subItem.title}`}
                   >
                     <div className="flex-1">
-                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-[#00A489]' : 'text-gray-900'}`}>
+                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-kk-ink' : 'text-gray-900'}`}>
                         {subItem.title}
                       </div>
                       {subItem.description && (

@@ -33,10 +33,35 @@ export interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+/**
+ * Turns an auth API failure into a message for the form. Validation errors arrive as
+ * `{ message: 'Validation failed', details: [{ field, message }] }`, so the per-field messages
+ * are more useful than the generic summary.
+ */
+const getAuthErrorMessage = (error: unknown): string => {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as
+      | { message?: string; details?: Array<{ message?: string }> | Record<string, unknown> }
+      | undefined;
+    if (Array.isArray(data?.details)) {
+      const messages = data.details.map((d) => d?.message).filter(Boolean);
+      if (messages.length > 0) return messages.join(' ');
+    }
+    if (data?.message) return data.message;
+    if (!error.response) {
+      return 'Cannot reach the server. It may be waking up, so please try again in a few seconds.';
+    }
+  }
+  return error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [initializing, setInitializing] = useState(true);
+  // True once the first /api/profile request for the current token has finished, so guards
+  // such as AdminRoute don't redirect while `user` is still unknown.
+  const [profileSettled, setProfileSettled] = useState(false);
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const tokenRef = useRef<string | null>(null);
   const isRefreshingRef = useRef<boolean>(false); // Prevent concurrent refreshes
@@ -202,6 +227,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (axios.isAxiosError(error) && error.response?.status === 401) {
          logout();
       }
+    } finally {
+      setProfileSettled(true);
     }
   };
 
@@ -259,23 +286,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // If all retries failed, throw the last error
       throw lastError;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.data?.message) {
-          throw new Error(error.response.data.message);
-        }
-        if (error.response?.data?.details) {
-          const details = error.response.data.details;
-          const errorMessages = Object.entries(details)
-            .filter(([_, value]) => value !== null)
-            .map(([key, value]) => `${key}: ${value}`)
-            .join(', ');
-          throw new Error(errorMessages);
-        }
-        if (error.code === 'ECONNREFUSED' || error.code === 'ERR_NETWORK') {
-          throw new Error('Server is starting up. Please try again in a few seconds.');
-        }
-      }
-      throw error;
+      throw new Error(getAuthErrorMessage(error));
     }
   };
 
@@ -357,23 +368,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // If all retries failed, throw the last error
       throw lastError;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.data?.message) {
-          throw new Error(error.response.data.message);
-        }
-        if (error.response?.data?.details) {
-          const details = error.response.data.details;
-          const errorMessages = Object.entries(details)
-            .filter(([_, value]) => value !== null)
-            .map(([key, value]) => `${key}: ${value}`)
-            .join(', ');
-          throw new Error(errorMessages);
-        }
-        if (error.code === 'ECONNREFUSED' || error.code === 'ERR_NETWORK') {
-          throw new Error('Server is starting up. Please try again in a few seconds.');
-        }
-      }
-      throw error;
+      throw new Error(getAuthErrorMessage(error));
     }
   };
 
@@ -494,7 +489,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       handleGoogleCallback,
       logout, 
       updateProfile,
-      loading: initializing,
+      loading: initializing || (Boolean(token) && !user && !profileSettled),
       refreshToken
     }}>
       {children}

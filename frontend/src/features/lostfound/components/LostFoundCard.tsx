@@ -1,7 +1,8 @@
 import React from 'react';
-import { FiMapPin, FiCalendar, FiUser, FiCheckCircle, FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiMapPin, FiCalendar, FiUser, FiCheckCircle, FiEdit2, FiTrash2, FiSearch } from 'react-icons/fi';
 import { LostFoundItem } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import CardImage from '../../../components/common/CardImage';
 
 interface LostFoundCardProps {
   item: LostFoundItem;
@@ -30,21 +31,7 @@ export const LostFoundCard: React.FC<LostFoundCardProps> = ({
       onClick={() => onSelect(item)}
     >
       <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-        {item.images && item.images.length > 0 ? (
-          <img
-            src={item.images[0].url}
-            alt={item.title || 'Item'}
-            className="object-cover w-full h-full"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-50">
-            <span className="text-5xl text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-16 h-16">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m7.5 0v10.5A2.25 2.25 0 0113.5 21h-3a2.25 2.25 0 01-2.25-2.25V9m7.5 0H6.75m8.25 0H18m-12 0h2.25" />
-              </svg>
-            </span>
-          </div>
-        )}
+        <CardImage src={item.images?.[0]?.url} alt={item.title || 'Item'} icon={<FiSearch />} />
         <div className={`${UI_PATTERNS.badgeTopRight} flex flex-col gap-2`}>
           <span className={`${UI_PATTERNS.badgeLabel} ${
             item.type === 'lost' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'

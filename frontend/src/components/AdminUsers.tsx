@@ -5,7 +5,6 @@ import { FiSearch, FiEdit2, FiTrash2, FiX, FiSave, FiShield, FiUser } from 'reac
 import { useAuth } from '../contexts/AuthContext';
 import { API_BASE } from '../config';
 import { Footer } from './ui/footer';
-import { socialLinks } from '../utils/socialLinks';
 import { FeatureModal } from './common/FeatureModal';
 import { ErrorMessage } from './common/ErrorMessage';
 import { SuccessMessage } from './common/SuccessMessage';
@@ -235,7 +234,7 @@ const AdminUsers = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#F4FDFB] to-white font-sans pt-24">
+    <div className="min-h-screen bg-white font-sans pt-24">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="flex flex-col gap-6 mb-8">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -597,17 +596,7 @@ const AdminUsers = () => {
         </div>
       </FeatureModal>
 
-      <Footer
-        logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-        brandName="KampusKart"
-        socialLinks={socialLinks}
-        mainLinks={[]}
-        legalLinks={[]}
-        copyright={{
-          text: `© ${new Date().getFullYear()} KampusKart`,
-          license: 'All rights reserved.',
-        }}
-      />
+      <Footer />
     </div>
   );
 };

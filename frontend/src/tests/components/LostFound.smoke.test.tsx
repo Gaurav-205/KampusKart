@@ -51,7 +51,7 @@ describe('LostFound page smoke test', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Lost and Found')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 1, name: 'Lost & Found' })).toBeInTheDocument();
     });
   });
 });

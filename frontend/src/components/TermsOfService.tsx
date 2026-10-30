@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Footer } from './ui/footer';
-import { socialLinks } from '../utils/socialLinks';
 
 const TermsOfService: React.FC = () => {
   return (
@@ -12,7 +11,7 @@ const TermsOfService: React.FC = () => {
           Back
         </Link>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4" style={{ letterSpacing: '-0.01em' }}>Terms of Service</h1>
-        <p className="text-sm text-gray-400 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p className="text-sm text-gray-400 mb-8">Last updated: October 30, 2026</p>
 
         <div className="space-y-8 text-gray-700 text-sm sm:text-base leading-relaxed">
           <section>
@@ -50,23 +49,7 @@ const TermsOfService: React.FC = () => {
         </div>
       </main>
 
-      <Footer
-        logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-        brandName="KampusKart"
-        socialLinks={socialLinks}
-        mainLinks={[
-          { href: '/', label: 'Home' },
-          { href: '/login', label: 'Sign In' },
-        ]}
-        legalLinks={[
-          { href: '/privacy', label: 'Privacy' },
-          { href: '/terms', label: 'Terms' },
-        ]}
-        copyright={{
-          text: `© ${new Date().getFullYear()} KampusKart`,
-          license: 'All rights reserved.',
-        }}
-      />
+      <Footer />
     </div>
   );
 };

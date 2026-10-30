@@ -180,7 +180,9 @@ const CampusMap: React.FC = () => {
           <div className="flex items-center gap-2">
             <FiInfo className="w-4 h-4 text-amber-600 shrink-0" />
             <span>
-              Interactive Vector Blueprint Mode (Google Maps API Key not set in <code>.env</code>)
+              {import.meta.env.DEV
+                ? 'Simplified campus map: set VITE_GOOGLE_MAPS_API_KEY to load Google Maps.'
+                : 'Showing a simplified campus map. Select a place to see its details.'}
             </span>
           </div>
         </div>
