@@ -53,7 +53,10 @@ export interface ServerToClientEvents {
   'message-deleted': (data: { _id: string }) => void;
 }
 
+// Mirrors the handlers registered in backend/server.js
 export interface ClientToServerEvents {
-  'send-message': (message: string) => void;
-  'request-previous-messages': (page: number) => void;
+  join: (data: { _id?: string; name?: string; profilePicture?: string | { url?: string } }) => void;
+  'send-message': (data: { message: string }) => void;
+  typing: (data: { _id?: string; name?: string }) => void;
+  'stop-typing': (data: { _id?: string; name?: string }) => void;
 }

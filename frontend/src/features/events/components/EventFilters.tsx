@@ -32,8 +32,9 @@ export const EventFilters: React.FC<EventFiltersProps> = ({
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4">
       <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
         <div className="relative">
-          <select 
-            value={filters.status} 
+          <select
+            aria-label="Filter by status"
+            value={filters.status}
             onChange={e => onFilterChange({ status: e.target.value as any })}
             className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-all duration-200 cursor-pointer"
           >
@@ -56,6 +57,7 @@ export const EventFilters: React.FC<EventFiltersProps> = ({
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           <input
             type="text"
+            aria-label="Search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={(e) => {

@@ -48,6 +48,8 @@ const Signup: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
@@ -70,6 +72,20 @@ const Signup: React.FC = () => {
   const handlePasswordBlur = () => {
     if (password) {
       setPasswordErrors(validatePassword(password));
+    }
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setConfirmPassword(val);
+    if (confirmPasswordError && val === password) {
+      setConfirmPasswordError('');
+    }
+  };
+
+  const handleConfirmPasswordBlur = () => {
+    if (confirmPassword && confirmPassword !== password) {
+      setConfirmPasswordError('Passwords do not match');
     }
   };
 
@@ -106,6 +122,10 @@ const Signup: React.FC = () => {
     const pwErrors = validatePassword(password);
     if (pwErrors.length > 0) {
       setPasswordErrors(pwErrors);
+      return;
+    }
+    if (confirmPassword !== password) {
+      setConfirmPasswordError('Passwords do not match');
       return;
     }
     if (!name.trim()) {
@@ -248,6 +268,34 @@ const Signup: React.FC = () => {
                       </li>
                     )}
                   </ul>
+                )}
+              </div>
+
+              {/* Confirm password */}
+              <div>
+                <label
+                  htmlFor="signup-confirm-password"
+                  className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+                >
+                  Confirm password
+                </label>
+                <input
+                  id="signup-confirm-password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  required
+                  aria-invalid={Boolean(confirmPasswordError)}
+                  aria-describedby={confirmPasswordError ? 'signup-confirm-password-error' : undefined}
+                  className={`w-full px-4 py-3 border-2 ${confirmPasswordError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                  placeholder="••••••••"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  onBlur={handleConfirmPasswordBlur}
+                />
+                {confirmPasswordError && (
+                  <p id="signup-confirm-password-error" className="mt-1.5 text-xs text-red-500">
+                    {confirmPasswordError}
+                  </p>
                 )}
               </div>
 

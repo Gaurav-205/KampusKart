@@ -92,7 +92,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      setFormError('Please fix the errors below');
+      setFormError('Please fix the highlighted errors above');
       return;
     }
 
