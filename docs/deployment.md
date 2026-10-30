@@ -2,8 +2,8 @@
 
 ## Hosting
 
-- Frontend: Netlify (current), Vercel (configured via `vercel.json`)
-- Backend: Render
+- Frontend: Vercel (<https://kampuskart-navy.vercel.app>), Netlify (<https://kampuskart.netlify.app>)
+- Backend: Render (<https://s72-gaurav-capstone.onrender.com>, service `S72_Gaurav_Capstone`)
 
 ## Vercel (frontend)
 
@@ -23,17 +23,27 @@ Environment variables (Production and Preview):
 
 | Variable                   | Value                                                                   |
 | -------------------------- | ----------------------------------------------------------------------- |
-| `VITE_API_URL`             | Backend URL, e.g. `https://s72-gaurav-capstone-kampuskart.onrender.com` |
+| `VITE_API_URL`             | Backend URL, e.g. `https://s72-gaurav-capstone.onrender.com` |
 | `VITE_SOCKET_URL`          | Same as `VITE_API_URL`                                                  |
 | `VITE_GOOGLE_MAPS_API_KEY` | Google Maps JS API key (restrict it to the Vercel domains)              |
 | `VITE_GOOGLE_MAPS_MAP_ID`  | Optional map style ID                                                   |
 
 Backend changes required on Render before switching traffic:
 
-- Add the Vercel origins to `ALLOWED_ORIGINS`, e.g.
-  `https://kampuskart.vercel.app,https://kampuskart-*-yourteam.vercel.app` (the wildcard covers previews)
+- Add the Vercel origins to `ALLOWED_ORIGINS` (the wildcard covers preview deployments)
 - Set `FRONTEND_URL` to the production Vercel URL so Google sign-in redirects back to it
 - Add the Vercel URL to the Google OAuth client's authorized JavaScript origins
+
+Values for the current Vercel project (`kampuskart`, team `orbit-s-projects71`):
+
+```env
+ALLOWED_ORIGINS=https://kampuskart.netlify.app,https://kampuskart-navy.vercel.app,https://kampuskart-*-orbit-s-projects71.vercel.app
+FRONTEND_URL=https://kampuskart-navy.vercel.app
+TRUST_PROXY=1
+```
+
+Render applies environment changes with a redeploy, so a suspended service must be resumed first
+(Render dashboard → service → **Resume**).
 
 Deploy with the Vercel GitHub integration (previews per PR, production from `main`) or the CLI:
 

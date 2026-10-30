@@ -8,8 +8,8 @@
   NETLIFY_SKIP_INSTALL = "true"
   NPM_CONFIG_PACKAGE_LOCK = "false"
   NPM_FLAGS = "--include=optional"
-  VITE_API_URL = "https://s72-gaurav-capstone-kampuskart.onrender.com"
-  VITE_SOCKET_URL = "https://s72-gaurav-capstone-kampuskart.onrender.com"
+  VITE_API_URL = "https://s72-gaurav-capstone.onrender.com"
+  VITE_SOCKET_URL = "https://s72-gaurav-capstone.onrender.com"
 
 [[redirects]]
   from = "/*"

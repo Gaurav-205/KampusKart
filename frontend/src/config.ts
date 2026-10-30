@@ -16,8 +16,8 @@ if (missingEnvVars.length > 0 && !isProduction) {
 }
 
 // Base API URL — override via VITE_API_URL env var, or fall back to localhost for dev
-const API_BASE: string = import.meta.env.VITE_API_URL || (isProduction ? 'https://s72-gaurav-capstone-kampuskart.onrender.com' : 'http://localhost:5000');
+const API_BASE: string = import.meta.env.VITE_API_URL || (isProduction ? 'https://s72-gaurav-capstone.onrender.com' : 'http://localhost:5000');
 
-const SOCKET_URL: string = import.meta.env.VITE_SOCKET_URL || (isProduction ? 'https://s72-gaurav-capstone-kampuskart.onrender.com' : 'http://localhost:5000');
+const SOCKET_URL: string = import.meta.env.VITE_SOCKET_URL || (isProduction ? 'https://s72-gaurav-capstone.onrender.com' : 'http://localhost:5000');
 
 export { API_BASE, SOCKET_URL, isProduction };
