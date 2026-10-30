@@ -158,7 +158,7 @@ const ClubsRecruitment = () => {
           {user?.isAdmin && (
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#181818] text-white font-bold text-lg hover:bg-[#00C6A7] transition-colors"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-kk-ink text-white font-bold text-lg hover:bg-kk-graphite transition-colors"
             >
               + Add New Recruitment
             </button>

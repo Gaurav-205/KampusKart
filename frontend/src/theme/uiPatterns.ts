@@ -1,14 +1,14 @@
 export const UI_PATTERNS = {
   buttonPrimary:
-    'px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200',
+    'px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200',
   buttonNeutral:
     'px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-700 bg-white border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200',
   buttonDanger:
-    'px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#F05A25] hover:bg-red-600 active:bg-[#F05A25] transition-colors duration-200',
+    'px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-kk-ink hover:bg-red-600 active:bg-kk-graphite transition-colors duration-200',
   modalCloseButton:
-    'absolute top-6 right-6 z-10 bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] text-white rounded-lg p-2.5 transition-all duration-200 flex items-center justify-center w-10 h-10',
+    'absolute top-6 right-6 z-10 bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink text-white rounded-lg p-2.5 transition-all duration-200 flex items-center justify-center w-10 h-10',
   zoomCloseButton:
-    'absolute top-4 right-4 z-50 bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] text-white rounded-lg p-2.5 transition-all duration-200 flex items-center justify-center w-10 h-10',
+    'absolute top-4 right-4 z-50 bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink text-white rounded-lg p-2.5 transition-all duration-200 flex items-center justify-center w-10 h-10',
   modalOverlay:
     'fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-[9999] p-0 sm:p-4',
   modalPanel:

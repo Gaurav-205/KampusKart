@@ -55,7 +55,7 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onSelect }) => {
           <button
             className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-bold transition-colors duration-200 ${
               club.formUrl 
-                ? 'bg-[#181818] text-white hover:bg-[#00C6A7] active:bg-[#181818]' 
+                ? 'bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink' 
                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
             }`}
             disabled={!club.formUrl}

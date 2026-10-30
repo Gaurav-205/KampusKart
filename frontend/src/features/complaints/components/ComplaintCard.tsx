@@ -71,7 +71,7 @@ export const ComplaintCard: React.FC<ComplaintCardProps> = ({
             complaint.priority === 'Urgent' ? 'bg-red-100 text-red-800' :
             complaint.priority === 'High' ? 'bg-orange-100 text-orange-800' :
             complaint.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-blue-100 text-blue-800'
+            'bg-gray-100 text-gray-800'
           }`}>
             {complaint.priority} Priority
           </span>
@@ -110,7 +110,7 @@ export const ComplaintCard: React.FC<ComplaintCardProps> = ({
             {!['Resolved', 'Closed'].includes(complaint.status) && (
               <button
                 onClick={(e) => { e.stopPropagation(); onEdit(complaint); }}
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-xs font-medium"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-xs font-medium"
               >
                 <FiEdit2 className="w-3.5 h-3.5" />
                 <span>Edit</span>

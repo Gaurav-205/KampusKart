@@ -29,7 +29,7 @@ const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
 // Centralized lazy loading fallback - simple spinner
 const PageLoader = () => (
   <div className="flex justify-center items-center w-full min-h-[60vh]">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00C6A7]"></div>
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kk-accent"></div>
   </div>
 );
 

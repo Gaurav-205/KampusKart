@@ -41,7 +41,7 @@ export const FacilityCard: React.FC<FacilityCardProps> = ({
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-50">
             <div className="flex flex-col items-center justify-center">
-              <div className="p-4 rounded-lg bg-[#181818]">
+              <div className="p-4 rounded-lg bg-kk-ink">
                 <div className="text-white">
                   {iconOption?.icon || <MdSchool className="w-16 h-16" />}
                 </div>
@@ -74,7 +74,7 @@ export const FacilityCard: React.FC<FacilityCardProps> = ({
           <div className="flex flex-col sm:flex-row gap-2 mt-4 pt-4 border-t-2 border-gray-200">
             <button
               onClick={(e) => { e.stopPropagation(); onEdit(facility); }}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium"
             >
               <FiEdit2 className="w-4 h-4" />
               <span>Edit</span>

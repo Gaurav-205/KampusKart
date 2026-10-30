@@ -100,7 +100,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
                 value={formData.name}
                 onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                 onBlur={(e) => handleBlur('name', e.target.value)}
-                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                   fieldErrors.name ? 'border-red-500' : 'border-gray-200'
                 }`}
                 placeholder="e.g. Main Library"
@@ -116,7 +116,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
                 value={formData.location}
                 onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
                 onBlur={(e) => handleBlur('location', e.target.value)}
-                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                   fieldErrors.location ? 'border-red-500' : 'border-gray-200'
                 }`}
                 placeholder="e.g. Block A, 1st Floor"
@@ -134,7 +134,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
               onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               onBlur={(e) => handleBlur('description', e.target.value)}
               rows={3}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.description ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Tell us more about this facility..."
@@ -152,7 +152,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, type: e.target.value as Facility['type'] }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               >
                 <option value="Academic">Academic</option>
                 <option value="Food">Food</option>
@@ -165,7 +165,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
               <select
                 value={formData.icon}
                 onChange={(e) => setFormData((prev) => ({ ...prev, icon: e.target.value }))}
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               >
                 {ICON_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -188,7 +188,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
                   onClick={() => setFormData((prev) => ({ ...prev, icon: opt.value }))}
                   className={`p-3 rounded-xl border-2 transition-all duration-200 flex items-center justify-center ${
                     formData.icon === opt.value
-                      ? 'border-[#00C6A7] bg-[#00C6A7] text-white shadow-lg shadow-teal-100 scale-110'
+                      ? 'border-kk-accent bg-kk-graphite text-white shadow-lg shadow-gray-100 scale-110'
                       : 'border-gray-100 bg-white text-gray-400 hover:border-gray-200 hover:text-gray-600'
                   }`}
                   title={opt.label}
@@ -216,7 +216,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-[#181818] text-white font-bold rounded-lg hover:bg-[#00C6A7] transition-colors disabled:opacity-50"
+          className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
           {isSubmitting ? 'Saving...' : facility ? 'Update Facility' : 'Add Facility'}
         </button>

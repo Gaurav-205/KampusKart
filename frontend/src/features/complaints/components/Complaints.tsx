@@ -163,7 +163,7 @@ const Complaints = () => {
           <h1 className="text-h2 font-extrabold text-black">College Complaints</h1>
           <button
             onClick={openAddModal}
-            className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#181818] text-white font-bold text-lg hover:bg-[#00C6A7] transition-colors"
+            className="flex items-center gap-2 px-6 py-3 rounded-lg bg-kk-ink text-white font-bold text-lg hover:bg-kk-graphite transition-colors"
           >
             + Add Complaint
           </button>
@@ -210,7 +210,7 @@ const Complaints = () => {
             )}
             <button
               onClick={() => updateFilters({ search: '', category: 'all', status: 'All' })}
-              className="ml-auto px-4 py-2 rounded-lg bg-[#181818] text-white text-xs font-bold hover:bg-[#00C6A7] transition-colors"
+              className="ml-auto px-4 py-2 rounded-lg bg-kk-ink text-white text-xs font-bold hover:bg-kk-graphite transition-colors"
             >
               Clear all
             </button>
@@ -259,7 +259,7 @@ const Complaints = () => {
 
         {isFetchingMore && (
           <div className="flex justify-center items-center mt-8">
-            <div className="animate-spin h-8 w-8 border-4 border-[#00C6A7] border-t-transparent rounded-full"></div>
+            <div className="animate-spin h-8 w-8 border-4 border-kk-accent border-t-transparent rounded-full"></div>
           </div>
         )}
 

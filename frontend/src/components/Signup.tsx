@@ -20,7 +20,7 @@ const RightPanel: React.FC = () => {
           onError={() => setImageError(true)}
         />
       ) : (
-        <div className="h-full w-full flex flex-col items-center justify-center px-10 text-center bg-gradient-to-br from-[#181818] via-[#2B2B2B] to-[#00C6A7]">
+        <div className="h-full w-full flex flex-col items-center justify-center px-10 text-center bg-gradient-to-br from-kk-ink via-[#2B2B2B] to-kk-graphite">
           <h3 className="text-2xl font-extrabold text-white mb-3">Build Your Campus Network</h3>
           <p className="text-sm text-white/90 max-w-sm">
             Create your KampusKart account to access events, clubs, facilities, and real-time campus
@@ -197,7 +197,7 @@ const Signup: React.FC = () => {
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                   placeholder="Your full name"
                   value={name}
                   onChange={handleNameChange}
@@ -214,7 +214,7 @@ const Signup: React.FC = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className={`w-full px-4 py-3 border-2 ${emailError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                  className={`w-full px-4 py-3 border-2 ${emailError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                   placeholder="you@example.com"
                   value={email}
                   onChange={handleEmailChange}
@@ -233,7 +233,7 @@ const Signup: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="new-password"
                     required
-                    className={`w-full px-4 py-3 pr-12 border-2 ${passwordErrors.length > 0 ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                    className={`w-full px-4 py-3 pr-12 border-2 ${passwordErrors.length > 0 ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                     placeholder="••••••••"
                     value={password}
                     onChange={handlePasswordChange}
@@ -287,7 +287,7 @@ const Signup: React.FC = () => {
                   required
                   aria-invalid={Boolean(confirmPasswordError)}
                   aria-describedby={confirmPasswordError ? 'signup-confirm-password-error' : undefined}
-                  className={`w-full px-4 py-3 border-2 ${confirmPasswordError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                  className={`w-full px-4 py-3 border-2 ${confirmPasswordError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
@@ -306,7 +306,7 @@ const Signup: React.FC = () => {
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#00C6A7] focus:ring-[#00C6A7]"
+                  className="h-4 w-4 rounded border-gray-300 text-kk-accent focus:ring-kk-accent"
                 />
                 Remember me
               </label>
@@ -315,7 +315,7 @@ const Signup: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-3 px-4 rounded-lg text-base font-bold text-white bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full py-3 px-4 rounded-lg text-base font-bold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {loading ? 'Creating account...' : 'Create account'}
               </button>
@@ -348,7 +348,7 @@ const Signup: React.FC = () => {
 
               <p className="text-center text-sm text-gray-600 dark:text-gray-400 pt-2">
                 Already have an account?{' '}
-                <Link to="/login" className="text-[#F05A25] font-semibold hover:underline">
+                <Link to="/login" className="text-kk-accent font-semibold hover:underline">
                   Sign in
                 </Link>
               </p>

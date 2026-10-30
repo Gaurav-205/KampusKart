@@ -36,7 +36,7 @@ const BackToTop: React.FC = () => {
     <button
       onClick={scrollToTop}
       aria-label="Back to top"
-      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] bg-[#00C6A7] text-white px-4 py-2 rounded-full shadow-lg hover:bg-[#00b095] hover:scale-105 transition"
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] bg-kk-graphite text-white px-4 py-2 rounded-full shadow-lg hover:bg-[#00b095] hover:scale-105 transition"
     >
       ↑
     </button>

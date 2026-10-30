@@ -52,7 +52,7 @@ export const LostFoundCard: React.FC<LostFoundCardProps> = ({
             {item.type === 'lost' ? 'Lost Item' : 'Found Item'}
           </span>
           <span className={`${UI_PATTERNS.badgeLabel} ${
-            item.resolved ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
+            item.resolved ? 'bg-gray-100 text-gray-800' : 'bg-yellow-100 text-yellow-800'
           }`}>
             {item.resolved ? 'Resolved' : 'Unresolved'}
           </span>
@@ -108,7 +108,7 @@ export const LostFoundCard: React.FC<LostFoundCardProps> = ({
                   e.stopPropagation();
                   onEdit(item);
                 }}
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors duration-200 text-xs font-medium min-w-0 min-h-touch"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-xs font-medium min-w-0 min-h-touch"
               >
                 <FiEdit2 className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">Edit</span>

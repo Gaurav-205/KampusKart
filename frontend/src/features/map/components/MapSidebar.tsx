@@ -43,7 +43,7 @@ export const MapSidebar: React.FC<MapSidebarProps> = ({
             onChange={(e) => onSearchChange(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             placeholder="Search campus..."
-            className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-[#00C6A7] focus:ring-4 focus:ring-teal-50 outline-none transition-all font-medium"
+            className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-kk-accent focus:ring-4 focus:ring-gray-50 outline-none transition-all font-medium"
           />
           
           {showSuggestions && suggestions.length > 0 && (
@@ -55,7 +55,7 @@ export const MapSidebar: React.FC<MapSidebarProps> = ({
                     onSearchChange(suggestion);
                     setShowSuggestions(false);
                   }}
-                  className="w-full flex items-center px-4 py-3 hover:bg-teal-50 transition-colors text-left border-b border-gray-50 last:border-none"
+                  className="w-full flex items-center px-4 py-3 hover:bg-gray-50 transition-colors text-left border-b border-gray-50 last:border-none"
                 >
                   <FiSearch className="mr-3 text-gray-300" />
                   <span className="text-sm font-medium text-gray-700">{suggestion}</span>
@@ -83,24 +83,24 @@ export const MapSidebar: React.FC<MapSidebarProps> = ({
               onClick={() => onLocationSelect(loc)}
               className={`w-full flex flex-col p-4 rounded-2xl border-2 transition-all text-left group ${
                 selectedLocationId === loc.id
-                  ? 'border-[#00C6A7] bg-teal-50 ring-2 ring-teal-100'
+                  ? 'border-kk-accent bg-gray-50 ring-2 ring-gray-100'
                   : 'border-gray-50 bg-white hover:border-gray-200'
               }`}
             >
               <div className="flex items-start gap-3">
                 <div className={`p-2 rounded-xl flex-shrink-0 transition-colors ${
-                  selectedLocationId === loc.id ? 'bg-[#00C6A7] text-white' : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
+                  selectedLocationId === loc.id ? 'bg-kk-graphite text-white' : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
                 }`}>
                   <FiMapPin className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className={`font-bold text-sm leading-tight mb-1 transition-colors ${
-                    selectedLocationId === loc.id ? 'text-teal-900' : 'text-gray-900'
+                    selectedLocationId === loc.id ? 'text-gray-900' : 'text-gray-900'
                   }`}>
                     {loc.name}
                   </h4>
                   <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
-                    selectedLocationId === loc.id ? 'bg-teal-200/50 text-teal-700' : 'bg-gray-100 text-gray-400'
+                    selectedLocationId === loc.id ? 'bg-gray-200/50 text-gray-700' : 'bg-gray-100 text-gray-400'
                   }`}>
                     {loc.category}
                   </span>

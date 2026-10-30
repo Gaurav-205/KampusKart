@@ -126,15 +126,15 @@ const CampusMap: React.FC = () => {
       case 'Entrance':
         return 'bg-orange-500 border-orange-200 text-white';
       case 'Academic':
-        return 'bg-blue-500 border-blue-200 text-white';
+        return 'bg-gray-500 border-gray-200 text-white';
       case 'Sports':
-        return 'bg-emerald-500 border-emerald-200 text-white';
+        return 'bg-gray-500 border-gray-200 text-white';
       case 'Landmark':
-        return 'bg-rose-500 border-rose-200 text-white';
+        return 'bg-gray-500 border-gray-200 text-white';
       case 'Administration':
-        return 'bg-purple-500 border-purple-200 text-white';
+        return 'bg-gray-500 border-gray-200 text-white';
       case 'Arts':
-        return 'bg-pink-500 border-pink-200 text-white';
+        return 'bg-gray-500 border-gray-200 text-white';
       default:
         return 'bg-gray-500 border-gray-200 text-white';
     }
@@ -162,7 +162,7 @@ const CampusMap: React.FC = () => {
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-8 py-3 bg-[#181818] text-white rounded-xl font-bold hover:bg-[#00C6A7] transition-all"
+          className="px-8 py-3 bg-kk-ink text-white rounded-xl font-bold hover:bg-kk-graphite transition-all"
         >
           Retry Loading
         </button>
@@ -188,7 +188,7 @@ const CampusMap: React.FC = () => {
 
       <div className="flex-grow flex flex-col md:flex-row min-h-0 relative">
         {/* Map Container */}
-        <div className="flex-grow relative h-full bg-slate-50 overflow-hidden">
+        <div className="flex-grow relative h-full bg-gray-50 overflow-hidden">
           {isDemoMode ? (
             /* Interactive Vector Fallback Map */
             <div className="absolute inset-0 w-full h-full bg-[#fafbfc] overflow-hidden flex items-center justify-center">
@@ -196,7 +196,7 @@ const CampusMap: React.FC = () => {
               <div
                 className="absolute inset-0 opacity-[0.03]"
                 style={{
-                  backgroundImage: `radial-gradient(#181818 1.5px, transparent 1.5px)`,
+                  backgroundImage: `radial-gradient(#0F1012 1.5px, transparent 1.5px)`,
                   backgroundSize: '24px 24px',
                 }}
               />
@@ -220,7 +220,7 @@ const CampusMap: React.FC = () => {
                       y1={p1.y}
                       x2={p2.x}
                       y2={p2.y}
-                      stroke="#00C6A7"
+                      stroke="#43464B"
                       strokeWidth="2"
                       strokeDasharray="4 4"
                     />
@@ -246,7 +246,7 @@ const CampusMap: React.FC = () => {
                     <div
                       className={`absolute -inset-3 rounded-full transition-all duration-300 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 ${
                         isSelected
-                          ? 'bg-[#00C6A7]/20 scale-125 opacity-100 animate-ping'
+                          ? 'bg-kk-accent/20 scale-125 opacity-100 animate-ping'
                           : 'bg-gray-400/10'
                       }`}
                     />
@@ -254,14 +254,14 @@ const CampusMap: React.FC = () => {
                     {/* Main Pin node */}
                     <div
                       className={`w-8 h-8 rounded-full border-2 shadow-lg flex items-center justify-center transition-all duration-300 transform ${
-                        isSelected ? 'scale-125 ring-4 ring-[#00C6A7]/20' : 'hover:scale-110'
+                        isSelected ? 'scale-125 ring-4 ring-kk-accent/20' : 'hover:scale-110'
                       } ${getCategoryColor(loc.category)}`}
                     >
                       <FiMapPin className={`w-4 h-4 ${isSelected ? 'animate-bounce' : ''}`} />
                     </div>
 
                     {/* Simple Hover Tooltip */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 bg-[#181818] text-white text-[10px] font-bold rounded shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 bg-kk-ink text-white text-[10px] font-bold rounded shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
                       {loc.name.split(',')[0]}
                     </div>
                   </div>
@@ -313,8 +313,8 @@ const CampusMap: React.FC = () => {
                       <div
                         className={`w-3 h-3 rounded-full border-2 border-white shadow-md ${
                           selectedLocation?.id === loc.id
-                            ? 'bg-[#00C6A7] scale-125'
-                            : 'bg-[#181818]'
+                            ? 'bg-kk-graphite scale-125'
+                            : 'bg-kk-ink'
                         }`}
                       />
                     </div>
@@ -344,7 +344,7 @@ const CampusMap: React.FC = () => {
 
               {userLocation && (
                 <InfoWindow position={userLocation}>
-                  <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-xl animate-bounce" />
+                  <div className="w-4 h-4 bg-gray-500 rounded-full border-2 border-white shadow-xl animate-bounce" />
                 </InfoWindow>
               )}
             </GoogleMap>
@@ -355,7 +355,7 @@ const CampusMap: React.FC = () => {
             {!isDemoMode && (
               <button
                 onClick={recenterToUser}
-                className="p-4 bg-white text-gray-900 rounded-2xl shadow-2xl border-2 border-gray-100 hover:text-[#00C6A7] transition-all"
+                className="p-4 bg-white text-gray-900 rounded-2xl shadow-2xl border-2 border-gray-100 hover:text-kk-accent transition-all"
                 title="Find my location"
               >
                 <FiTarget className="w-6 h-6" />
@@ -363,7 +363,7 @@ const CampusMap: React.FC = () => {
             )}
             <button
               onClick={() => setIsPanelOpen(!isPanelOpen)}
-              className="p-4 bg-white text-gray-900 rounded-2xl shadow-2xl border-2 border-gray-100 hover:text-[#00C6A7] transition-all"
+              className="p-4 bg-white text-gray-900 rounded-2xl shadow-2xl border-2 border-gray-100 hover:text-kk-accent transition-all"
               title={isPanelOpen ? 'Close Sidebar' : 'Open Sidebar'}
             >
               <FiList className="w-6 h-6" />
@@ -394,7 +394,7 @@ const CampusMap: React.FC = () => {
         title="Open in Google Maps?"
       >
         <div className="p-6 text-center">
-          <div className="w-20 h-20 bg-teal-50 text-[#00C6A7] rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 bg-gray-50 text-kk-accent rounded-full flex items-center justify-center mx-auto mb-6">
             <FiNavigation className="w-10 h-10" />
           </div>
           <h3 className="text-xl font-black text-gray-900 mb-2">Navigate to Location</h3>
@@ -410,7 +410,7 @@ const CampusMap: React.FC = () => {
             </button>
             <button
               onClick={confirmDirections}
-              className="flex-1 px-6 py-4 bg-[#181818] text-white rounded-2xl font-bold hover:bg-[#00C6A7] transition-all shadow-xl"
+              className="flex-1 px-6 py-4 bg-kk-ink text-white rounded-2xl font-bold hover:bg-kk-graphite transition-all shadow-xl"
             >
               Open Maps
             </button>

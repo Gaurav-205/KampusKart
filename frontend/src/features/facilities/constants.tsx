@@ -6,15 +6,15 @@ export const ICON_OPTIONS = [
     value: 'MdSchool', 
     label: 'Academic - School', 
     icon: <MdSchool className="w-10 h-10" />,
-    gradient: 'from-blue-500 to-indigo-600',
-    color: 'text-blue-600'
+    gradient: 'from-gray-500 to-gray-600',
+    color: 'text-gray-600'
   },
   { 
     value: 'MdLibraryBooks', 
     label: 'Academic - Library', 
     icon: <MdLibraryBooks className="w-10 h-10" />,
-    gradient: 'from-purple-500 to-pink-600',
-    color: 'text-purple-600'
+    gradient: 'from-gray-500 to-gray-600',
+    color: 'text-gray-600'
   },
   { 
     value: 'MdRestaurant', 
@@ -41,36 +41,36 @@ export const ICON_OPTIONS = [
     value: 'MdLocalLaundryService', 
     label: 'Service - Laundry', 
     icon: <MdLocalLaundryService className="w-10 h-10" />,
-    gradient: 'from-cyan-500 to-blue-600',
-    color: 'text-cyan-600'
+    gradient: 'from-gray-500 to-gray-600',
+    color: 'text-gray-600'
   },
   { 
     value: 'MdRoomService', 
     label: 'Service - Room Service', 
     icon: <MdRoomService className="w-10 h-10" />,
-    gradient: 'from-teal-500 to-green-600',
-    color: 'text-teal-600'
+    gradient: 'from-gray-500 to-green-600',
+    color: 'text-gray-600'
   },
   { 
     value: 'MdHotel', 
     label: 'Accommodation - Hotel', 
     icon: <MdHotel className="w-10 h-10" />,
-    gradient: 'from-emerald-500 to-teal-600',
-    color: 'text-emerald-600'
+    gradient: 'from-gray-500 to-gray-600',
+    color: 'text-gray-600'
   },
   { 
     value: 'MdBed', 
     label: 'Accommodation - Hostel', 
     icon: <MdBed className="w-10 h-10" />,
-    gradient: 'from-green-500 to-emerald-600',
+    gradient: 'from-green-500 to-gray-600',
     color: 'text-green-600'
   },
   { 
     value: 'MdApartment', 
     label: 'Accommodation - Apartment', 
     icon: <MdApartment className="w-10 h-10" />,
-    gradient: 'from-lime-500 to-green-600',
-    color: 'text-lime-600'
+    gradient: 'from-gray-500 to-green-600',
+    color: 'text-gray-600'
   },
 ];
 
