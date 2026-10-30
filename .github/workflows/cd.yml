@@ -52,9 +52,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # --fail-with-body makes API errors (bad key, suspended service, bad payload) fail the job
+      # instead of passing silently. Render expects clearCache as "do_not_clear" | "clear".
       - name: Trigger Render Deployment
         run: |
-          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+          curl --fail-with-body -sS -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
             -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{"clearCache": false}'
+            -d '{"clearCache": "do_not_clear"}'
