@@ -24,7 +24,6 @@ export default defineConfig({
         manualChunks: (id) => {
           if (id.includes('node_modules/@mui/')) return 'vendor-mui';
           if (id.includes('node_modules/@react-google-maps/') || id.includes('node_modules/@googlemaps/')) return 'vendor-maps';
-          if (id.includes('node_modules/three/') || id.includes('node_modules/@react-three/')) return 'vendor-three';
           if (id.includes('node_modules/@emoji-mart/data/')) return 'vendor-emoji-data';
           if (id.includes('node_modules/@emoji-mart/react/') || id.includes('node_modules/emoji-mart/')) return 'vendor-emoji-ui';
           if (id.includes('node_modules/socket.io-client/')) return 'vendor-socket';

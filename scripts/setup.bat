@@ -2,6 +2,9 @@
 REM KampusKart Setup Script for Windows
 REM This script helps fresh contributors set up the development environment.
 
+REM Always run from the repository root, wherever the script is invoked from
+cd /d "%~dp0.."
+
 echo.
 echo ====================================
 echo   KampusKart Development Setup
@@ -11,7 +14,7 @@ echo.
 REM Check Node.js and npm versions
 echo Checking Node.js and npm versions...
 node --version || (
-  echo ERROR: Node.js is not installed. Please install Node.js 18.x from https://nodejs.org/
+  echo ERROR: Node.js is not installed. Please install Node.js 20.19+ from https://nodejs.org/
   exit /b 1
 )
 npm --version || (

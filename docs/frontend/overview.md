@@ -17,7 +17,7 @@
 ## Styling and UI
 - Tailwind utility classes drive the base layout
 - MUI is used heavily in the chat UI
-- Shared UI patterns and design rules live in UI_UX_STANDARDS.md
+- Shared UI patterns and design rules live in [ui-ux-standards.md](ui-ux-standards.md)
 
 ## Asset and build tooling
 - build:verify runs Vite build plus asset verification

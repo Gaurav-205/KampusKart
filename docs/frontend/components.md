@@ -10,7 +10,6 @@ This section describes the primary route components and the major shared UI elem
 ## Marketing and entry
 - Landing: marketing homepage for unauthenticated users, feature cards, and CTA to signup.
 - Home: authenticated landing page with feature grid and shuffle animations.
-- Features: simple grid of feature links.
 - PrivacyPolicy and TermsOfService: static legal content pages.
 
 ## Authentication screens

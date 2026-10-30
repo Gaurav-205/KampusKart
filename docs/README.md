@@ -22,10 +22,13 @@ This folder is the technical handbook for the KampusKart capstone. It explains a
 - frontend/components.md
 - frontend/state-and-hooks.md
 - frontend/ui-ux.md
+- frontend/ui-ux-standards.md (full design system)
 - testing.md
 - deployment.md
 - operations.md
 - troubleshooting.md
+- project-report.md (capstone project report)
+- archive/ (historical notes and analysis; may be out of date)
 
 ## Conventions used in the docs
 - Auth required means Authorization: Bearer <token> is required
@@ -35,5 +38,6 @@ This folder is the technical handbook for the KampusKart capstone. It explains a
 
 ## Related docs in the repo
 - ../README.md for setup, scripts, and high level overview
-- ../UI_UX_STANDARDS.md for the UI design system
+- frontend/ui-ux-standards.md for the UI design system
 - ../SECURITY.md for security policy and reporting
+- ../CONTRIBUTING.md for the contribution workflow
