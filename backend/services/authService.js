@@ -26,6 +26,13 @@ const ensureJwtSecret = () => {
   }
 };
 
+const OTP_TTL_MS = 15 * 60 * 1000;
+// A 6-digit OTP has 900k possibilities; cap guesses per issued OTP so it cannot be brute-forced
+const MAX_OTP_ATTEMPTS = 5;
+const GENERIC_RESET_MESSAGE = 'If that email is registered, an OTP has been sent';
+
+const hashOtp = (otp) => crypto.createHash('sha256').update(String(otp)).digest('hex');
+
 const createToken = (userId) => {
   ensureJwtSecret();
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '24h' });
@@ -88,18 +95,18 @@ const requestPasswordReset = async ({ email }) => {
   const normalizedEmail = email.toLowerCase();
   const user = await userRepository.findByEmail(normalizedEmail);
   if (!user) {
-    return { message: 'If that email is registered, an OTP has been sent' };
+    return { message: GENERIC_RESET_MESSAGE };
   }
 
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  const hashedOtp = crypto.createHash('sha256').update(otp).digest('hex');
+  const otp = crypto.randomInt(100000, 1000000).toString();
 
-  user.resetPasswordOTP = hashedOtp;
-  user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+  user.resetPasswordOTP = hashOtp(otp);
+  user.resetPasswordExpires = Date.now() + OTP_TTL_MS;
+  user.resetPasswordAttempts = 0;
   await user.save();
 
   if (!transporter) {
-    return { message: 'If that email is registered, an OTP has been sent' };
+    return { message: GENERIC_RESET_MESSAGE };
   }
 
   try {
@@ -110,7 +117,7 @@ const requestPasswordReset = async ({ email }) => {
       text: `Your OTP for password reset is: ${otp}. This OTP is valid for 15 minutes.`
     });
 
-    return { message: 'If that email is registered, an OTP has been sent' };
+    return { message: GENERIC_RESET_MESSAGE };
   } catch (error) {
     throw new ServiceError('Error sending email. Please try again later.', 500);
   }
@@ -119,39 +126,40 @@ const requestPasswordReset = async ({ email }) => {
 const resetPassword = async ({ email, otp, newPassword }) => {
   const normalizedEmail = email.toLowerCase();
   const user = await userRepository.findByEmail(normalizedEmail);
+  // Same response for unknown accounts and bad OTPs so the endpoint cannot enumerate users
   if (!user) {
-    throw new ServiceError('User not found', 404);
+    throw new ServiceError('Invalid or expired OTP', 400);
   }
 
   const now = Date.now();
-  if (!user.resetPasswordOTP || !user.resetPasswordExpires || user.resetPasswordExpires < now) {
+  if (
+    !user.resetPasswordOTP ||
+    !user.resetPasswordExpires ||
+    user.resetPasswordExpires < now ||
+    (user.resetPasswordAttempts || 0) >= MAX_OTP_ATTEMPTS
+  ) {
     throw new ServiceError('Invalid or expired OTP', 400);
   }
 
-  const hashedProvidedOtp = crypto.createHash('sha256').update(otp).digest('hex');
-  if (user.resetPasswordOTP.length !== hashedProvidedOtp.length) {
-    throw new ServiceError('Invalid or expired OTP', 400);
-  }
+  const otpMatch = crypto.timingSafeEqual(
+    Buffer.from(user.resetPasswordOTP, 'hex'),
+    Buffer.from(hashOtp(otp), 'hex')
+  );
 
-  try {
-    const otpMatch = crypto.timingSafeEqual(
-      Buffer.from(user.resetPasswordOTP, 'hex'),
-      Buffer.from(hashedProvidedOtp, 'hex')
-    );
-
-    if (!otpMatch) {
-      throw new ServiceError('Invalid or expired OTP', 400);
+  if (!otpMatch) {
+    user.resetPasswordAttempts = (user.resetPasswordAttempts || 0) + 1;
+    if (user.resetPasswordAttempts >= MAX_OTP_ATTEMPTS) {
+      user.resetPasswordOTP = undefined;
+      user.resetPasswordExpires = undefined;
     }
-  } catch (error) {
-    if (error instanceof ServiceError) {
-      throw error;
-    }
+    await user.save();
     throw new ServiceError('Invalid or expired OTP', 400);
   }
 
   user.password = newPassword;
   user.resetPasswordOTP = undefined;
   user.resetPasswordExpires = undefined;
+  user.resetPasswordAttempts = 0;
   await user.save();
 
   return { message: 'Password reset successfully' };
@@ -166,9 +174,16 @@ const refreshToken = async ({ token }) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const newToken = jwt.sign({ userId: decoded.userId }, process.env.JWT_SECRET, { expiresIn: '24h' });
-    return { token: newToken };
+    // Do not mint fresh tokens for accounts that have since been deleted
+    const user = await userRepository.findById(decoded.userId);
+    if (!user) {
+      throw new ServiceError('User not found', 401);
+    }
+    return { token: createToken(user._id) };
   } catch (error) {
+    if (error instanceof ServiceError) {
+      throw error;
+    }
     if (error.name === 'TokenExpiredError') {
       throw new ServiceError('Token expired', 401);
     }

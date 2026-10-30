@@ -46,7 +46,7 @@ const Events = () => {
     return suggestions;
   }, []);
 
-  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef } =
+  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef, markSuggestionSelection } =
     useSearchSuggestions<Event>({
       searchInput: filters.search,
       items: events,
@@ -164,7 +164,11 @@ const Events = () => {
           showSuggestions={showSuggestions}
           setShowSuggestions={setShowSuggestions}
           searchRef={searchRef}
-          onSuggestionSelect={(val: string) => updateFilters({ search: val })}
+          onSuggestionSelect={(val: string) => {
+            if (val !== filters.search) markSuggestionSelection();
+            setShowSuggestions(false);
+            updateFilters({ search: val });
+          }}
         />
 
         {fetchError && (

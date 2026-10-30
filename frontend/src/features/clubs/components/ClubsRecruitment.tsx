@@ -46,7 +46,7 @@ const ClubsRecruitment = () => {
     return suggestions;
   }, []);
 
-  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef } =
+  const { showSuggestions, setShowSuggestions, filteredSuggestions, searchRef, markSuggestionSelection } =
     useSearchSuggestions<Club>({
       searchInput: filters.search,
       items: clubs,
@@ -172,7 +172,11 @@ const ClubsRecruitment = () => {
           showSuggestions={showSuggestions}
           setShowSuggestions={setShowSuggestions}
           searchRef={searchRef}
-          onSuggestionSelect={(val: string) => updateFilters({ search: val })}
+          onSuggestionSelect={(val: string) => {
+            if (val !== filters.search) markSuggestionSelection();
+            setShowSuggestions(false);
+            updateFilters({ search: val });
+          }}
         />
 
         {fetchError && (

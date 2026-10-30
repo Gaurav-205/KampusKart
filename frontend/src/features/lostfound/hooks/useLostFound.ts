@@ -18,13 +18,16 @@ export const useLostFound = (token: string | null) => {
   });
 
   const itemsPerPage = 9;
+  // Tracks whether the first page has loaded, so later fetches show the lighter "filtering"
+  // state. A ref (not list length) keeps fetch callbacks stable and avoids duplicate requests.
+  const hasLoadedRef = useRef(false);
 
   const fetchItems = useCallback(async (currentFilters: LostFoundFilters, isMore = false) => {
     if (!token) return;
 
     try {
       if (!isMore) {
-        if (currentFilters.page === 1 && items.length === 0) {
+        if (currentFilters.page === 1 && !hasLoadedRef.current) {
           setLoading(true);
         } else {
           setIsFiltering(true);
@@ -42,6 +45,7 @@ export const useLostFound = (token: string | null) => {
         setItems(data.items);
       }
       setTotalPages(data.totalPages);
+      hasLoadedRef.current = true;
     } catch (err: any) {
       setError(err.message || 'Failed to fetch items');
     } finally {
@@ -49,7 +53,7 @@ export const useLostFound = (token: string | null) => {
       setIsFiltering(false);
       setIsFetchingMore(false);
     }
-  }, [token, items.length]);
+  }, [token]);
 
   useEffect(() => {
     fetchItems(filters);

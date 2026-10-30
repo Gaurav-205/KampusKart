@@ -28,7 +28,7 @@ const createItem = async ({ userId, data, files }) => {
     contact
   });
 
-  await item.populate('user', 'name email');
+  await item.populate('user', 'name');
   return item;
 };
 
@@ -104,7 +104,7 @@ const listItems = async ({ type, category, resolved, search, page, limit }) => {
     .find(filter)
     .skip(skip)
     .limit(parsedLimit)
-    .populate('user', 'name email')
+    .populate('user', 'name')
     .sort({ createdAt: -1 });
 
   return { items, totalItems, totalPages, page: parsedPage };
@@ -154,7 +154,7 @@ const listAdminItems = async ({ type, resolved, search, page, limit, includeDele
 const getItemById = async (id) => {
   const item = await lostfoundRepository
     .findOne({ _id: id, isDeleted: { $ne: true } })
-    .populate('user', 'name email');
+    .populate('user', 'name');
 
   if (!item) {
     throw new ServiceError('Item not found', 404);
@@ -232,7 +232,7 @@ const updateItem = async ({ itemId, userId, isAdmin, data, files }) => {
   }
 
   await item.save();
-  await item.populate('user', 'name email');
+  await item.populate('user', 'name');
   return item;
 };
 
@@ -255,7 +255,7 @@ const deleteItem = async ({ itemId, userId, isAdmin }) => {
 
 const resolveItem = async ({ itemId, userId, isAdmin }) => {
   const item = await lostfoundRepository.findById(itemId);
-  if (!item) {
+  if (!item || item.isDeleted) {
     throw new ServiceError('Item not found', 404);
   }
 

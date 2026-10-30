@@ -88,56 +88,13 @@ Additional pages — Events, News, Facilities, Clubs Recruitment, Complaints, an
 If you already have MongoDB, Cloudinary, and Google OAuth credentials ready, this is the fastest path:
 
 ```bash
-git clone https://github.com/kalviumcommunity/S72_Gaurav_Capstone_KampusKart.git
-cd S72_Gaurav_Capstone_KampusKart
+git clone https://github.com/Gaurav-205/KampusKart.git
+cd KampusKart
 
-cd frontend && npm install
-cd ../backend && npm install
-
-cp backend/.env.example backend/.env
-cp frontend/.env.development frontend/.env
-
-# Run in 2 terminals:
-# Terminal 1
-cd backend && npm run dev
-
-# Terminal 2
-cd frontend && npm run dev
+npm install
 ```
 
-Open frontend at `http://localhost:5173`.
-
----
-
-## Local Setup
-
-### Prerequisites
-
-- Node.js >= 20.19.0
-- MongoDB (local or [Atlas](https://www.mongodb.com/cloud/atlas))
-- Cloudinary account
-- Google Cloud project with OAuth 2.0 credentials
-- Gmail account (for email/OTP features)
-
-### 1. Clone and install
-
-```bash
-git clone https://github.com/kalviumcommunity/S72_Gaurav_Capstone_KampusKart.git
-cd S72_Gaurav_Capstone_KampusKart
-
-cd frontend && npm install
-cd ../backend && npm install
-
-
-### Maps Feature Dependencies
-
-This project uses interactive maps using **Leaflet** and **React Leaflet**.
-
-To enable map functionality, install the required dependencies:
-
-```bash
-npm install leaflet react-leaflet@4
-```
+`npm install` at the repository root installs both workspaces (`frontend` and `backend`) from the single root `package-lock.json`.
 
 ### 2. Configure environment variables
 
@@ -451,32 +408,3 @@ This project is proprietary software. Unauthorized copying, distribution, or use
 <div align="center">
   Made by <a href="https://github.com/Gaurav-205">Gaurav Khandelwal</a>
 </div>
-
-/**
-## ✨ README Improvement Notes
-
-### 📌 Formatting Enhancements Needed
-- Improve heading hierarchy for better readability
-- Ensure consistent spacing between sections
-- Use proper Markdown formatting for code blocks and lists
-- Align all installation and usage steps properly
-
-### 🚀 Suggested Structure Upgrade
-- Introduction
-- Features
-- Tech Stack
-- Installation
-- Usage
-- Project Structure
-- Contribution Guidelines
-- License
-
-### 🛠️ Documentation Improvements
-- Add badges (optional): build, license, contributors
-- Add screenshots for better UI understanding
-- Standardize code blocks for commands
-
-### 🎯 Goal
-Improve onboarding experience for new contributors and users by making README more structured, readable, and professional.
-*/
-

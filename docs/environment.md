@@ -11,7 +11,7 @@ Required for full feature set:
 - CLOUDINARY_CLOUD_NAME
 - CLOUDINARY_API_KEY
 - CLOUDINARY_API_SECRET
-- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_ID (Google sign-in is disabled, not fatal, when unset)
 - GOOGLE_CLIENT_SECRET
 - EMAIL_USER
 - EMAIL_PASS
@@ -19,7 +19,8 @@ Required for full feature set:
 Optional:
 - EMAIL_SERVICE (example: gmail)
 - ADMIN_EMAILS (comma separated list)
-- ALLOWED_ORIGINS (comma separated list)
+- ALLOWED_ORIGINS (comma separated list; an entry may use `*` for one hostname fragment, e.g. `https://kampuskart-*-yourteam.vercel.app` for Vercel preview deployments. `*` never matches a dot.)
+- TRUST_PROXY (reverse-proxy hops to trust for client IPs used by rate limiting; defaults to `1` in production, `false` otherwise)
 - FRONTEND_URL (used for Google OAuth redirect)
 - BACKEND_URL (used for Google OAuth callback)
 - RENDER_EXTERNAL_URL (used by keep alive)

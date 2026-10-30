@@ -14,6 +14,19 @@ const ALLOWED_CHAT_MIME_TYPES = [
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 ];
 
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_EMOJI_LENGTH = 16;
+
+// Soft-deleted messages are hidden from every listing, so they must not be editable,
+// reactable or markable either.
+const findActiveMessage = async (messageId) => {
+  const message = await chatRepository.findById(messageId);
+  if (!message || message.isDeleted) {
+    throw new ServiceError('Message not found', 404);
+  }
+  return message;
+};
+
 const listMessages = async ({ page, limit }) => {
   const { page: parsedPage, limit: parsedLimit, skip } = parsePagination({
     page,
@@ -59,20 +72,30 @@ const searchMessages = async ({ query }) => {
 };
 
 const sendMessage = async ({ userId, message, replyTo, files }) => {
-  const attachments = files && files.length > 0
+  if (message !== undefined && message !== null && typeof message !== 'string') {
+    throw new ServiceError('Message must be text', 400);
+  }
+
+  // Validate before uploading so rejected messages don't leave orphaned files in Cloudinary
+  if (message && message.length > MAX_MESSAGE_LENGTH) {
+    throw new ServiceError(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`, 400);
+  }
+
+  const hasFiles = Boolean(files && files.length > 0);
+  if (!message?.trim() && !hasFiles) {
+    throw new ServiceError('Message cannot be empty', 400);
+  }
+
+  if (replyTo) {
+    await findActiveMessage(replyTo);
+  }
+
+  const attachments = hasFiles
     ? await mediaService.uploadAttachments(files, {
         folder: 'chat_attachments',
         allowedMimeTypes: ALLOWED_CHAT_MIME_TYPES
       })
     : [];
-
-  if (!message?.trim() && attachments.length === 0) {
-    throw new ServiceError('Message cannot be empty', 400);
-  }
-
-  if (message && message.length > 2000) {
-    throw new ServiceError('Message cannot exceed 2000 characters', 400);
-  }
 
   const chatMessage = await chatRepository.create({
     sender: userId,
@@ -91,21 +114,18 @@ const sendMessage = async ({ userId, message, replyTo, files }) => {
 };
 
 const editMessage = async ({ messageId, userId, message }) => {
-  const chatMessage = await chatRepository.findById(messageId);
-  if (!chatMessage) {
-    throw new ServiceError('Message not found', 404);
-  }
+  const chatMessage = await findActiveMessage(messageId);
 
   if (chatMessage.sender.toString() !== userId.toString()) {
     throw new ServiceError('Not authorized to edit this message', 403);
   }
 
-  if (!message || !message.trim()) {
+  if (typeof message !== 'string' || !message.trim()) {
     throw new ServiceError('Message cannot be empty', 400);
   }
 
-  if (message.length > 2000) {
-    throw new ServiceError('Message cannot exceed 2000 characters', 400);
+  if (message.length > MAX_MESSAGE_LENGTH) {
+    throw new ServiceError(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`, 400);
   }
 
   chatMessage.message = message;
@@ -151,16 +171,20 @@ const deleteMessage = async ({ messageId, userId, isAdmin, permanent = false }) 
     return { message: 'Message permanently deleted successfully' };
   }
 
+  // The files are gone from Cloudinary now; drop the dangling references so the orphan
+  // cleanup job does not keep re-processing this message forever.
+  message.attachments = [];
   message.isDeleted = true;
   await message.save();
   return { message: 'Message deleted successfully' };
 };
 
 const addReaction = async ({ messageId, userId, emoji }) => {
-  const message = await chatRepository.findById(messageId);
-  if (!message) {
-    throw new ServiceError('Message not found', 404);
+  if (typeof emoji !== 'string' || !emoji.trim() || emoji.length > MAX_EMOJI_LENGTH) {
+    throw new ServiceError('A valid emoji is required', 400);
   }
+
+  const message = await findActiveMessage(messageId);
 
   await message.addReaction(userId, emoji);
 
@@ -174,10 +198,7 @@ const addReaction = async ({ messageId, userId, emoji }) => {
 };
 
 const markRead = async ({ messageId, userId }) => {
-  const message = await chatRepository.findById(messageId);
-  if (!message) {
-    throw new ServiceError('Message not found', 404);
-  }
+  const message = await findActiveMessage(messageId);
 
   await message.markAsRead(userId);
 
@@ -198,14 +219,19 @@ const cleanupOrphanedAttachments = async () => {
 
   for (const message of deletedMessages) {
     if (message.attachments && message.attachments.length > 0) {
+      const remaining = [];
       for (const attachment of message.attachments) {
         try {
           await mediaService.deleteByUrl(attachment.url);
           deletedCount += 1;
         } catch (error) {
           errorCount += 1;
+          remaining.push(attachment);
         }
       }
+      // Keep only the attachments that failed so the next run retries them, not everything
+      message.attachments = remaining;
+      await message.save();
     }
   }
 

@@ -36,7 +36,7 @@ const listComplaints = async ({ status, category, search, page, limit }) => {
 
   const complaints = await complaintRepository
     .find(query)
-    .populate('user', 'name email')
+    .populate('user', 'name')
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(parsedLimit);
@@ -67,7 +67,7 @@ const createComplaint = async ({ userId, data, files }) => {
     department
   });
 
-  await complaint.populate('user', 'name email');
+  await complaint.populate('user', 'name');
   return complaint;
 };
 
@@ -138,7 +138,7 @@ const updateComplaint = async ({ complaintId, userId, isAdmin, data, files }) =>
   complaint.images = keptImages;
 
   const updatedComplaint = await complaint.save();
-  await updatedComplaint.populate('user', 'name email');
+  await updatedComplaint.populate('user', 'name');
 
   return updatedComplaint;
 };

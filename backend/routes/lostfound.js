@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { authMiddleware, requireAdmin } = require('../middleware/auth');
-const { sanitizeInput, validateLostFoundItem } = require('../middleware/validation');
+const {
+  sanitizeInput,
+  validateLostFoundItem,
+  validateLostFoundItemUpdate
+} = require('../middleware/validation');
 const { createMemoryUpload } = require('../middleware/uploads');
 const { createRateLimiter } = require('../middleware/rateLimit');
 const lostfoundController = require('../controllers/lostfoundController');
@@ -10,7 +14,7 @@ const upload = createMemoryUpload();
 const itemRateLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 100,
-  message: 'Too many requests from this IP, please try again after 15 minutes'
+  message: { message: 'Too many requests from this IP, please try again after 15 minutes' }
 });
 
 router.post(
@@ -56,9 +60,11 @@ router.put(
   authMiddleware,
   itemRateLimiter,
   upload.array('images', 5),
+  sanitizeInput,
+  validateLostFoundItemUpdate,
   lostfoundController.updateItem
 );
 router.delete('/:id', authMiddleware, itemRateLimiter, lostfoundController.deleteItem);
-router.patch('/:id/resolve', authMiddleware, lostfoundController.resolveItem);
+router.patch('/:id/resolve', authMiddleware, itemRateLimiter, lostfoundController.resolveItem);
 
 module.exports = router;

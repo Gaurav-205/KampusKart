@@ -160,6 +160,20 @@ const ChatWindow = () => {
     }
   }, []);
 
+  // Reconnect the existing socket instead of reloading the whole page (which threw away
+  // drafts and app state). The `connect` handler re-joins the room and clears the error.
+  const handleRetryConnection = useCallback(() => {
+    const socket = socketRef.current;
+    if (!socket) {
+      window.location.reload();
+      return;
+    }
+    setError(null);
+    setLoading(true);
+    socket.auth = { token: getToken() };
+    socket.disconnect().connect();
+  }, []);
+
   useEffect(() => {
     const token = getToken();
     // Initialize socket connection
@@ -170,14 +184,17 @@ const ChatWindow = () => {
       },
     });
 
-    // Join chat when component mounts
-    if (user) {
-      socketRef.current.emit('join', {
-        _id: user._id,
-        name: user.name,
-        profilePicture: user.profilePicture,
-      });
-    }
+    // Join on every (re)connect: after a reconnect the server sees a brand-new socket that is
+    // not in the chat room, so joining only once on mount would silently stop live updates.
+    const joinChat = () => {
+      if (user) {
+        socketRef.current?.emit('join', {
+          _id: user._id,
+          name: user.name,
+          profilePicture: user.profilePicture,
+        });
+      }
+    };
 
     // Listen for previous messages
     socketRef.current.on('previous-messages', (data: ChatMessage[] | PaginatedChatResponse) => {
@@ -209,6 +226,7 @@ const ChatWindow = () => {
 
     socketRef.current.on('connect', () => {
       setError(null);
+      joinChat();
     });
 
     // Listen for new messages
@@ -986,7 +1004,7 @@ const ChatWindow = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => window.location.reload()}
+            onClick={handleRetryConnection}
             sx={{ mt: 2 }}
           >
             Retry Connection

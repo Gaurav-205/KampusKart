@@ -15,6 +15,23 @@ if (typeof jest !== 'undefined' && jest.setTimeout) {
 let mongoServer;
 const mongoose = require('mongoose');
 
+// Jest runs test files in parallel workers. When CI provides one MONGODB_URI, every worker
+// would share a database and suites that call `deleteMany({})` would wipe each other's
+// fixtures mid-test. Give each worker its own database on the provided server.
+// This runs synchronously so test files that read process.env.MONGODB_URI see the new value.
+if (process.env.MONGODB_URI && process.env.JEST_WORKER_ID) {
+  try {
+    const uri = new URL(process.env.MONGODB_URI);
+    const baseName = uri.pathname.replace(/^\//, '') || 'kampuskart-test';
+    if (!baseName.endsWith(`-w${process.env.JEST_WORKER_ID}`)) {
+      uri.pathname = `/${baseName}-w${process.env.JEST_WORKER_ID}`;
+      process.env.MONGODB_URI = uri.toString();
+    }
+  } catch (err) {
+    // Leave unparseable URIs untouched
+  }
+}
+
 // If MONGODB_URI is provided (CI uses a service), prefer it. Otherwise, start an in-memory server.
 beforeAll(async () => {
   const dbName = `kampuskart-test-${process.env.JEST_WORKER_ID || 'main'}`;

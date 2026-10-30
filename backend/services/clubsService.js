@@ -122,15 +122,17 @@ const updateClub = async ({ clubId, data, file }) => {
   }
 
   if (file) {
-    if (club.image && club.image.public_id) {
+    // Upload first: if the upload fails the existing image must stay intact
+    const previousImage = club.image;
+    club.image = await mediaService.uploadSingleImage(file, { folder: 'clubs' });
+
+    if (previousImage && previousImage.public_id) {
       try {
-        await mediaService.deleteByPublicId(club.image.public_id);
+        await mediaService.deleteByPublicId(previousImage.public_id);
       } catch (error) {
         // Ignore delete errors
       }
     }
-
-    club.image = await mediaService.uploadSingleImage(file, { folder: 'clubs' });
   }
 
   let parsedContactInfo;

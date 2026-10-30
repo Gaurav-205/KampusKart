@@ -156,15 +156,17 @@ const updateEvent = async ({ eventId, data, file }) => {
   }
 
   if (file) {
-    if (event.image && event.image.public_id) {
+    // Upload first: if the upload fails the existing image must stay intact
+    const previousImage = event.image;
+    event.image = await mediaService.uploadSingleImage(file, { folder: 'events' });
+
+    if (previousImage && previousImage.public_id) {
       try {
-        await mediaService.deleteByPublicId(event.image.public_id);
+        await mediaService.deleteByPublicId(previousImage.public_id);
       } catch (error) {
         // Ignore delete errors
       }
     }
-
-    event.image = await mediaService.uploadSingleImage(file, { folder: 'events' });
   } else if (removeImage === 'true') {
     if (event.image && event.image.public_id) {
       try {

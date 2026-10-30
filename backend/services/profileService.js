@@ -6,7 +6,7 @@ const { isAdminEmail } = require('../utils/adminUtils');
 const getProfile = async (userId) => {
   const user = await userRepository
     .findById(userId)
-    .select('-password -resetPasswordOTP -resetPasswordExpires');
+    .select('-password -resetPasswordOTP -resetPasswordExpires -resetPasswordAttempts');
 
   if (!user) {
     throw new ServiceError('User not found', 404);
@@ -45,19 +45,21 @@ const updateProfile = async ({ userId, data, file }) => {
   }
 
   if (file) {
-    if (user.profilePicture && user.profilePicture.public_id) {
-      try {
-        await mediaService.deleteByPublicId(user.profilePicture.public_id);
-      } catch (error) {
-        // Continue even if delete fails
-      }
-    }
-
+    // Upload first: if the upload fails the existing picture must stay intact
+    const previousPicture = user.profilePicture;
     const uploadResult = await mediaService.uploadSingleImage(file, {
       folder: 'profile_pictures'
     });
 
     user.profilePicture = uploadResult;
+
+    if (previousPicture && previousPicture.public_id) {
+      try {
+        await mediaService.deleteByPublicId(previousPicture.public_id);
+      } catch (error) {
+        // Continue even if delete fails
+      }
+    }
   }
 
   Object.assign(user, profileFields);
@@ -65,7 +67,7 @@ const updateProfile = async ({ userId, data, file }) => {
 
   const updatedUser = await userRepository
     .findById(userId)
-    .select('-password -resetPasswordOTP -resetPasswordExpires');
+    .select('-password -resetPasswordOTP -resetPasswordExpires -resetPasswordAttempts');
 
   const userObject = updatedUser.toObject();
   userObject.isAdmin = isAdminEmail(updatedUser.email);
