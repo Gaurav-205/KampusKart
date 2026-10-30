@@ -1,4 +1,5 @@
 const lostfoundRepository = require('../repositories/lostfoundRepository');
+const { RESOLVED_RETENTION_DAYS, daysAgo } = require('../config/retention');
 const { ServiceError } = require('./serviceError');
 const mediaService = require('./mediaService');
 const { escapeRegex, parsePagination } = require('./queryUtils');
@@ -297,12 +298,11 @@ const adminPermanentDelete = async (itemId) => {
 
 const adminCleanupExpired = async () => {
   const now = new Date();
-  const fourteenDaysAgo = new Date(now);
-  fourteenDaysAgo.setDate(now.getDate() - 14);
+  const resolvedCutoff = daysAgo(RESOLVED_RETENTION_DAYS, now);
 
   const expiredItems = await lostfoundRepository.find({
     resolved: true,
-    resolvedAt: { $lt: fourteenDaysAgo },
+    resolvedAt: { $lt: resolvedCutoff },
     isDeleted: { $ne: true }
   });
 

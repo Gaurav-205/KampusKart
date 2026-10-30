@@ -30,16 +30,16 @@
 
 ## Features
 
-| Module            | What it does                                                                          |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| Campus Map        | Google Maps with facility markers and location search                                 |
-| News & Events     | Announcements and event listings, managed by admins                                   |
-| Lost & Found      | Report and search lost or found items with photos; listings expire after 14 days      |
-| Complaints        | File complaints by category, priority and department, and follow their status history |
-| Facilities        | Directory with type, opening hours, contact details and images                        |
-| Clubs Recruitment | Open recruitment drives with deadlines and application links                          |
-| Global Chat       | Real-time chat with replies, reactions, read receipts and attachments                 |
-| Accounts          | Email/password or Google sign-in, JWT sessions, OTP password reset, profiles          |
+| Module            | What it does                                                                                 |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| Campus Map        | Google Maps with facility markers and location search                                        |
+| News & Events     | Announcements and event listings, managed by admins                                          |
+| Lost & Found      | Report and search lost or found items with photos; resolved items are archived after 14 days |
+| Complaints        | File complaints by category, priority and department, and follow their status history        |
+| Facilities        | Directory with type, opening hours, contact details and images                               |
+| Clubs Recruitment | Open recruitment drives with deadlines and application links                                 |
+| Global Chat       | Real-time chat with replies, reactions, read receipts and attachments                        |
+| Accounts          | Email/password or Google sign-in, JWT sessions, OTP password reset, profiles                 |
 
 Admins are configured by email (`ADMIN_EMAILS`) and can manage news, events, facilities and clubs, review every complaint and Lost & Found item, and restore or permanently delete soft-deleted records.
 

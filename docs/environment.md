@@ -20,6 +20,8 @@ Optional:
 - EMAIL_SERVICE (example: gmail)
 - ADMIN_EMAILS (comma separated list)
 - ALLOWED_ORIGINS (comma separated list; an entry may use `*` for one hostname fragment, e.g. `https://kampuskart-*-yourteam.vercel.app` for Vercel preview deployments. `*` never matches a dot.)
+- RESOLVED_RETENTION_DAYS (default 14: resolved Lost & Found items and resolved/closed complaints are soft-deleted after this many days)
+- SOFT_DELETE_RETENTION_DAYS (default 7: soft-deleted records are permanently removed after this many days)
 - TRUST_PROXY (reverse-proxy hops to trust for client IPs used by rate limiting; defaults to `1` in production, `false` otherwise)
 - FRONTEND_URL (used for Google OAuth redirect)
 - BACKEND_URL (used for Google OAuth callback)

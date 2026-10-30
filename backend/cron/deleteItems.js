@@ -2,6 +2,11 @@ const cron = require('node-cron');
 const LostFoundItem = require('../models/LostFoundItem');
 const Complaint = require('../models/Complaint');
 const cloudinary = require('../config/cloudinary');
+const {
+    RESOLVED_RETENTION_DAYS,
+    SOFT_DELETE_RETENTION_DAYS,
+    daysAgo
+} = require('../config/retention');
 
 // Helper function to delete images from Cloudinary
 const deleteImages = async (images) => {
@@ -30,19 +35,17 @@ const deleteImages = async (images) => {
 const deleteExpiredItems = async () => {
     try {
         const now = new Date();
-        const fourteenDaysAgo = new Date(now);
-        fourteenDaysAgo.setDate(now.getDate() - 14);
-        const sevenDaysAgo = new Date(now);
-        sevenDaysAgo.setDate(now.getDate() - 7);
+        const resolvedCutoff = daysAgo(RESOLVED_RETENTION_DAYS, now);
+        const softDeleteCutoff = daysAgo(SOFT_DELETE_RETENTION_DAYS, now);
 
         console.log('Starting automatic deletion of expired complaints and lost & found items...');
 
         // ===== LOST & FOUND ITEMS =====
         
-        // Find resolved items older than 14 days (to be soft deleted)
+        // Find items resolved longer ago than RESOLVED_RETENTION_DAYS (to be soft deleted)
         const resolvedExpiredItems = await LostFoundItem.find({
             resolved: true,
-            resolvedAt: { $lt: fourteenDaysAgo },
+            resolvedAt: { $lt: resolvedCutoff },
             isDeleted: { $ne: true }
         });
 
@@ -65,10 +68,10 @@ const deleteExpiredItems = async () => {
 
         // ===== COMPLAINTS =====
         
-        // Find resolved/closed complaints older than 14 days (to be soft deleted)
+        // Find complaints resolved/closed longer ago than RESOLVED_RETENTION_DAYS (to be soft deleted)
         const resolvedExpiredComplaints = await Complaint.find({
             status: { $in: ['Resolved', 'Closed'] },
-            lastUpdated: { $lt: fourteenDaysAgo },
+            lastUpdated: { $lt: resolvedCutoff },
             isDeleted: { $ne: true }
         });
 
@@ -102,7 +105,7 @@ const deleteExpiredItems = async () => {
         // Hard delete lost & found items that have been soft-deleted for more than 7 days
         const itemsToHardDelete = await LostFoundItem.find({
             isDeleted: true,
-            deletedAt: { $lt: sevenDaysAgo }
+            deletedAt: { $lt: softDeleteCutoff }
         });
         for (const item of itemsToHardDelete) {
             try {
@@ -117,7 +120,7 @@ const deleteExpiredItems = async () => {
         // Hard delete complaints that have been soft-deleted for more than 7 days
         const complaintsToHardDelete = await Complaint.find({
             isDeleted: true,
-            deletedAt: { $lt: sevenDaysAgo }
+            deletedAt: { $lt: softDeleteCutoff }
         });
         for (const complaint of complaintsToHardDelete) {
             try {

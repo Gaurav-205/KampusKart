@@ -1,4 +1,5 @@
 const complaintRepository = require('../repositories/complaintRepository');
+const { RESOLVED_RETENTION_DAYS, daysAgo } = require('../config/retention');
 const { ServiceError } = require('./serviceError');
 const mediaService = require('./mediaService');
 const { escapeRegex, parsePagination } = require('./queryUtils');
@@ -235,12 +236,11 @@ const adminPermanentDelete = async (complaintId) => {
 
 const adminCleanupExpired = async () => {
   const now = new Date();
-  const fourteenDaysAgo = new Date(now);
-  fourteenDaysAgo.setDate(now.getDate() - 14);
+  const resolvedCutoff = daysAgo(RESOLVED_RETENTION_DAYS, now);
 
   const expiredComplaints = await complaintRepository.find({
     status: { $in: ['Resolved', 'Closed'] },
-    lastUpdated: { $lt: fourteenDaysAgo },
+    lastUpdated: { $lt: resolvedCutoff },
     isDeleted: { $ne: true }
   });
 
