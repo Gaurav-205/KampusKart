@@ -2,7 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
-const PROD_BACKEND_URL = 'https://s72-gaurav-capstone.onrender.com';
+const PROD_BACKEND_URL = 'https://kampuskart.onrender.com';
 
 // Determine the callback URL based on environment
 const getCallbackURL = () => {

@@ -3,7 +3,7 @@
 ## Hosting
 
 - Frontend: Vercel (<https://kampuskart-navy.vercel.app>), Netlify (<https://kampuskart.netlify.app>)
-- Backend: Render (<https://s72-gaurav-capstone.onrender.com>, service `S72_Gaurav_Capstone`)
+- Backend: Render (<https://kampuskart.onrender.com>, service `KampusKart`)
 
 ## Vercel (frontend)
 
@@ -21,12 +21,12 @@ Project settings (leave the overrides in the dashboard empty so `vercel.json` ap
 
 Environment variables (Production and Preview):
 
-| Variable                   | Value                                                                   |
-| -------------------------- | ----------------------------------------------------------------------- |
-| `VITE_API_URL`             | Backend URL, e.g. `https://s72-gaurav-capstone.onrender.com` |
-| `VITE_SOCKET_URL`          | Same as `VITE_API_URL`                                                  |
-| `VITE_GOOGLE_MAPS_API_KEY` | Google Maps JS API key (restrict it to the Vercel domains)              |
-| `VITE_GOOGLE_MAPS_MAP_ID`  | Optional map style ID                                                   |
+| Variable                   | Value                                                      |
+| -------------------------- | ---------------------------------------------------------- |
+| `VITE_API_URL`             | Backend URL, e.g. `https://kampuskart.onrender.com`        |
+| `VITE_SOCKET_URL`          | Same as `VITE_API_URL`                                     |
+| `VITE_GOOGLE_MAPS_API_KEY` | Google Maps JS API key (restrict it to the Vercel domains) |
+| `VITE_GOOGLE_MAPS_MAP_ID`  | Optional map style ID                                      |
 
 Backend changes required on Render before switching traffic:
 
@@ -64,8 +64,13 @@ npx vercel deploy --prod     # production, after the preview is verified
 
 ## Render
 
-- Backend deployed as a Node service
-- Uses MONGODB_URI, JWT_SECRET, and other backend env vars
+- Service `KampusKart` (Node, free plan, Oregon), auto-deploys from `main`
+- Build: `cd backend && npm install --omit=dev`; start: `cd backend && node server.js`
+- Required secrets: `MONGODB_URI`, `JWT_SECRET`; for uploads and password reset also the
+  `CLOUDINARY_*` and `EMAIL_*` variables (see [environment.md](environment.md))
+- `BACKEND_URL=https://kampuskart.onrender.com`, plus `FRONTEND_URL`, `ALLOWED_ORIGINS` and
+  `TRUST_PROXY` as listed in the Vercel section
+- The CD workflow's `RENDER_SERVICE_ID` secret must hold this service's ID
 
 ## GitHub Actions
 

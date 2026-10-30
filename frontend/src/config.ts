@@ -16,9 +16,9 @@ if (missingEnvVars.length > 0 && !isProduction) {
 }
 
 // Base API URL — override via VITE_API_URL env var, or fall back to localhost for dev
-const API_BASE: string = import.meta.env.VITE_API_URL || (isProduction ? 'https://s72-gaurav-capstone.onrender.com' : 'http://localhost:5000');
+const API_BASE: string = import.meta.env.VITE_API_URL || (isProduction ? 'https://kampuskart.onrender.com' : 'http://localhost:5000');
 
-const SOCKET_URL: string = import.meta.env.VITE_SOCKET_URL || (isProduction ? 'https://s72-gaurav-capstone.onrender.com' : 'http://localhost:5000');
+const SOCKET_URL: string = import.meta.env.VITE_SOCKET_URL || (isProduction ? 'https://kampuskart.onrender.com' : 'http://localhost:5000');
 
 // Google sign-in is off unless explicitly enabled; the backend must also set GOOGLE_AUTH_ENABLED=true.
 const GOOGLE_AUTH_ENABLED: boolean = import.meta.env.VITE_ENABLE_GOOGLE_AUTH === 'true';

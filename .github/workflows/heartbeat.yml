@@ -15,7 +15,7 @@ jobs:
       - name: Health check
         id: health
         env:
-          HEALTH_URL: ${{ secrets.HEALTH_CHECK_URL || 'https://s72-gaurav-capstone.onrender.com/api/health' }}
+          HEALTH_URL: ${{ secrets.HEALTH_CHECK_URL || 'https://kampuskart.onrender.com/api/health' }}
         run: |
           echo "Checking $HEALTH_URL"
           status=$(curl -s -o /dev/null -w "%{http_code}" "$HEALTH_URL" || echo 000)
