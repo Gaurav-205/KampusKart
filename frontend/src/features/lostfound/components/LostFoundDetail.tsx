@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiMapPin, FiCalendar, FiUser, FiMail, FiCheckCircle, FiEdit2, FiTrash2, FiTag, FiFileText } from 'react-icons/fi';
 import { LostFoundItem } from '../types';
+import { formatDate } from '../../../utils/formatDate';
 
 interface LostFoundDetailProps {
   item: LostFoundItem;
@@ -68,7 +69,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
           <h2 className="text-3xl font-extrabold text-gray-900 leading-tight mb-2">{item.title}</h2>
           <div className="flex items-center text-gray-500 text-sm font-medium">
             <FiCalendar className="mr-2" />
-            <span>Posted on {new Date(item.createdAt).toLocaleDateString()}</span>
+            <span>Posted on {formatDate(item.createdAt)}</span>
           </div>
         </div>
 

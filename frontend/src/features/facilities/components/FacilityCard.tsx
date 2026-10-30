@@ -4,6 +4,7 @@ import { MdSchool } from 'react-icons/md';
 import { Facility } from '../types';
 import { getIconByValue } from '../constants';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import CardImage from '../../../components/common/CardImage';
 
 interface FacilityCardProps {
   facility: Facility;
@@ -28,28 +29,7 @@ export const FacilityCard: React.FC<FacilityCardProps> = ({
       onClick={() => onSelect(facility)}
     >
       <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-        {facility.images && facility.images.length > 0 ? (
-          <img
-            src={facility.images[0].url}
-            alt={facility.name}
-            className="object-cover w-full h-full"
-            onError={(e) => {
-            e.currentTarget.src =
-              'https://via.placeholder.com/600x400?text=No+Image';
-          }}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-50">
-            <div className="flex flex-col items-center justify-center">
-              <div className="p-4 rounded-lg bg-kk-ink">
-                <div className="text-white">
-                  {iconOption?.icon || <MdSchool className="w-16 h-16" />}
-                </div>
-              </div>
-              <span className="text-sm font-medium text-gray-500 mt-4">No Image</span>
-            </div>
-          </div>
-        )}
+        <CardImage src={facility.images?.[0]?.url} alt={facility.name} icon={iconOption?.icon || <MdSchool />} />
         
         <div className={UI_PATTERNS.badgeTopLeft}>
           <span className={UI_PATTERNS.badgeLabel}>
@@ -58,10 +38,10 @@ export const FacilityCard: React.FC<FacilityCardProps> = ({
           </span>
         </div>
         
-        <div className={UI_PATTERNS.badgeTopRight}>
-          <span className={UI_PATTERNS.badgeLabel}>
-            <FiMapPin className="w-3 h-3" />
-            {facility.location}
+        <div className={`${UI_PATTERNS.badgeTopRight} max-w-[55%]`}>
+          <span className={`${UI_PATTERNS.badgeLabel} max-w-full`} title={facility.location}>
+            <FiMapPin className="w-3 h-3 shrink-0" />
+            <span className="truncate">{facility.location}</span>
           </span>
         </div>
       </div>

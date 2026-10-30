@@ -4,7 +4,6 @@ import { FeatureModal } from '../../../components/common/FeatureModal';
 import { SuccessMessage } from '../../../components/common/SuccessMessage';
 import { PageSkeleton } from '../../../components/common/SkeletonLoader';
 import { Footer } from '../../../components/ui/footer';
-import { socialLinks } from '../../../utils/socialLinks';
 import { useSearchSuggestions } from '../../../hooks/useSearchSuggestions';
 
 import { useEvents } from '../hooks/useEvents';
@@ -146,13 +145,16 @@ const Events = () => {
         <SuccessMessage message={successMessage} onDismiss={() => setSuccessMessage(null)} />
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-          <h1 className="text-h2 font-extrabold text-black">Campus Events</h1>
+          <div>
+            <h1 className="text-h2 font-extrabold text-kk-ink">Events</h1>
+            <p className="mt-2 text-gray-600">Fests, workshops, talks and everything else happening on campus.</p>
+          </div>
           {user?.isAdmin && (
             <button
               onClick={openAddModal}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-kk-ink text-white font-bold text-lg hover:bg-kk-graphite transition-colors"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-kk-ink text-white font-bold text-base hover:bg-kk-graphite transition-colors whitespace-nowrap self-start md:self-auto"
             >
-              + Add New Event
+              Add event
             </button>
           )}
         </div>
@@ -252,25 +254,7 @@ const Events = () => {
           )}
         </FeatureModal>
       </main>
-      <Footer
-        logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-        brandName="KampusKart"
-        socialLinks={socialLinks}
-        mainLinks={[
-          { href: '/events', label: 'Events' },
-          { href: '/facilities', label: 'Facilities' },
-          { href: '/clubs-recruitment', label: 'Clubs' },
-          { href: '/campus-map', label: 'Map' },
-        ]}
-        legalLinks={[
-          { href: '/privacy', label: 'Privacy' },
-          { href: '/terms', label: 'Terms' },
-        ]}
-        copyright={{
-          text: `© ${new Date().getFullYear()} KampusKart`,
-          license: 'All rights reserved.',
-        }}
-      />
+      <Footer />
     </div>
   );
 };

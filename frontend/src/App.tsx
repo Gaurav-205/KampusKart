@@ -24,6 +24,7 @@ const ClubsRecruitment = React.lazy(() => import('./pages/ClubsRecruitment'));
 const AdminUsers = React.lazy(() => import('./pages/AdminUsers'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 // Centralized lazy loading fallback - simple spinner
 const PageLoader = () => (
@@ -215,6 +216,7 @@ const AppLayout: React.FC = () => {
             />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </React.Suspense>
       </div>

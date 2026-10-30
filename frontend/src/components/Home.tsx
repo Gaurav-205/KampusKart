@@ -2,21 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiMap, FiSearch, FiCalendar, FiFileText, FiAlertCircle, FiHome, FiUsers, FiMessageSquare } from 'react-icons/fi';
 import { Footer } from './ui/footer';
+import { useAuth } from '../contexts/AuthContext';
 import { ShuffleGrid } from './ui/shuffle-grid';
-import { socialLinks } from '../utils/socialLinks';
 
 const features = [
   { name: 'Campus Map',        description: 'Explore the campus and find locations easily.',          icon: <FiMap className="w-6 h-6 sm:w-7 sm:h-7" />,           link: '/campus-map',        iconBg: 'bg-kk-ink' },
   { name: 'Lost & Found',      description: 'Report or find lost items on campus.',                   icon: <FiSearch className="w-6 h-6 sm:w-7 sm:h-7" />,        link: '/lostfound',         iconBg: 'bg-kk-ink' },
-  { name: 'Events',            description: 'Stay updated with campus events.',                       icon: <FiCalendar className="w-6 h-6 sm:w-7 sm:h-7" />,      link: '/events',            iconBg: 'bg-kk-graphite' },
+  { name: 'Events',            description: 'Stay updated with campus events.',                       icon: <FiCalendar className="w-6 h-6 sm:w-7 sm:h-7" />,      link: '/events',            iconBg: 'bg-kk-ink' },
   { name: 'News',              description: 'Read the latest campus news.',                           icon: <FiFileText className="w-6 h-6 sm:w-7 sm:h-7" />,      link: '/news',              iconBg: 'bg-kk-ink' },
   { name: 'Complaints',        description: 'Raise and track campus complaints.',                     icon: <FiAlertCircle className="w-6 h-6 sm:w-7 sm:h-7" />,   link: '/complaints',        iconBg: 'bg-kk-ink' },
-  { name: 'Facilities',        description: 'Discover campus facilities and services.',               icon: <FiHome className="w-6 h-6 sm:w-7 sm:h-7" />,          link: '/facilities',        iconBg: 'bg-kk-graphite' },
+  { name: 'Facilities',        description: 'Discover campus facilities and services.',               icon: <FiHome className="w-6 h-6 sm:w-7 sm:h-7" />,          link: '/facilities',        iconBg: 'bg-kk-ink' },
   { name: 'Global Chat',       description: 'Chat with other campus members in real-time.',           icon: <FiMessageSquare className="w-6 h-6 sm:w-7 sm:h-7" />, link: '/chat',              iconBg: 'bg-kk-ink' },
   { name: 'Clubs Recruitment', description: 'Apply to join campus clubs and societies.',              icon: <FiUsers className="w-6 h-6 sm:w-7 sm:h-7" />,         link: '/clubs-recruitment', iconBg: 'bg-kk-ink' },
 ];
 
 const Home = () => {
+  const { user } = useAuth();
+  const firstName = user?.name?.trim().split(/\s+/)[0];
   const scrollToFeatures = () => {
     const featuresSection = document.getElementById('features-section');
     if (featuresSection) {
@@ -39,7 +41,7 @@ const Home = () => {
               className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black leading-tight"
               style={{ letterSpacing: "-0.02em" }}
             >
-              Welcome to KampusKart
+              {firstName ? `Welcome back, ${firstName}` : 'Welcome to KampusKart'}
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-gray-500 max-w-md mx-auto md:mx-0 leading-relaxed">
               Your all-in-one campus companion for navigation, events, news, lost &amp; found, complaints, and more.
@@ -49,13 +51,13 @@ const Home = () => {
                 to="/campus-map"
                 className="min-h-[48px] px-6 sm:px-8 py-3 rounded-lg font-bold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 text-sm sm:text-base text-center"
               >
-                Explore Full Map
+                Open campus map
               </Link>
               <button
                 onClick={scrollToFeatures}
                 className="min-h-[48px] px-6 sm:px-8 py-3 rounded-lg font-bold text-gray-700 bg-white border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 text-sm sm:text-base"
               >
-                View Features
+                Browse features
               </button>
             </div>
           </div>
@@ -107,25 +109,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <Footer
-        logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-        brandName="KampusKart"
-        socialLinks={socialLinks}
-        mainLinks={[
-          { href: '/events', label: 'Events' },
-          { href: '/facilities', label: 'Facilities' },
-          { href: '/clubs-recruitment', label: 'Clubs' },
-          { href: '/campus-map', label: 'Map' },
-        ]}
-        legalLinks={[
-          { href: '/privacy', label: 'Privacy' },
-          { href: '/terms', label: 'Terms' },
-        ]}
-        copyright={{
-          text: `© ${new Date().getFullYear()} KampusKart`,
-          license: 'All rights reserved.',
-        }}
-      />
+      <Footer />
     </div>
   );
 };

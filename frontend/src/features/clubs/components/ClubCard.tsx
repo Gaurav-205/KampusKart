@@ -2,6 +2,8 @@ import React from 'react';
 import { FiCalendar, FiTag, FiUsers } from 'react-icons/fi';
 import { Club } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import CardImage from '../../../components/common/CardImage';
+import { formatShortDate } from '../../../utils/formatDate';
 
 interface ClubCardProps {
   club: Club;
@@ -9,26 +11,16 @@ interface ClubCardProps {
 }
 
 export const ClubCard: React.FC<ClubCardProps> = ({ club, onSelect }) => {
+  // A recruitment can be closed while its form link still exists, so check both.
+  const canApply = club.status === 'Open' && Boolean(club.formUrl);
+
   return (
     <div 
       className="bg-white rounded-lg border-2 border-gray-200 overflow-hidden cursor-pointer hover:border-gray-300 transition-colors duration-200 h-full flex flex-col"
       onClick={() => onSelect(club)}
     >
       <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-        {club.image?.url ? (
-          <img 
-            src={club.image.url} 
-            alt={club.title} 
-            className="w-full h-full object-cover" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-50">
-            <div className="flex flex-col items-center justify-center text-gray-300">
-              <FiUsers className="w-16 h-16" />
-              <span className="text-xs mt-2">No Image Available</span>
-            </div>
-          </div>
-        )}
+        <CardImage src={club.image?.url} alt={club.title} icon={<FiUsers />} />
         <div className={UI_PATTERNS.badgeTopRight}>
           <span className={`${UI_PATTERNS.badgeLabel} ${club.status === 'Open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
             {club.status}
@@ -47,24 +39,24 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onSelect }) => {
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <FiCalendar className="mr-2 flex-shrink-0 text-gray-400" />
-            <span>{new Date(club.startDate).toLocaleDateString()} - {new Date(club.endDate).toLocaleDateString()}</span>
+            <span>{formatShortDate(club.startDate)} - {formatShortDate(club.endDate)}</span>
           </div>
         </div>
 
         <div className="mt-4 pt-4 border-t-2 border-gray-200">
           <button
             className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-bold transition-colors duration-200 ${
-              club.formUrl 
+              canApply 
                 ? 'bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink' 
                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
             }`}
-            disabled={!club.formUrl}
+            disabled={!canApply}
             onClick={e => { 
               e.stopPropagation(); 
-              if (club.formUrl) window.open(club.formUrl, '_blank'); 
+              if (canApply) window.open(club.formUrl, '_blank', 'noopener,noreferrer'); 
             }}
           >
-            {club.formUrl ? 'Apply Now' : 'Applications Closed'}
+            {canApply ? 'Apply now' : 'Applications closed'}
           </button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiTag, FiUser, FiCalendar, FiClock, FiEdit2, FiTrash2, FiFileText, FiActivity } from 'react-icons/fi';
 import { Complaint } from '../types';
+import { formatDate, formatDateTime } from '../../../utils/formatDate';
 
 interface ComplaintDetailProps {
   complaint: Complaint;
@@ -74,7 +75,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
           <h2 className="text-3xl font-extrabold text-gray-900 leading-tight mb-2">{complaint.title}</h2>
           <div className="flex items-center text-gray-500 text-sm font-medium">
             <FiCalendar className="mr-2" />
-            <span>Submitted on {new Date(complaint.createdAt).toLocaleDateString()}</span>
+            <span>Submitted on {formatDate(complaint.createdAt)}</span>
           </div>
         </div>
 
@@ -115,7 +116,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
               </div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Last Updated</p>
-                <p className="text-gray-900 font-bold">{new Date(complaint.lastUpdated).toLocaleString()}</p>
+                <p className="text-gray-900 font-bold">{formatDateTime(complaint.lastUpdated)}</p>
               </div>
             </div>
           </div>
@@ -147,7 +148,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
                 <div className="bg-white p-4 rounded-xl border-2 border-gray-100 shadow-sm">
                   <div className="flex flex-wrap justify-between items-center mb-2 gap-2">
                     <span className="font-bold text-gray-900">{history.status}</span>
-                    <span className="text-xs text-gray-400 font-medium">{new Date(history.timestamp).toLocaleString()}</span>
+                    <span className="text-xs text-gray-400 font-medium">{formatDateTime(history.timestamp)}</span>
                   </div>
                   {history.comment && (
                     <p className="text-gray-600 text-sm italic">"{history.comment}"</p>

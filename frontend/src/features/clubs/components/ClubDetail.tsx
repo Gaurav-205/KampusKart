@@ -3,6 +3,7 @@ import { FiCalendar, FiTag, FiUser, FiMail, FiPhone, FiEdit2, FiTrash2, FiFileTe
 import { FaWhatsapp } from 'react-icons/fa';
 import { Club } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import { formatShortDate } from '../../../utils/formatDate';
 
 interface ClubDetailProps {
   club: Club;
@@ -27,7 +28,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
       `*Club:* ${club.clubName}`,
       `*Title:* ${club.title}`,
       `*Description:* ${club.description}`,
-      `*Recruitment Period:* ${new Date(club.startDate).toLocaleDateString()} - ${new Date(club.endDate).toLocaleDateString()}`,
+      `*Recruitment Period:* ${formatShortDate(club.startDate)} - ${formatShortDate(club.endDate)}`,
       ...(contactSegments.length > 0 ? [`*Contact:* ${contactSegments.join(' | ')}`] : []),
       '',
       'Apply now and be part of something amazing!',
@@ -83,20 +84,26 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
           <div className="bg-gray-50 p-4 rounded-xl space-y-3">
             <div className="flex items-center text-gray-700 font-medium">
               <FiCalendar className="mr-3 text-gray-400" />
-              <span>{new Date(club.startDate).toLocaleDateString()} - {new Date(club.endDate).toLocaleDateString()}</span>
+              <span>{formatShortDate(club.startDate)} - {formatShortDate(club.endDate)}</span>
             </div>
           </div>
 
           {club.formUrl && (
             <div className="flex flex-col gap-3">
-              <a
-                href={club.formUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`w-full ${UI_PATTERNS.buttonPrimary} text-center py-4 rounded-xl text-lg`}
-              >
-                Apply Now
-              </a>
+              {club.status === 'Open' ? (
+                <a
+                  href={club.formUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full ${UI_PATTERNS.buttonPrimary} text-center py-4 rounded-xl text-lg`}
+                >
+                  Apply now
+                </a>
+              ) : (
+                <p className="w-full text-center py-4 rounded-xl text-lg font-bold bg-gray-100 text-gray-500">
+                  Applications closed
+                </p>
+              )}
               <a
                 href={buildWhatsAppShareUrl()}
                 target="_blank"

@@ -6,7 +6,6 @@ import {
 } from 'react-icons/fi';
 import { API_BASE } from '../config';
 import { Footer } from './ui/footer';
-import { socialLinks } from '../utils/socialLinks';
 
 const formatDate = (dateString: string | null | undefined) => {
   if (!dateString) return 'Not set';
@@ -426,7 +425,7 @@ const Profile = () => {
                       value={profileData.major} onChange={handleInputChange} placeholder="e.g., Computer Science" />
                     <EditField id="program" label="Program" icon={<FiBriefcase className="w-4 h-4" />}
                       value={profileData.program} onChange={handleInputChange} placeholder="e.g., Bachelor of Science" />
-                    <EditField id="yearOfStudy" label="Year Interval" icon={<FiCalendar className="w-4 h-4" />}
+                    <EditField id="yearOfStudy" label="Year of study" icon={<FiCalendar className="w-4 h-4" />}
                       value={profileData.yearOfStudy} onChange={handleInputChange} placeholder="e.g., 2024 - 2028" />
                   </div>
                 </div>
@@ -479,7 +478,7 @@ const Profile = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <InfoField label="Major / Department" value={profileData.major || 'Not set'} icon={<FiTag className="w-4 h-4" />} />
                     <InfoField label="Program" value={profileData.program || 'Not set'} icon={<FiBriefcase className="w-4 h-4" />} />
-                    <InfoField label="Year Interval" value={profileData.yearOfStudy || 'Not set'} icon={<FiCalendar className="w-4 h-4" />} />
+                    <InfoField label="Year of study" value={profileData.yearOfStudy || 'Not set'} icon={<FiCalendar className="w-4 h-4" />} />
                   </div>
                 </div>
               </div>
@@ -489,25 +488,7 @@ const Profile = () => {
         </div>
       </main>
 
-      <Footer
-        logo={<img src="/Logo.webp" alt="KampusKart Logo" className="h-7 w-7" />}
-        brandName="KampusKart"
-        socialLinks={socialLinks}
-        mainLinks={[
-          { href: '/news', label: 'News' },
-          { href: '/events', label: 'Events' },
-          { href: '/facilities', label: 'Facilities' },
-          { href: '/campus-map', label: 'Map' },
-        ]}
-        legalLinks={[
-          { href: '/privacy', label: 'Privacy' },
-          { href: '/terms', label: 'Terms' },
-        ]}
-        copyright={{
-          text: `© ${new Date().getFullYear()} KampusKart`,
-          license: 'All rights reserved.',
-        }}
-      />
+      <Footer />
     </div>
   );
 };
