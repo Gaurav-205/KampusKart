@@ -3,6 +3,7 @@ import { FiInfo } from 'react-icons/fi';
 import { ImageUpload, ImageFile } from '../../../components/common/ImageUpload';
 import { LostFoundItem } from '../types';
 import { validateEmail, validatePhone } from '../../../utils/formValidation';
+import { todayInputValue } from '../../../utils/formatDate';
 
 interface LostFoundFormProps {
   item?: LostFoundItem | null;
@@ -22,7 +23,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
     title: item?.title || '',
     description: item?.description || '',
     location: item?.location || '',
-    date: item?.date ? new Date(item.date).toISOString().split('T')[0] : '',
+    date: item?.date ? new Date(item.date).toISOString().split('T')[0] : todayInputValue(),
     contact: item?.contact || '',
     images: (item?.images || []).map((img) => ({
       previewUrl: img.url,
@@ -251,7 +252,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : item ? 'Update Item' : 'Post Item'}
+          {isSubmitting ? 'Saving...' : item ? 'Save changes' : 'Post item'}
         </button>
       </div>
     </form>

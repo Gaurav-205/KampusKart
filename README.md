@@ -171,7 +171,7 @@ Run these from the repository root.
 | `npm run format`    | Prettier                                              |
 | `npm run mongo:up`  | Start local MongoDB in Docker (`mongo:down` stops it) |
 
-Workspace-specific scripts run with `npm --workspace frontend run <script>` or `npm --workspace backend run <script>`. For example, `npm --workspace backend run seed` loads sample data.
+Workspace-specific scripts run with `npm --workspace frontend run <script>` or `npm --workspace backend run <script>`. For example, `npm --workspace backend run seed` loads sample data and creates a test account (`testuser@mitadt.edu` / `Test@12345`) when the database has no users.
 
 ## Testing
 

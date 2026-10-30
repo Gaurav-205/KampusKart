@@ -292,7 +292,7 @@ const LostFound = () => {
             modalType === 'form'
               ? selectedItem
                 ? 'Edit Item'
-                : 'Add New Item'
+                : 'Report an item'
               : modalType === 'detail'
                 ? 'Item Details'
                 : 'Confirm Delete'

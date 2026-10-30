@@ -404,7 +404,7 @@ export const EventForm: React.FC<EventFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : event ? 'Update Event' : 'Create Event'}
+          {isSubmitting ? 'Saving...' : event ? 'Save changes' : 'Create event'}
         </button>
       </div>
     </form>

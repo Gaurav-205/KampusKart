@@ -281,7 +281,7 @@ const Complaints = () => {
             modalType === 'form'
               ? selectedComplaint
                 ? 'Edit Complaint'
-                : 'Add New Complaint'
+                : 'File a complaint'
               : modalType === 'detail'
                 ? 'Complaint Details'
                 : 'Confirm Delete'

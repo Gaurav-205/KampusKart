@@ -203,7 +203,7 @@ const Events = () => {
             modalType === 'form'
               ? selectedEvent
                 ? 'Edit Event'
-                : 'Add New Event'
+                : 'Add event'
               : modalType === 'detail'
                 ? 'Event Details'
                 : 'Confirm Delete'

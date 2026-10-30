@@ -92,7 +92,7 @@ const KampusKartNavbar: React.FC = () => {
   const authConfig = isLoggedIn
     ? {
         login: { text: 'Profile', url: '/profile' },
-        signup: { text: 'Logout', url: '#', onClick: handleLogout },
+        signup: { text: 'Log out', url: '#', onClick: handleLogout },
       }
     : {
         login: { text: 'Log in', url: '/login' },

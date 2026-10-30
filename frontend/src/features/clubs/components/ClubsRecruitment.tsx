@@ -211,7 +211,7 @@ const ClubsRecruitment = () => {
             modalType === 'form'
               ? selectedClub
                 ? 'Edit Recruitment'
-                : 'Add New Recruitment'
+                : 'Post a recruitment'
               : modalType === 'detail'
                 ? 'Recruitment Details'
                 : 'Confirm Delete'

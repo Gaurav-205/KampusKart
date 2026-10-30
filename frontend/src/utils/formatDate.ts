@@ -23,3 +23,10 @@ export const formatDateTime = (value: DateInput): string =>
     hour: 'numeric',
     minute: '2-digit',
   }) ?? '';
+
+/** Today's date in the user's time zone as YYYY-MM-DD, for <input type="date"> defaults. */
+export const todayInputValue = (): string => {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+};

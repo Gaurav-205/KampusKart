@@ -15,7 +15,6 @@ interface ImageUploadProps {
   maxImages?: number;
   maxSizeMB?: number;
   single?: boolean;
-  label?: string;
   helpText?: string;
   disabled?: boolean;
   id?: string;
@@ -31,7 +30,6 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   maxImages = 5,
   maxSizeMB = 5,
   single = false,
-  label = 'Images',
   helpText,
   disabled = false,
   id = 'image-upload',
@@ -128,13 +126,11 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
     : `PNG, JPG, GIF up to ${maxSizeMB}MB each. Add clear images to help illustrate.`;
 
   return (
-    <div className="bg-gray-50 rounded-lg p-6" style={{ colorScheme: 'light', backgroundColor: '#f9fafb' }}>
-      <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-        {label} {!single && `(Optional, Max ${maxImages})`}
-      </h3>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        {single ? 'Image' : 'Images'}
-      </label>
+    <div>
+      {/* The surrounding form section already carries the "Images" heading. */}
+      <p className="text-sm text-gray-600 mb-2">
+        {single ? 'Optional. One image.' : `Optional. Up to ${maxImages} images.`}
+      </p>
       <div
         data-testid={`${id}-dropzone`}
         onDragOver={handleDragOver}

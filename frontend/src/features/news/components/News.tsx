@@ -218,7 +218,7 @@ const News = () => {
             modalType === 'form'
               ? selectedNews
                 ? 'Edit News'
-                : 'Add News'
+                : 'Post news'
               : modalType === 'detail'
                 ? 'News Details'
                 : 'Confirm Delete'

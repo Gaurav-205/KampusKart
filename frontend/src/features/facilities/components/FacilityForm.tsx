@@ -218,7 +218,7 @@ export const FacilityForm: React.FC<FacilityFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : facility ? 'Update Facility' : 'Add Facility'}
+          {isSubmitting ? 'Saving...' : facility ? 'Save changes' : 'Add facility'}
         </button>
       </div>
     </form>

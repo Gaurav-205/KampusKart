@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiCalendar, FiTag, FiEdit2, FiTrash2, FiFileText } from 'react-icons/fi';
 import { NewsItem } from '../types';
+import CardImage from '../../../components/common/CardImage';
 
 interface NewsDetailProps {
   news: NewsItem;
@@ -25,10 +26,11 @@ export const NewsDetail: React.FC<NewsDetailProps> = ({ news, isAdmin, onEdit, o
               }`}
               onClick={() => setZoomedImage(img.url ?? null)}
             >
-              <img
+              <CardImage
                 src={img.url}
                 alt={`${news.title} - ${idx + 1}`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                icon={<FiFileText />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ))
