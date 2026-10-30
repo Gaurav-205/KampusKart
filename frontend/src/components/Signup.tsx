@@ -155,10 +155,10 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="auth-page min-h-screen w-screen flex flex-col font-sans bg-white dark:bg-gray-950 overflow-hidden">
+    <div className="auth-page min-h-screen w-screen flex flex-col font-sans bg-white overflow-hidden">
       <div className="flex flex-1 min-h-0">
         {/* Left: form */}
-        <div className="auth-form-panel w-full md:w-1/2 px-4 sm:px-6 md:px-8 py-8 bg-white dark:bg-gray-900 overflow-y-auto flex items-center justify-center">
+        <div className="auth-form-panel w-full md:w-1/2 px-4 sm:px-6 md:px-8 py-8 bg-white overflow-y-auto flex items-center justify-center">
           <div className="auth-form-card w-full max-w-sm">
             {/* Logo */}
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
@@ -168,13 +168,13 @@ const Signup: React.FC = () => {
                   alt="KampusKart Logo"
                   className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
                 />
-                <span className="text-xl sm:text-2xl font-extrabold text-black dark:text-white tracking-tight">
+                <span className="text-xl sm:text-2xl font-extrabold text-black tracking-tight">
                   KampusKart
                 </span>
               </Link>
             </div>
 
-            <h2 className="mb-2 text-2xl sm:text-3xl font-extrabold text-black dark:text-white text-center">
+            <h2 className="mb-2 text-2xl sm:text-3xl font-extrabold text-black text-center">
               Create an account
             </h2>
             <p className="text-sm sm:text-base text-gray-500 text-center mb-6 sm:mb-8">
@@ -197,7 +197,7 @@ const Signup: React.FC = () => {
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white text-gray-900 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                   placeholder="Your full name"
                   value={name}
                   onChange={handleNameChange}
@@ -214,7 +214,7 @@ const Signup: React.FC = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className={`w-full px-4 py-3 border-2 ${emailError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                  className={`w-full px-4 py-3 border-2 ${emailError ? 'border-red-400' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white text-gray-900 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                   placeholder="you@example.com"
                   value={email}
                   onChange={handleEmailChange}
@@ -233,7 +233,7 @@ const Signup: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="new-password"
                     required
-                    className={`w-full px-4 py-3 pr-12 border-2 ${passwordErrors.length > 0 ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                    className={`w-full px-4 py-3 pr-12 border-2 ${passwordErrors.length > 0 ? 'border-red-400' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white text-gray-900 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                     placeholder="••••••••"
                     value={password}
                     onChange={handlePasswordChange}
@@ -287,7 +287,7 @@ const Signup: React.FC = () => {
                   required
                   aria-invalid={Boolean(confirmPasswordError)}
                   aria-describedby={confirmPasswordError ? 'signup-confirm-password-error' : undefined}
-                  className={`w-full px-4 py-3 border-2 ${confirmPasswordError ? 'border-red-400' : 'border-gray-200 dark:border-gray-800'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
+                  className={`w-full px-4 py-3 border-2 ${confirmPasswordError ? 'border-red-400' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white text-gray-900 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch`}
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
@@ -301,7 +301,7 @@ const Signup: React.FC = () => {
               </div>
 
               {/* Remember me */}
-              <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 cursor-pointer pt-1">
+              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer pt-1">
                 <input
                   type="checkbox"
                   checked={remember}
@@ -325,10 +325,10 @@ const Signup: React.FC = () => {
                   {/* Divider */}
                   <div className="relative py-2">
                     <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t-2 border-gray-200 dark:border-gray-800" />
+                      <div className="w-full border-t-2 border-gray-200" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-4 bg-white dark:bg-gray-900 text-gray-400 font-medium">
+                      <span className="px-4 bg-white text-gray-400 font-medium">
                         or continue with
                       </span>
                     </div>
@@ -338,7 +338,7 @@ const Signup: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => loginWithGoogle()}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-base font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 min-h-touch"
+                    className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-base font-semibold text-gray-700 bg-white border-2 border-gray-200 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 min-h-touch"
                   >
                     <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
                     Sign up with Google
@@ -346,7 +346,7 @@ const Signup: React.FC = () => {
                 </>
               )}
 
-              <p className="text-center text-sm text-gray-600 dark:text-gray-400 pt-2">
+              <p className="text-center text-sm text-gray-600 pt-2">
                 Already have an account?{' '}
                 <Link to="/login" className="text-kk-accent font-semibold hover:underline">
                   Sign in

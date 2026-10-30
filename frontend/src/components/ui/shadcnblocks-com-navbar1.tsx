@@ -1,6 +1,5 @@
-import { Menu, Lock, Sun, Moon } from "lucide-react";
+import { Menu, Lock } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "../../contexts/ThemeContext";
 
 import {
   Accordion,
@@ -70,11 +69,10 @@ const Navbar1 = ({
   },
 }: Navbar1Props) => {
   const { pathname } = useLocation();
-  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950 w-full border-b border-gray-200 dark:border-gray-800 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 py-4 bg-white dark:bg-gray-950">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white w-full border-b border-gray-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 py-4 bg-white">
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -84,7 +82,7 @@ const Navbar1 = ({
               aria-label="Go to home page"
             >
               <img src={logo.src} className="w-8 h-8" alt={logo.alt} />
-              <span className="text-xl font-extrabold text-black dark:text-white tracking-tight">
+              <span className="text-xl font-extrabold text-black tracking-tight">
                 {logo.title}
               </span>
             </Link>
@@ -96,22 +94,9 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-3 items-center">
             <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-10 w-10 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg p-0"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" strokeWidth={2} />
-              ) : (
-                <Sun className="h-5 w-5" strokeWidth={2} />
-              )}
-            </Button>
-            <Button
               asChild
               variant="outline"
-              className="h-10 px-4 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-900 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg"
+              className="h-10 px-4 text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 active:bg-gray-100 hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg"
             >
               <Link to={auth.login.url}>{auth.login.text}</Link>
             </Button>
@@ -142,37 +127,24 @@ const Navbar1 = ({
             aria-label="Go to home page"
           >
             <img src={logo.src} className="w-8 h-8" alt={logo.alt} />
-            <span className="text-xl font-extrabold text-black dark:text-white tracking-tight">
+            <span className="text-xl font-extrabold text-black tracking-tight">
               {logo.title}
             </span>
           </Link>
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-9 w-9 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg p-0"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" strokeWidth={2} />
-              ) : (
-                <Sun className="h-5 w-5" strokeWidth={2} />
-              )}
-            </Button>
             <Sheet>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg p-0"
+                  className="h-9 w-9 bg-transparent hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg p-0"
                   aria-label="Open navigation menu"
                 >
-                  <Menu className="h-5 w-5 text-black dark:text-white" strokeWidth={2} />
+                  <Menu className="h-5 w-5 text-black" strokeWidth={2} />
                 </Button>
               </SheetTrigger>
-            <SheetContent className="bg-white dark:bg-gray-950 w-[85vw] sm:w-[380px] p-0 border-l border-gray-200 dark:border-gray-800">
-              <SheetHeader className="px-6 border-b border-gray-200 dark:border-gray-800 min-h-[72px] flex flex-row items-center dark:bg-gray-950">
+            <SheetContent className="bg-white w-[85vw] sm:w-[380px] p-0 border-l border-gray-200">
+              <SheetHeader className="px-6 border-b border-gray-200 min-h-[72px] flex flex-row items-center">
                 <SheetTitle className="text-left flex-1">
                   <Link
                     to={logo.url}
@@ -180,7 +152,7 @@ const Navbar1 = ({
                     aria-label="Go to home page"
                   >
                     <img src={logo.src} className="w-8 h-8" alt={logo.alt} />
-                    <span className="text-xl font-extrabold text-black dark:text-white tracking-tight">
+                    <span className="text-xl font-extrabold text-black tracking-tight">
                       {logo.title}
                     </span>
                   </Link>
@@ -198,8 +170,8 @@ const Navbar1 = ({
                   {menu.map((item) => renderMobileMenuItem(item, pathname))}
                 </Accordion>
                 {mobileExtraLinks.length > 0 && (
-                  <div className="border-t border-gray-200 dark:border-gray-800 pt-4 mt-2">
-                    <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 px-1">
+                  <div className="border-t border-gray-200 pt-4 mt-2">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
                       Quick Access
                     </h3>
                     <div className="flex flex-col gap-2">
@@ -210,7 +182,7 @@ const Navbar1 = ({
                             className={`inline-flex h-11 items-center justify-center rounded-lg px-4 py-3 text-sm font-semibold border transition-colors duration-200 focus:outline-none focus:ring-0 ${
                               isActivePath(pathname, link.url)
                                 ? "text-kk-accent bg-kk-tint/40 border-kk-accent"
-                                : "text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-900 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700"
+                                : "text-gray-700 bg-white border-gray-200 hover:bg-gray-50 active:bg-gray-100 hover:text-gray-900 hover:border-gray-300"
                             }`}
                             aria-label={`Go to ${link.name}`}
                           >
@@ -221,12 +193,12 @@ const Navbar1 = ({
                     </div>
                   </div>
                 )}
-                <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-200 dark:border-gray-800">
+                <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-gray-200">
                   <SheetClose asChild>
                     <Button
                       asChild
                       variant="outline"
-                      className="w-full h-11 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-900 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
+                      className="w-full h-11 text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 active:bg-gray-100 hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
                     >
                       <Link to={auth.login.url}>{auth.login.text}</Link>
                     </Button>
@@ -273,13 +245,13 @@ const renderMenuItem = (item: MenuItem) => {
     return (
       <NavigationMenuItem key={item.title}>
         <NavigationMenuTrigger
-          className="text-gray-700 dark:text-gray-200 font-semibold px-4 py-2 rounded-lg focus:outline-none focus:ring-0"
+          className="text-gray-700 font-semibold px-4 py-2 rounded-lg focus:outline-none focus:ring-0"
           aria-label={`${item.title} menu`}
         >
           {item.title}
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="w-80 p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg">
+          <ul className="w-80 p-2 bg-white border border-gray-200 rounded-lg shadow-lg">
             {item.items.map((subItem) => (
               <li key={subItem.title}>
                 <NavigationMenuLink asChild>
@@ -288,7 +260,7 @@ const renderMenuItem = (item: MenuItem) => {
                     className={`flex select-none gap-3 rounded-lg p-3 leading-none no-underline outline-none transition-colors duration-200 focus:ring-0 ${
                       subItem.locked
                         ? "bg-gray-50 text-gray-400 cursor-not-allowed pointer-events-none"
-                        : "hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                        : "hover:bg-gray-50 text-gray-700 hover:text-gray-900"
                     }`}
                     aria-label={`Go to ${subItem.title}`}
                     tabIndex={subItem.locked ? -1 : undefined}
@@ -303,7 +275,7 @@ const renderMenuItem = (item: MenuItem) => {
                     <div className="flex-1">
                       <div
                         className={`text-sm font-semibold flex items-center gap-2 ${
-                          subItem.locked ? "text-gray-400" : "text-gray-900 dark:text-white"
+                          subItem.locked ? "text-gray-400" : "text-gray-900"
                         }`}
                       >
                         {subItem.title}
@@ -312,7 +284,7 @@ const renderMenuItem = (item: MenuItem) => {
                       {subItem.description && (
                         <p
                           className={`text-xs leading-snug mt-1 ${
-                            subItem.locked ? "text-gray-400" : "text-gray-600 dark:text-gray-400"
+                            subItem.locked ? "text-gray-400" : "text-gray-600"
                           }`}
                         >
                           {subItem.description}
@@ -335,7 +307,7 @@ const renderMenuItem = (item: MenuItem) => {
       <NavigationMenuLink asChild>
         <Link
           to={item.url}
-          className="inline-flex h-9 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-transparent transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-0"
+          className="inline-flex h-9 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 bg-transparent transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-0"
           aria-label={`Go to ${item.title}`}
         >
           {item.title}
@@ -350,7 +322,7 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
     return (
       <AccordionItem key={item.title} value={item.title} className="border-none">
         <AccordionTrigger
-          className="py-3 px-4 font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-950 hover:text-gray-900 dark:hover:text-white data-[state=open]:text-gray-900 dark:data-[state=open]:text-white data-[state=open]:bg-gray-50 dark:data-[state=open]:bg-gray-800 transition-colors duration-200 rounded-lg text-sm focus:outline-none focus:ring-0 border border-gray-200 dark:border-gray-800 hover:no-underline"
+          className="py-3 px-4 font-semibold text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 hover:text-gray-900 data-[state=open]:text-gray-900 data-[state=open]:bg-gray-50 transition-colors duration-200 rounded-lg text-sm focus:outline-none focus:ring-0 border border-gray-200 hover:no-underline"
           aria-label={`${item.title} menu`}
         >
           {item.title}
@@ -362,7 +334,7 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
                 <Link
                   key={subItem.title}
                   to="#"
-                  className="flex select-none gap-3 rounded-lg p-3 leading-none outline-none transition-colors duration-200 border focus:ring-0 bg-gray-50 dark:bg-gray-950 text-gray-400 cursor-not-allowed border-gray-200 dark:border-gray-800"
+                  className="flex select-none gap-3 rounded-lg p-3 leading-none outline-none transition-colors duration-200 border focus:ring-0 bg-gray-50 text-gray-400 cursor-not-allowed border-gray-200"
                   aria-label={`Go to ${subItem.title}`}
                   tabIndex={-1}
                   aria-disabled={true}
@@ -390,16 +362,16 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
                     className={`flex select-none gap-3 rounded-lg p-3 leading-none outline-none transition-colors duration-200 border focus:ring-0 ${
                       isActivePath(pathname, subItem.url)
                         ? "bg-kk-tint/40 text-kk-accent border-kk-accent"
-                        : "bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-950 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
+                        : "bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-700 hover:text-gray-900 border-gray-200 hover:border-gray-300"
                     }`}
                     aria-label={`Go to ${subItem.title}`}
                   >
                     <div className="flex-1">
-                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-[#00A489] dark:text-kk-accent' : 'text-gray-900 dark:text-white'}`}>
+                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-[#00A489]' : 'text-gray-900'}`}>
                         {subItem.title}
                       </div>
                       {subItem.description && (
-                        <p className="text-xs leading-snug text-gray-600 dark:text-gray-400">
+                        <p className="text-xs leading-snug text-gray-600">
                           {subItem.description}
                         </p>
                       )}
@@ -421,7 +393,7 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
         className={`flex h-11 items-center rounded-lg px-4 text-sm font-semibold transition-colors duration-200 border focus:outline-none focus:ring-0 ${
           isActivePath(pathname, item.url)
             ? "text-kk-accent bg-kk-tint/40 border-kk-accent"
-            : "text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-950 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
+            : "text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 hover:text-gray-900 border-gray-200 hover:border-gray-300"
         }`}
         aria-label={`Go to ${item.title}`}
       >
