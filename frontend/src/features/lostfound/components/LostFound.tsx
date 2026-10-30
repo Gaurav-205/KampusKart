@@ -322,9 +322,9 @@ const LostFound = () => {
 
           {modalType === 'delete' && (
             <div className="p-6 text-center">
-              <h3 className="text-xl font-bold mb-4">Are you sure?</h3>
               <p className="text-gray-600 mb-8">
-                This action cannot be undone. This will permanently delete your post.
+                Are you sure you want to delete &quot;{selectedItem?.title}&quot;? This action cannot
+                be undone.
               </p>
               <div className="flex justify-center gap-4">
                 <button
@@ -337,7 +337,7 @@ const LostFound = () => {
                   onClick={handleDelete}
                   className="px-6 py-2 bg-red-600 text-white rounded-lg font-bold"
                 >
-                  Delete Post
+                  Delete
                 </button>
               </div>
             </div>
