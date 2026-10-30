@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
@@ -34,8 +33,8 @@ export default {
         'navbar': '72px',
       },
       colors: {
-        // Graphite Milk palette. `ink`, `graphite`, `accent` and `tint` switch tone in dark mode
-        // (see index.css) so buttons, text, rings and borders stay visible on both backgrounds.
+        // Graphite Milk palette. `ink`, `graphite`, `accent` and `tint` read CSS variables from
+        // index.css so their alpha modifiers (e.g. bg-kk-accent/10) work.
         kk: {
           milk: '#FAFAF8',
           mist: '#DADADA',
