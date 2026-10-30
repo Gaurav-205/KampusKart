@@ -87,4 +87,4 @@ Any specific areas you'd like reviewers to focus on?
 
 ---
 
-**By submitting this pull request, I confirm that my contribution is made under the terms of the MIT License.**
+**By submitting this pull request, I confirm this is my own work and agree to the licensing terms in [CONTRIBUTING.md](../CONTRIBUTING.md#licensing).**
