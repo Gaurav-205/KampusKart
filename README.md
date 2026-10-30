@@ -6,7 +6,7 @@
 **Your campus, all in one place.** Events, news, lost & found, complaints, facilities, club recruitment and live chat for MIT ADT University.
 
 [![CI](https://github.com/Gaurav-205/KampusKart/actions/workflows/ci.yml/badge.svg)](https://github.com/Gaurav-205/KampusKart/actions/workflows/ci.yml)
-[![Live demo](https://img.shields.io/badge/demo-kampuskart.netlify.app-00C7B7?logo=netlify&logoColor=white)](https://kampuskart.netlify.app)
+[![Live demo](https://img.shields.io/badge/demo-kampuskartmitadt.vercel.app-000000?logo=vercel&logoColor=white)](https://kampuskartmitadt.vercel.app)
 [![Node](https://img.shields.io/badge/node-%3E%3D20.19-339933?logo=node.js&logoColor=white)](.nvmrc)
 [![License](https://img.shields.io/badge/license-proprietary-red)](LICENSE)
 

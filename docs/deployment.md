@@ -2,7 +2,7 @@
 
 ## Hosting
 
-- Frontend: Vercel (<https://kampuskart-navy.vercel.app>), Netlify (<https://kampuskart.netlify.app>)
+- Frontend: Vercel (<https://kampuskartmitadt.vercel.app>), Netlify (<https://kampuskart.netlify.app>)
 - Backend: Render (<https://kampuskart.onrender.com>, service `KampusKart`)
 
 ## Vercel (frontend)
@@ -39,8 +39,8 @@ Backend changes required on Render before switching traffic:
 Values for the current Vercel project (`kampuskart`, team `orbit-s-projects71`):
 
 ```env
-ALLOWED_ORIGINS=https://kampuskart.netlify.app,https://kampuskart-navy.vercel.app,https://kampuskart-*-orbit-s-projects71.vercel.app
-FRONTEND_URL=https://kampuskart-navy.vercel.app
+ALLOWED_ORIGINS=https://kampuskartmitadt.vercel.app,https://kampuskart-navy.vercel.app,https://kampuskart.netlify.app,https://kampuskart-*-orbit-s-projects71.vercel.app
+FRONTEND_URL=https://kampuskartmitadt.vercel.app
 TRUST_PROXY=1
 ```
 
