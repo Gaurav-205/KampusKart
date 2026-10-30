@@ -5,7 +5,7 @@ This project includes two options for uptime/alerting:
 1) GitHub Actions heartbeat (added)
 - A scheduled workflow (`.github/workflows/heartbeat.yml`) pings your backend `/api/health` endpoint every 15 minutes.
 - If the endpoint returns a non-200 response, the workflow creates a GitHub Issue labeled `uptime` and `automated-alert`.
-- Configure the monitored URL in repository secrets as `HEALTH_CHECK_URL` (defaults to `https://s72-gaurav-capstone-kampuskart.onrender.com/api/health` if unset).
+- Configure the monitored URL in repository secrets as `HEALTH_CHECK_URL` (defaults to `https://s72-gaurav-capstone.onrender.com/api/health` if unset).
 
 2) External uptime monitors (recommended)
 - Use UptimeRobot, Pingdom, or Grafana Cloud to monitor `/api/health` and configure alerting channels (email, Slack, SMS).
