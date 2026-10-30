@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FiMapPin, FiTag, FiCalendar, FiUser, FiEdit2, FiTrash2, FiFileText } from 'react-icons/fi';
+import { FiMapPin, FiTag, FiCalendar, FiUser, FiEdit2, FiTrash2, FiFileText, FiHome } from 'react-icons/fi';
 import { MdSchool } from 'react-icons/md';
 import { Facility } from '../types';
 import { getIconByValue } from '../constants';
+import CardImage from '../../../components/common/CardImage';
 
 interface FacilityDetailProps {
   facility: Facility;
@@ -33,10 +34,11 @@ export const FacilityDetail: React.FC<FacilityDetailProps> = ({
               }`}
               onClick={() => setZoomedImage(img.url ?? null)}
             >
-              <img
+              <CardImage
                 src={img.url}
                 alt={`${facility.name} - ${idx + 1}`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                icon={<FiHome />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ))

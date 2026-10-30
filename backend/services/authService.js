@@ -69,12 +69,12 @@ const login = async ({ email, password }) => {
   const normalizedEmail = email.toLowerCase();
   const user = await userRepository.findByEmail(normalizedEmail);
   if (!user) {
-    throw new ServiceError('Invalid credentials', 400);
+    throw new ServiceError('Incorrect email or password', 400);
   }
 
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
-    throw new ServiceError('Invalid credentials', 400);
+    throw new ServiceError('Incorrect email or password', 400);
   }
 
   const token = createToken(user._id);

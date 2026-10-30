@@ -279,7 +279,7 @@ export const ClubForm: React.FC<ClubFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : club ? 'Update Recruitment' : 'Add Recruitment'}
+          {isSubmitting ? 'Saving...' : club ? 'Save changes' : 'Post recruitment'}
         </button>
       </div>
     </form>

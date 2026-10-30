@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FiCalendar, FiMapPin, FiClock, FiUser, FiMail, FiPhone, FiEdit2, FiTrash2, FiTag, FiFileText } from 'react-icons/fi';
 import { Event } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
+import CardImage from '../../../components/common/CardImage';
 
 interface EventDetailProps {
   event: Event;
@@ -54,10 +55,11 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
               className="relative aspect-video rounded-xl overflow-hidden border-2 border-gray-100 cursor-zoom-in group"
               onClick={() => setZoomedImage(event.image?.url || null)}
             >
-              <img 
-                src={event.image.url} 
-                alt={event.title} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              <CardImage
+                src={event.image.url}
+                alt={event.title}
+                icon={<FiCalendar />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ) : (

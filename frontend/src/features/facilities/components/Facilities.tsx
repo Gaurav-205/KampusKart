@@ -220,7 +220,7 @@ const Facilities = () => {
             modalType === 'form'
               ? selectedFacility
                 ? 'Edit Facility'
-                : 'Add New Facility'
+                : 'Add facility'
               : modalType === 'detail'
                 ? 'Facility Details'
                 : 'Confirm Delete'

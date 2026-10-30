@@ -272,7 +272,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : complaint ? 'Update Complaint' : 'Submit Complaint'}
+          {isSubmitting ? 'Saving...' : complaint ? 'Save changes' : 'Submit complaint'}
         </button>
       </div>
     </form>

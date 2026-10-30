@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { FiTag, FiUser, FiCalendar, FiClock, FiEdit2, FiTrash2, FiFileText, FiActivity } from 'react-icons/fi';
+import { FiTag, FiUser, FiCalendar, FiClock, FiEdit2, FiTrash2, FiFileText, FiActivity, FiAlertCircle } from 'react-icons/fi';
 import { Complaint } from '../types';
 import { formatDate, formatDateTime } from '../../../utils/formatDate';
+import CardImage from '../../../components/common/CardImage';
 
 interface ComplaintDetailProps {
   complaint: Complaint;
@@ -25,10 +26,10 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
 
   return (
     <div className="space-y-8 pb-4">
-      {/* Images Section */}
+      {/* Images Section (only when the complaint has photos) */}
+      {complaint.images && complaint.images.length > 0 && (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {complaint.images && complaint.images.length > 0 ? (
-          complaint.images.map((img, idx) => (
+        {complaint.images.map((img, idx) => (
             <div 
               key={idx} 
               className={`relative overflow-hidden rounded-xl border-2 border-gray-100 cursor-zoom-in group ${
@@ -36,20 +37,16 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
               }`}
               onClick={() => setZoomedImage(img.url)}
             >
-              <img 
-                src={img.url} 
-                alt={`${complaint.title} - ${idx + 1}`} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              <CardImage
+                src={img.url}
+                alt={`${complaint.title} - ${idx + 1}`}
+                icon={<FiAlertCircle />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-          ))
-        ) : (
-          <div className="md:col-span-2 aspect-video bg-gray-50 rounded-xl flex flex-col items-center justify-center border-2 border-dashed border-gray-200">
-            <FiTag className="w-12 h-12 text-gray-200 mb-2" />
-            <span className="text-gray-400 font-medium">No images provided</span>
-          </div>
-        )}
+          ))}
       </div>
+      )}
 
       {/* Main Content */}
       <div className="space-y-6">

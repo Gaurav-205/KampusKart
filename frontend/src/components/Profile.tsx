@@ -425,7 +425,7 @@ const Profile = () => {
                       value={profileData.major} onChange={handleInputChange} placeholder="e.g., Computer Science" />
                     <EditField id="program" label="Program" icon={<FiBriefcase className="w-4 h-4" />}
                       value={profileData.program} onChange={handleInputChange} placeholder="e.g., Bachelor of Science" />
-                    <EditField id="yearOfStudy" label="Year of study" icon={<FiCalendar className="w-4 h-4" />}
+                    <EditField id="yearOfStudy" label="Batch" icon={<FiCalendar className="w-4 h-4" />}
                       value={profileData.yearOfStudy} onChange={handleInputChange} placeholder="e.g., 2024 - 2028" />
                   </div>
                 </div>
@@ -478,7 +478,7 @@ const Profile = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <InfoField label="Major / Department" value={profileData.major || 'Not set'} icon={<FiTag className="w-4 h-4" />} />
                     <InfoField label="Program" value={profileData.program || 'Not set'} icon={<FiBriefcase className="w-4 h-4" />} />
-                    <InfoField label="Year of study" value={profileData.yearOfStudy || 'Not set'} icon={<FiCalendar className="w-4 h-4" />} />
+                    <InfoField label="Batch" value={profileData.yearOfStudy || 'Not set'} icon={<FiCalendar className="w-4 h-4" />} />
                   </div>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiInfo, FiTag, FiCalendar, FiFileText } from 'react-icons/fi';
 import { ImageUpload, ImageFile } from '../../../components/common/ImageUpload';
 import { NewsItem } from '../types';
+import { todayInputValue } from '../../../utils/formatDate';
 
 interface NewsFormProps {
   news?: NewsItem | null;
@@ -19,7 +20,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
   const [formData, setFormData] = useState({
     title: news?.title || '',
     description: news?.description || '',
-    date: news?.date ? new Date(news.date).toISOString().split('T')[0] : '',
+    date: news?.date ? new Date(news.date).toISOString().split('T')[0] : todayInputValue(),
     category: news?.category || 'Campus',
   });
 
@@ -174,7 +175,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
           disabled={isSubmitting}
           className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
-          {isSubmitting ? 'Saving...' : news ? 'Update News' : 'Add News'}
+          {isSubmitting ? 'Saving...' : news ? 'Save changes' : 'Post news'}
         </button>
       </div>
     </form>

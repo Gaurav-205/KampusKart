@@ -103,7 +103,8 @@ const Navbar1 = ({
             {auth.signup.onClick ? (
               <Button
                 onClick={auth.signup.onClick}
-                className="h-10 px-4 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
+                variant="ghost"
+                className="h-10 px-4 text-sm font-semibold text-gray-700 bg-transparent hover:bg-gray-100 hover:text-kk-ink transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
                 aria-label={auth.signup.text}
               >
                 {auth.signup.text}
@@ -207,7 +208,8 @@ const Navbar1 = ({
                     <SheetClose asChild>
                       <Button
                         onClick={auth.signup.onClick}
-                        className="w-full h-11 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
+                        variant="ghost"
+                        className="w-full h-11 text-sm font-semibold text-gray-700 bg-transparent hover:bg-gray-100 hover:text-kk-ink transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
                         aria-label={auth.signup.text}
                       >
                         {auth.signup.text}

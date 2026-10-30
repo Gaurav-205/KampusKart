@@ -124,7 +124,7 @@ const CampusMap: React.FC = () => {
   const getCategoryColor = (category?: string) => {
     switch (category) {
       case 'Entrance':
-        return 'bg-orange-500 border-orange-200 text-white';
+        return 'bg-kk-ink border-gray-300 text-white';
       case 'Academic':
         return 'bg-gray-500 border-gray-200 text-white';
       case 'Sports':

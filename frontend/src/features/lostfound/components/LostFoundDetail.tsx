@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { FiMapPin, FiCalendar, FiUser, FiMail, FiCheckCircle, FiEdit2, FiTrash2, FiTag, FiFileText } from 'react-icons/fi';
+import { FiMapPin, FiCalendar, FiUser, FiMail, FiCheckCircle, FiEdit2, FiTrash2, FiTag, FiFileText, FiSearch } from 'react-icons/fi';
 import { LostFoundItem } from '../types';
 import { formatDate } from '../../../utils/formatDate';
+import CardImage from '../../../components/common/CardImage';
 
 interface LostFoundDetailProps {
   item: LostFoundItem;
@@ -36,10 +37,11 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
               }`}
               onClick={() => setZoomedImage(img.url)}
             >
-              <img 
-                src={img.url} 
-                alt={`${item.title} - ${idx + 1}`} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              <CardImage
+                src={img.url}
+                alt={`${item.title} - ${idx + 1}`}
+                icon={<FiSearch />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ))

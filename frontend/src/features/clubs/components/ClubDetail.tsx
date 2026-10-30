@@ -4,6 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Club } from '../types';
 import { UI_PATTERNS } from '../../../theme/uiPatterns';
 import { formatShortDate } from '../../../utils/formatDate';
+import CardImage from '../../../components/common/CardImage';
 
 interface ClubDetailProps {
   club: Club;
@@ -51,10 +52,11 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
               className="relative aspect-video rounded-xl overflow-hidden border-2 border-gray-100 cursor-zoom-in group"
               onClick={() => setZoomedImage(club.image?.url || null)}
             >
-              <img 
-                src={club.image.url} 
-                alt={club.title} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              <CardImage
+                src={club.image.url}
+                alt={club.title}
+                icon={<FiUsers />}
+                className="transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ) : (

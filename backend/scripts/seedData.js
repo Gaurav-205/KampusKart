@@ -441,15 +441,14 @@ const seedData = async () => {
     // If no user exists, create a test user
     if (!testUser) {
       console.log('No users found. Creating a test user...');
-      const bcrypt = require('bcryptjs');
-      const hashedPassword = await bcrypt.hash('test123456', 10);
+      // Plain password: the User model hashes it in its pre-save hook.
       testUser = await User.create({
         name: 'Test User',
         email: 'testuser@mitadt.edu',
-        password: hashedPassword,
+        password: 'Test@12345',
         phone: '+91 9876543210'
       });
-      console.log('✓ Test user created');
+      console.log('✓ Test user created (testuser@mitadt.edu / Test@12345)');
     }
 
     // Seed Events
@@ -855,14 +854,14 @@ const seedData = async () => {
     await Chat.deleteMany({});
 
     // Create a few extra dummy users for realistic chat variety
-    const bcrypt = require('bcryptjs');
-    const hashedPw = await bcrypt.hash('Dummy@1234', 10);
+    // Plain password: the User model hashes it in its pre-save hook.
+    const dummyPassword = 'Dummy@1234';
     const dummyUserDefs = [
-      { name: 'Priya Sharma',   email: 'priya.sharma@mitadt.edu',   password: hashedPw },
-      { name: 'Rahul Mehta',    email: 'rahul.mehta@mitadt.edu',    password: hashedPw },
-      { name: 'Ananya Joshi',   email: 'ananya.joshi@mitadt.edu',   password: hashedPw },
-      { name: 'Karan Patel',    email: 'karan.patel@mitadt.edu',    password: hashedPw },
-      { name: 'Sneha Kulkarni', email: 'sneha.kulkarni@mitadt.edu', password: hashedPw },
+      { name: 'Priya Sharma',   email: 'priya.sharma@mitadt.edu',   password: dummyPassword },
+      { name: 'Rahul Mehta',    email: 'rahul.mehta@mitadt.edu',    password: dummyPassword },
+      { name: 'Ananya Joshi',   email: 'ananya.joshi@mitadt.edu',   password: dummyPassword },
+      { name: 'Karan Patel',    email: 'karan.patel@mitadt.edu',    password: dummyPassword },
+      { name: 'Sneha Kulkarni', email: 'sneha.kulkarni@mitadt.edu', password: dummyPassword },
     ];
 
     const chatUsers = [];
