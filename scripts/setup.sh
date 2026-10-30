@@ -4,6 +4,9 @@
 
 set -e
 
+# Always run from the repository root, wherever the script is invoked from
+cd "$(dirname "$0")/.."
+
 echo ""
 echo "===================================="
 echo "  KampusKart Development Setup"
@@ -13,7 +16,7 @@ echo ""
 # Check Node.js and npm versions
 echo "Checking Node.js and npm versions..."
 if ! command -v node &> /dev/null; then
-  echo "ERROR: Node.js is not installed. Please install Node.js 18.x from https://nodejs.org/"
+  echo "ERROR: Node.js is not installed. Please install Node.js 20.19+ from https://nodejs.org/"
   exit 1
 fi
 node --version

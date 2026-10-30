@@ -9,9 +9,11 @@
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
+/* No fixed height here: with height:100% plus body's overflow-x:hidden, <body> became a
+   viewport-sized scroll container, so window never scrolled and window scroll listeners
+   (BackToTop, scroll restoration) never fired. */
 html, body, #root {
   min-height: 100vh;
-  height: 100%;
   width: 100%;
   font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
   touch-action: manipulation;

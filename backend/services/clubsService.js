@@ -2,22 +2,28 @@ const clubRepository = require('../repositories/clubRepository');
 const { ServiceError } = require('./serviceError');
 const mediaService = require('./mediaService');
 const { escapeRegex, parsePagination } = require('./queryUtils');
+const { buildClubStatusFilter, withEffectiveClubStatus } = require('./scheduleStatus');
 
 const listClubs = async ({ status, search, page, limit }) => {
-  const query = {};
+  const now = new Date();
+  const conditions = [];
 
   if (status && status !== 'all') {
-    query.status = status;
+    conditions.push(buildClubStatusFilter(status, now) || { status });
   }
 
   if (search && typeof search === 'string') {
     const escaped = escapeRegex(search);
-    query.$or = [
-      { title: { $regex: escaped, $options: 'i' } },
-      { description: { $regex: escaped, $options: 'i' } },
-      { clubName: { $regex: escaped, $options: 'i' } }
-    ];
+    conditions.push({
+      $or: [
+        { title: { $regex: escaped, $options: 'i' } },
+        { description: { $regex: escaped, $options: 'i' } },
+        { clubName: { $regex: escaped, $options: 'i' } }
+      ]
+    });
   }
+
+  const query = conditions.length === 0 ? {} : conditions.length === 1 ? conditions[0] : { $and: conditions };
 
   if (page !== undefined && limit !== undefined) {
     const { page: parsedPage, limit: parsedLimit, skip } = parsePagination({
@@ -36,11 +42,16 @@ const listClubs = async ({ status, search, page, limit }) => {
       .skip(skip)
       .limit(parsedLimit);
 
-    return { clubs, totalItems, totalPages, page: parsedPage };
+    return {
+      clubs: clubs.map((club) => withEffectiveClubStatus(club, now)),
+      totalItems,
+      totalPages,
+      page: parsedPage
+    };
   }
 
   const clubs = await clubRepository.find(query).sort({ startDate: -1 });
-  return clubs;
+  return clubs.map((club) => withEffectiveClubStatus(club, now));
 };
 
 const createClub = async ({ data, file }) => {

@@ -31,8 +31,14 @@ export const MapSidebar: React.FC<MapSidebarProps> = ({
       <div className="p-4 border-b-2 border-gray-200 bg-white" ref={searchRef}>
         <div className="relative">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+          <label htmlFor="campus-map-search" className="sr-only">
+            Search campus locations
+          </label>
           <input
+            id="campus-map-search"
+            name="campus-map-search"
             type="text"
+            autoComplete="off"
             value={searchInput}
             onChange={(e) => onSearchChange(e.target.value)}
             onFocus={() => setShowSuggestions(true)}

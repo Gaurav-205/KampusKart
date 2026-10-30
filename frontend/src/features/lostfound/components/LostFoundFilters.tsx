@@ -34,6 +34,7 @@ export const LostFoundFilters: React.FC<LostFoundFiltersProps> = ({
       <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
         <div className="relative">
           <select
+            aria-label="Filter by type"
             value={filters.type}
             onChange={e => onFilterChange({ type: e.target.value as any })}
             className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-all duration-200 cursor-pointer"
@@ -51,6 +52,7 @@ export const LostFoundFilters: React.FC<LostFoundFiltersProps> = ({
 
         <div className="relative">
           <select
+            aria-label="Filter by resolution status"
             value={filters.resolved}
             onChange={e => onFilterChange({ resolved: e.target.value as any })}
             className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-all duration-200 cursor-pointer"
@@ -73,6 +75,7 @@ export const LostFoundFilters: React.FC<LostFoundFiltersProps> = ({
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           <input
             type="text"
+            aria-label="Search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={(e) => {

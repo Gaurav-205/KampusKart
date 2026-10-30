@@ -18,7 +18,6 @@ Key methods:
 - refreshToken()
 
 ## Hooks
-- useDebounce: delays value updates for search inputs
 - useSearchSuggestions: builds a suggestion list from client side data and controls visibility
 
 ## Utilities

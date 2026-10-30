@@ -106,7 +106,7 @@ export const EventForm: React.FC<EventFormProps> = ({
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      setFormError('Please fix the errors below');
+      setFormError('Please fix the highlighted errors above');
       return;
     }
 

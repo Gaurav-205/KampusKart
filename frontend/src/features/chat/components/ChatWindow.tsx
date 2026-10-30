@@ -1,5 +1,15 @@
 import React, { ComponentType, useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
+import type {
+  ChatAttachment,
+  ChatMessage,
+  ChatReaction,
+  ChatReadEntry,
+  ChatUser,
+  PaginatedChatResponse,
+  ServerToClientEvents,
+  ClientToServerEvents,
+} from '../types';
 import { io, Socket } from 'socket.io-client';
 import { format } from 'date-fns';
 import {
@@ -41,67 +51,6 @@ const CHAT_THEME = {
   textSecondary: '#6b7280', // Secondary text
   textMuted: '#9ca3af', // Muted text
 };
-
-interface ChatUser {
-  _id?: string;
-  id?: string;
-  name?: string;
-  profilePicture?: string | { url?: string };
-}
-
-interface ChatAttachment {
-  type?: string;
-  url: string;
-  name: string;
-}
-
-interface ChatReaction {
-  emoji?: string;
-  user?: ChatUser;
-}
-
-interface ChatReadEntry {
-  user?: ChatUser;
-}
-
-interface ChatMessage {
-  _id: string;
-  message: string;
-  sender?: ChatUser;
-  timestamp?: string;
-  edited?: boolean;
-  attachments?: ChatAttachment[];
-  reactions?: ChatReaction[];
-  readBy?: ChatReadEntry[];
-  replyTo?: ChatMessage;
-}
-
-interface PaginatedChatResponse {
-  messages: ChatMessage[];
-  pagination?: {
-    page: number;
-    pages: number;
-  };
-}
-
-interface ServerToClientEvents {
-  'previous-messages': (data: ChatMessage[] | PaginatedChatResponse) => void;
-  connect_error: () => void;
-  disconnect: (reason: string) => void;
-  connect: () => void;
-  'new-message': (message: ChatMessage) => void;
-  'online-users': (users: ChatUser[]) => void;
-  'user-typing': (userData: ChatUser) => void;
-  'user-stop-typing': (userData: ChatUser) => void;
-  'message-updated': (updatedMessage: ChatMessage) => void;
-  'message-deleted': (data: { _id: string }) => void;
-}
-
-interface ClientToServerEvents {
-  join: (data: { _id?: string; name?: string; profilePicture?: string | { url?: string } }) => void;
-  typing: (data: { _id?: string; name?: string }) => void;
-  'stop-typing': (data: { _id?: string; name?: string }) => void;
-}
 
 interface EmojiSelectData {
   native?: string;

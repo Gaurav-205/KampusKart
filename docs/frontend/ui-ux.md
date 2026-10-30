@@ -1,6 +1,6 @@
 # UI and UX Standards
 
-The primary UI system is documented in UI_UX_STANDARDS.md. This summary highlights how those standards show up in the app.
+The primary UI system is documented in [ui-ux-standards.md](ui-ux-standards.md). This summary highlights how those standards show up in the app.
 
 ## Color system
 - Primary: #181818 for buttons and headers
@@ -25,4 +25,4 @@ The primary UI system is documented in UI_UX_STANDARDS.md. This summary highligh
 - Skeleton loaders for pages, lists, and profile
 - Button spinners for actions
 
-For detailed standards, see UI_UX_STANDARDS.md in the repo root.
+For detailed standards, see [ui-ux-standards.md](ui-ux-standards.md).

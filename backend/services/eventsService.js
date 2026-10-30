@@ -2,22 +2,29 @@ const eventRepository = require('../repositories/eventRepository');
 const { ServiceError } = require('./serviceError');
 const mediaService = require('./mediaService');
 const { escapeRegex, parsePagination } = require('./queryUtils');
+const { buildStatusFilter, withEffectiveStatus } = require('./scheduleStatus');
 
 const listEvents = async ({ status, search, page, limit }) => {
-  const query = {};
+  const now = new Date();
+  const conditions = [];
 
   if (status && status !== 'All') {
-    query.status = status;
+    // Unknown statuses fall back to an exact match, which simply returns nothing
+    conditions.push(buildStatusFilter(status, now) || { status });
   }
 
   if (search && typeof search === 'string') {
     const escaped = escapeRegex(search);
-    query.$or = [
-      { title: { $regex: escaped, $options: 'i' } },
-      { description: { $regex: escaped, $options: 'i' } },
-      { location: { $regex: escaped, $options: 'i' } }
-    ];
+    conditions.push({
+      $or: [
+        { title: { $regex: escaped, $options: 'i' } },
+        { description: { $regex: escaped, $options: 'i' } },
+        { location: { $regex: escaped, $options: 'i' } }
+      ]
+    });
   }
+
+  const query = conditions.length === 0 ? {} : conditions.length === 1 ? conditions[0] : { $and: conditions };
 
   if (page !== undefined && limit !== undefined) {
     const { page: parsedPage, limit: parsedLimit, skip } = parsePagination({
@@ -36,11 +43,16 @@ const listEvents = async ({ status, search, page, limit }) => {
       .skip(skip)
       .limit(parsedLimit);
 
-    return { events, totalItems, totalPages, page: parsedPage };
+    return {
+      events: events.map((event) => withEffectiveStatus(event, now)),
+      totalItems,
+      totalPages,
+      page: parsedPage
+    };
   }
 
   const events = await eventRepository.find(query).sort({ date: -1 });
-  return events;
+  return events.map((event) => withEffectiveStatus(event, now));
 };
 
 const createEvent = async ({ data, file }) => {
