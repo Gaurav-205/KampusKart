@@ -92,7 +92,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
-                  className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                  className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                     fieldErrors.title ? 'border-red-500' : 'border-gray-200'
                   }`}
                   placeholder="e.g. Campus Festival 2024"
@@ -110,7 +110,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
                   type="date"
                   value={formData.date}
                   onChange={(e) => setFormData((prev) => ({ ...prev, date: e.target.value }))}
-                  className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                  className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                     fieldErrors.date ? 'border-red-500' : 'border-gray-200'
                   }`}
                 />
@@ -129,7 +129,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
                 value={formData.description}
                 onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
                 rows={4}
-                className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                   fieldErrors.description ? 'border-red-500' : 'border-gray-200'
                 }`}
                 placeholder="Share the full story here..."
@@ -146,7 +146,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
             <select
               value={formData.category}
               onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
             >
               <option value="Campus">Campus</option>
               <option value="Academic">Academic</option>
@@ -172,7 +172,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-[#181818] text-white font-bold rounded-lg hover:bg-[#00C6A7] transition-colors disabled:opacity-50"
+          className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
           {isSubmitting ? 'Saving...' : news ? 'Update News' : 'Add News'}
         </button>

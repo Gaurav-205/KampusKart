@@ -56,10 +56,10 @@ export const FacilityDetail: React.FC<FacilityDetailProps> = ({
       <div className="space-y-6">
         <div>
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="px-4 py-1.5 rounded-full bg-teal-50 text-[#00C6A7] text-xs font-bold uppercase tracking-wider border border-teal-100 flex items-center gap-2">
+            <span className="px-4 py-1.5 rounded-full bg-gray-50 text-kk-accent text-xs font-bold uppercase tracking-wider border border-gray-100 flex items-center gap-2">
               <FiTag /> {facility.type}
             </span>
-            <span className="px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-100 flex items-center gap-2">
+            <span className="px-4 py-1.5 rounded-full bg-gray-50 text-gray-600 text-xs font-bold uppercase tracking-wider border border-gray-100 flex items-center gap-2">
               <FiMapPin /> {facility.location}
             </span>
           </div>
@@ -79,7 +79,7 @@ export const FacilityDetail: React.FC<FacilityDetailProps> = ({
 
         <div className="bg-gray-50 p-8 rounded-3xl border-2 border-gray-100">
           <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-4">
-            <FiFileText className="text-[#00C6A7]" /> About this Facility
+            <FiFileText className="text-kk-accent" /> About this Facility
           </h3>
           <p className="text-gray-600 leading-relaxed text-lg whitespace-pre-wrap">
             {facility.description}
@@ -108,7 +108,7 @@ export const FacilityDetail: React.FC<FacilityDetailProps> = ({
         <div className="flex flex-wrap gap-4 pt-6 border-t-2 border-gray-100">
           <button
             onClick={() => onEdit(facility)}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-[#181818] text-white rounded-xl font-bold hover:bg-[#00C6A7] transition-all shadow-lg shadow-gray-100"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-kk-ink text-white rounded-xl font-bold hover:bg-kk-graphite transition-all shadow-lg shadow-gray-100"
           >
             <FiEdit2 /> Edit Facility
           </button>

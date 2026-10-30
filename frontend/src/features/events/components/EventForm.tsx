@@ -135,7 +135,7 @@ export const EventForm: React.FC<EventFormProps> = ({
       {/* Basic Info */}
       <div className="border-2 border-gray-200 rounded-lg p-6">
         <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-          <FiInfo className="text-[#00C6A7]" /> Event Information
+          <FiInfo className="text-kk-accent" /> Event Information
         </h3>
         <div className="space-y-6">
           <div>
@@ -145,7 +145,7 @@ export const EventForm: React.FC<EventFormProps> = ({
               value={formData.title}
               onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
               onBlur={(e) => handleBlur('title', e.target.value)}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.title ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Enter event name"
@@ -162,7 +162,7 @@ export const EventForm: React.FC<EventFormProps> = ({
               onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               onBlur={(e) => handleBlur('description', e.target.value)}
               rows={4}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.description ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Tell us about the event..."
@@ -180,7 +180,7 @@ export const EventForm: React.FC<EventFormProps> = ({
                 value={formData.date}
                 onChange={(e) => setFormData((prev) => ({ ...prev, date: e.target.value }))}
                 onBlur={(e) => handleBlur('date', e.target.value)}
-                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                   fieldErrors.date ? 'border-red-500' : 'border-gray-200'
                 }`}
               />
@@ -195,7 +195,7 @@ export const EventForm: React.FC<EventFormProps> = ({
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, status: e.target.value as Event['status'] }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all"
               >
                 <option value="Upcoming">Upcoming</option>
                 <option value="Ongoing">Ongoing</option>
@@ -210,7 +210,7 @@ export const EventForm: React.FC<EventFormProps> = ({
       {/* Location & Time */}
       <div className="border-2 border-gray-200 rounded-lg p-6">
         <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-          <FiMapPin className="text-[#00C6A7]" /> Location & Time
+          <FiMapPin className="text-kk-accent" /> Location & Time
         </h3>
         <div className="space-y-6">
           <div>
@@ -222,7 +222,7 @@ export const EventForm: React.FC<EventFormProps> = ({
               value={formData.location}
               onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
               onBlur={(e) => handleBlur('location', e.target.value)}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.location ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Where is the event?"
@@ -244,7 +244,7 @@ export const EventForm: React.FC<EventFormProps> = ({
                     mapLocation: { ...prev.mapLocation, building: e.target.value },
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
                 placeholder="e.g. Block A"
               />
             </div>
@@ -259,7 +259,7 @@ export const EventForm: React.FC<EventFormProps> = ({
                     mapLocation: { ...prev.mapLocation, floor: e.target.value },
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
                 placeholder="e.g. 2nd"
               />
             </div>
@@ -274,7 +274,7 @@ export const EventForm: React.FC<EventFormProps> = ({
                     mapLocation: { ...prev.mapLocation, room: e.target.value },
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
                 placeholder="e.g. Auditorium"
               />
             </div>
@@ -286,7 +286,7 @@ export const EventForm: React.FC<EventFormProps> = ({
               type="text"
               value={formData.operatingHours}
               onChange={(e) => setFormData((prev) => ({ ...prev, operatingHours: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               placeholder="e.g. 10:00 AM - 4:00 PM"
             />
           </div>
@@ -296,7 +296,7 @@ export const EventForm: React.FC<EventFormProps> = ({
       {/* Image Upload */}
       <div className="border-2 border-gray-200 rounded-lg p-6">
         <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-          <FiTag className="text-[#00C6A7]" /> Event Banner
+          <FiTag className="text-kk-accent" /> Event Banner
         </h3>
         <ImageUpload
           images={formData.images}
@@ -308,7 +308,7 @@ export const EventForm: React.FC<EventFormProps> = ({
       {/* Registration & Contact */}
       <div className="border-2 border-gray-200 rounded-lg p-6">
         <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
-          <FiMail className="text-[#00C6A7]" /> Registration & Contact
+          <FiMail className="text-kk-accent" /> Registration & Contact
         </h3>
         <div className="space-y-6">
           <div>
@@ -320,7 +320,7 @@ export const EventForm: React.FC<EventFormProps> = ({
               value={formData.registerUrl}
               onChange={(e) => setFormData((prev) => ({ ...prev, registerUrl: e.target.value }))}
               onBlur={(e) => handleBlur('url', e.target.value)}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.url ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="https://..."
@@ -402,7 +402,7 @@ export const EventForm: React.FC<EventFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-[#181818] text-white font-bold rounded-lg hover:bg-[#00C6A7] transition-colors disabled:opacity-50"
+          className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
           {isSubmitting ? 'Saving...' : event ? 'Update Event' : 'Create Event'}
         </button>

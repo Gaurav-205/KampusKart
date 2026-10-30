@@ -2,9 +2,9 @@
 
 :root {
   /* Primary Colors */
-  --color-primary: #00C6A7;
-  --color-secondary: #FFD166;
-  --color-accent: #F05A25;
+  --color-primary: #43464B;
+  --color-secondary: #B0B3B8;
+  --color-accent: #0F1012;
   --color-success: #10B981;
   --color-warning: #F59E0B;
   --color-error: #EF4444;
@@ -28,13 +28,13 @@
   --color-gray-900: #111827;
   
   /* Background Colors */
-  --color-background-primary: #FFFFFF;
-  --color-background-secondary: #F7F7FA;
+  --color-background-primary: #FAFAF8;
+  --color-background-secondary: #DADADA;
   
   /* Text Colors */
-  --color-text-primary: #111827;
-  --color-text-secondary: #6B7280;
-  --color-text-light: #9CA3AF;
+  --color-text-primary: #0F1012;
+  --color-text-secondary: #43464B;
+  --color-text-light: #B0B3B8;
   --color-text-white: #FFFFFF;
   
   /* Typography */
@@ -136,7 +136,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #009e87;
+  background-color: #0F1012;
   box-shadow: var(--shadow-md);
 }
 

@@ -115,7 +115,7 @@ export const ShuffleHero = () => {
     <section className="w-full px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto">
       {/* Left: text */}
       <div className="text-center md:text-left space-y-3 sm:space-y-4 md:space-y-5">
-        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 text-xs font-semibold text-teal-700 dark:text-teal-400 uppercase tracking-widest">
+        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 text-xs font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-widest">
           Your campus, simplified
         </span>
         <h1
@@ -131,7 +131,7 @@ export const ShuffleHero = () => {
           <Link
             to="/signup"
             aria-label="Sign up for free account"
-            className="min-h-[48px] px-6 sm:px-8 py-3 rounded-lg font-bold text-white bg-[#181818] dark:bg-white dark:text-black hover:bg-[#00C6A7] dark:hover:bg-[#00C6A7] active:bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:ring-offset-2 transition-colors duration-200 text-sm sm:text-base text-center"
+            className="min-h-[48px] px-6 sm:px-8 py-3 rounded-lg font-bold text-white bg-kk-ink dark:bg-white dark:text-black hover:bg-kk-graphite dark:hover:bg-kk-graphite active:bg-kk-ink focus:outline-none focus:ring-2 focus:ring-kk-accent focus:ring-offset-2 transition-colors duration-200 text-sm sm:text-base text-center"
           >
             Get started
           </Link>

@@ -25,7 +25,7 @@ export const MapInfoWindow: React.FC<MapInfoWindowProps> = ({
         </button>
         
         <div className="pr-10">
-          <span className="inline-flex items-center px-2 py-0.5 rounded-lg bg-teal-50 text-[#00C6A7] text-[10px] font-bold uppercase tracking-widest mb-2 border border-teal-100">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-lg bg-gray-50 text-kk-accent text-[10px] font-bold uppercase tracking-widest mb-2 border border-gray-100">
             <FiTag className="mr-1" /> {location.category}
           </span>
           <h3 className="text-xl font-black text-gray-900 leading-tight">
@@ -48,7 +48,7 @@ export const MapInfoWindow: React.FC<MapInfoWindowProps> = ({
 
         <button
           onClick={() => onGetDirections(location)}
-          className="w-full flex items-center justify-center gap-2 py-4 bg-[#181818] hover:bg-[#00C6A7] text-white rounded-xl font-bold transition-all shadow-lg shadow-gray-200"
+          className="w-full flex items-center justify-center gap-2 py-4 bg-kk-ink hover:bg-kk-graphite text-white rounded-xl font-bold transition-all shadow-lg shadow-gray-200"
         >
           <FiNavigation className="w-5 h-5" />
           <span>Get Directions</span>

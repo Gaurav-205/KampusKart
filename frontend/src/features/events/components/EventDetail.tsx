@@ -18,8 +18,8 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
     let textColorClass;
     switch (status) {
       case 'Upcoming':
-        bgColorClass = 'bg-blue-100';
-        textColorClass = 'text-blue-800';
+        bgColorClass = 'bg-gray-100';
+        textColorClass = 'text-gray-800';
         break;
       case 'Ongoing':
         bgColorClass = 'bg-green-100';
@@ -82,12 +82,12 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
 
           <div className="space-y-4">
             <div className="flex items-start text-gray-700 gap-3">
-              <FiMapPin className="text-[#00C6A7] w-5 h-5 flex-shrink-0 mt-0.5" />
+              <FiMapPin className="text-kk-accent w-5 h-5 flex-shrink-0 mt-0.5" />
               <span className="font-semibold break-words">{event.location}</span>
             </div>
             {event.operatingHours && (
               <div className="flex items-center text-gray-700 gap-3">
-                <FiClock className="text-[#00C6A7] w-5 h-5 flex-shrink-0" />
+                <FiClock className="text-kk-accent w-5 h-5 flex-shrink-0" />
                 <span>{event.operatingHours}</span>
               </div>
             )}
@@ -113,7 +113,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-              <FiFileText className="text-[#00C6A7]" /> Event Description
+              <FiFileText className="text-kk-accent" /> Event Description
             </h3>
             <p className="text-gray-600 leading-relaxed bg-white p-6 rounded-2xl border-2 border-gray-100 whitespace-pre-wrap">
               {event.description}
@@ -123,7 +123,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
           {(event.mapLocation?.building || event.mapLocation?.floor || event.mapLocation?.room) && (
             <div>
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <FiMapPin className="text-[#00C6A7]" /> Precise Location
+                <FiMapPin className="text-kk-accent" /> Precise Location
               </h3>
               <div className="bg-gray-50 p-6 rounded-2xl border-2 border-gray-100 grid grid-cols-1 gap-4">
                 {event.mapLocation.building && (
@@ -152,7 +152,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-              <FiUser className="text-[#00C6A7]" /> Contact Information
+              <FiUser className="text-kk-accent" /> Contact Information
             </h3>
             <div className="bg-gray-50 p-6 rounded-2xl border-2 border-gray-100 space-y-4">
               {event.contactInfo?.name && (
@@ -169,7 +169,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
                   <FiMail className="text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Email</p>
-                    <a href={`mailto:${event.contactInfo.email}`} className="text-[#00C6A7] font-bold hover:underline">{event.contactInfo.email}</a>
+                    <a href={`mailto:${event.contactInfo.email}`} className="text-kk-accent font-bold hover:underline">{event.contactInfo.email}</a>
                   </div>
                 </div>
               )}
@@ -178,7 +178,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
                   <FiPhone className="text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Phone</p>
-                    <a href={`tel:${event.contactInfo.phone}`} className="text-[#00C6A7] font-bold hover:underline">{event.contactInfo.phone}</a>
+                    <a href={`tel:${event.contactInfo.phone}`} className="text-kk-accent font-bold hover:underline">{event.contactInfo.phone}</a>
                   </div>
                 </div>
               )}
@@ -192,7 +192,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({ event, isAdmin, onEdit
             <div className="pt-6 border-t-2 border-gray-100 flex flex-wrap gap-4">
               <button
                 onClick={() => onEdit?.(event)}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gray-600 text-white rounded-xl font-bold hover:bg-gray-700 transition-all shadow-lg shadow-gray-100"
               >
                 <FiEdit2 /> Edit Event
               </button>

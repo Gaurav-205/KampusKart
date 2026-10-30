@@ -14,8 +14,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onClick }) => {
     let textColorClass;
     switch (status) {
       case 'Upcoming':
-        bgColorClass = 'bg-blue-100';
-        textColorClass = 'text-blue-800';
+        bgColorClass = 'bg-gray-100';
+        textColorClass = 'text-gray-800';
         break;
       case 'Ongoing':
         bgColorClass = 'bg-green-100';

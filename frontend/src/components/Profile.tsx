@@ -107,7 +107,7 @@ const EditField: React.FC<{
       <input
         id={id} type={type} name={id} value={value} onChange={onChange}
         disabled={disabled} placeholder={placeholder} max={max}
-        className={`w-full pl-10 pr-3 py-2.5 border-2 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-colors
+        className={`w-full pl-10 pr-3 py-2.5 border-2 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent transition-colors
           ${disabled ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed' : 'bg-white text-gray-900 border-gray-200'}`}
       />
     </div>
@@ -289,7 +289,7 @@ const Profile = () => {
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181818] text-white font-bold text-sm hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 min-h-touch"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-kk-ink text-white font-bold text-sm hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 min-h-touch"
               >
                 <FiEdit2 className="w-4 h-4" /> Edit Profile
               </button>
@@ -357,7 +357,7 @@ const Profile = () => {
                     className="h-2 rounded-full transition-all duration-500"
                     style={{
                       width: `${completion}%`,
-                      backgroundColor: completion === 100 ? '#10B981' : '#00C6A7',
+                      backgroundColor: completion === 100 ? '#0F1012' : '#43464B',
                     }}
                   />
                 </div>
@@ -380,7 +380,7 @@ const Profile = () => {
                 {/* Personal Info */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-[#181818] text-white rounded-lg p-1.5"><FiUser className="w-4 h-4" /></span>
+                    <span className="bg-kk-ink text-white rounded-lg p-1.5"><FiUser className="w-4 h-4" /></span>
                     <h2 className="text-base font-extrabold text-black">Personal Information</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -395,7 +395,7 @@ const Profile = () => {
                       <label htmlFor="gender" className="block text-xs font-semibold text-gray-700 mb-1.5">Gender</label>
                       <div className="relative">
                         <select id="gender" name="gender" value={profileData.gender} onChange={handleInputChange}
-                          className="appearance-none w-full px-4 py-2.5 bg-white text-gray-900 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent text-base cursor-pointer">
+                          className="appearance-none w-full px-4 py-2.5 bg-white text-gray-900 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent text-base cursor-pointer">
                           <option value="">Select Gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -418,7 +418,7 @@ const Profile = () => {
                 {/* Academic Info */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-[#181818] text-white rounded-lg p-1.5"><FiBriefcase className="w-4 h-4" /></span>
+                    <span className="bg-kk-ink text-white rounded-lg p-1.5"><FiBriefcase className="w-4 h-4" /></span>
                     <h2 className="text-base font-extrabold text-black">Academic Information</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -438,7 +438,7 @@ const Profile = () => {
                     Cancel
                   </button>
                   <button onClick={handleSave} disabled={saveLoading}
-                    className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 min-h-touch ${saveLoading ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                    className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 min-h-touch ${saveLoading ? 'opacity-60 cursor-not-allowed' : ''}`}>
                     {saveLoading ? (
                       <>
                         <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
@@ -458,7 +458,7 @@ const Profile = () => {
                 {/* Personal Info view */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-[#181818] text-white rounded-lg p-1.5"><FiUser className="w-4 h-4" /></span>
+                    <span className="bg-kk-ink text-white rounded-lg p-1.5"><FiUser className="w-4 h-4" /></span>
                     <h2 className="text-base font-extrabold text-black">Personal Information</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -473,7 +473,7 @@ const Profile = () => {
                 {/* Academic Info view */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-[#181818] text-white rounded-lg p-1.5"><FiBriefcase className="w-4 h-4" /></span>
+                    <span className="bg-kk-ink text-white rounded-lg p-1.5"><FiBriefcase className="w-4 h-4" /></span>
                     <h2 className="text-base font-extrabold text-black">Academic Information</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">

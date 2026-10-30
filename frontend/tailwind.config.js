@@ -34,6 +34,24 @@ export default {
         'navbar': '72px',
       },
       colors: {
+        // Graphite Milk palette. `ink`, `graphite`, `accent` and `tint` switch tone in dark mode
+        // (see index.css) so buttons, text, rings and borders stay visible on both backgrounds.
+        kk: {
+          milk: '#FAFAF8',
+          mist: '#DADADA',
+          ash: '#B0B3B8',
+          graphite: 'rgb(var(--kk-graphite) / <alpha-value>)',
+          ink: 'rgb(var(--kk-ink) / <alpha-value>)',
+          accent: 'rgb(var(--kk-accent) / <alpha-value>)',
+          tint: 'rgb(var(--kk-tint) / <alpha-value>)',
+        },
+        // Neutral graphite scale built around the palette (50 milk, 200 mist, 400 ash, 700 graphite,
+        // 950 ink), replacing Tailwind's blue-tinted gray so every gray-* class stays on-brand.
+        gray: {
+          50: '#FAFAF8', 100: '#F1F1EF', 200: '#DADADA', 300: '#C5C6C9', 400: '#B0B3B8', 500: '#7D8086',
+          600: '#5C5F65', 700: '#43464B', 800: '#26282C', 900: '#17181B', 950: '#0F1012',
+        },
+        white: '#FAFAF8',
         'deep-purple': {
           50: '#f3f0fa', 100: '#e0d6f5', 200: '#c1aeea', 300: '#a285df', 400: '#835dd4', 500: '#6434c9', 600: '#5029a1', 700: '#3c1f79', 800: '#281451', 900: '#140a28',
         },

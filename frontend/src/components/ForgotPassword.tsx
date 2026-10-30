@@ -144,7 +144,7 @@ const ForgotPassword = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="w-full px-3 py-3 sm:py-2.5 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                className="w-full px-3 py-3 sm:py-2.5 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -154,14 +154,14 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 px-4 rounded-lg text-sm sm:text-base font-bold text-white bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`w-full py-3 px-4 rounded-lg text-sm sm:text-base font-bold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Sending OTP...' : 'Send OTP'}
             </button>
 
             <p className="text-center text-sm text-gray-500 mt-4">
               Remember your password?{' '}
-              <Link to="/login" className="text-[#F05A25] font-semibold hover:underline">Sign in</Link>
+              <Link to="/login" className="text-kk-accent font-semibold hover:underline">Sign in</Link>
             </p>
           </form>
         ) : (
@@ -177,7 +177,7 @@ const ForgotPassword = () => {
               <input
                 type="text"
                 required
-                className="w-full px-3 py-3 sm:py-2.5 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                className="w-full px-3 py-3 sm:py-2.5 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                 placeholder="Enter 6-digit code"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
@@ -192,7 +192,7 @@ const ForgotPassword = () => {
                   type={showNewPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className="w-full px-3 py-3 sm:py-2.5 pr-12 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                  className="w-full px-3 py-3 sm:py-2.5 pr-12 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                   placeholder="••••••••"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -216,7 +216,7 @@ const ForgotPassword = () => {
                   type={showConfirmPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className="w-full px-3 py-3 sm:py-2.5 pr-12 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
+                  className="w-full px-3 py-3 sm:py-2.5 pr-12 border-2 border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 text-base placeholder:text-gray-400 transition-colors duration-200 min-h-touch"
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -236,7 +236,7 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 px-4 rounded-lg text-sm sm:text-base font-bold text-white bg-[#181818] hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`w-full py-3 px-4 rounded-lg text-sm sm:text-base font-bold text-white bg-kk-ink hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 min-h-touch ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Resetting Password...' : 'Reset Password'}
             </button>

@@ -63,7 +63,7 @@ export function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="w-11 h-11 rounded-xl border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[#00C6A7] hover:text-white hover:border-[#00C6A7] transition-all duration-300 hover:-translate-y-1"
+                    className="w-11 h-11 rounded-xl border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-kk-graphite hover:text-white hover:border-kk-accent transition-all duration-300 hover:-translate-y-1"
                   >
                     {link.icon}
                   </a>
@@ -80,7 +80,7 @@ export function Footer({
                   <li key={i}>
                     <a
                       href={link.label.toLowerCase() === 'home' ? '/' : link.href}
-                      className="text-gray-600 hover:text-[#00C6A7] transition-colors duration-300"
+                      className="text-gray-600 hover:text-kk-accent transition-colors duration-300"
                     >
                       {link.label}
                     </a>
@@ -103,7 +103,7 @@ export function Footer({
                           link.label.toLowerCase().includes('privacy') ? 'privacy' : 'terms'
                         )
                       }
-                      className="text-gray-600 hover:text-[#00C6A7] transition-colors duration-300"
+                      className="text-gray-600 hover:text-kk-accent transition-colors duration-300"
                     >
                       {link.label}
                     </button>
@@ -122,7 +122,7 @@ export function Footer({
               </p>
 
               <div className="mt-5">
-                <span className="inline-flex items-center rounded-full bg-[#00C6A7]/10 px-4 py-2 text-sm font-medium text-[#00C6A7]">
+                <span className="inline-flex items-center rounded-full bg-kk-accent/10 px-4 py-2 text-sm font-medium text-kk-accent">
                   🚀 Built for Students
                 </span>
               </div>
@@ -194,7 +194,7 @@ export function Footer({
             {/* BUTTON */}
             <button
               onClick={() => setActiveModal(null)}
-              className="mt-8 rounded-xl bg-[#00C6A7] px-6 py-3 text-white font-semibold hover:bg-[#00b093] transition"
+              className="mt-8 rounded-xl bg-kk-graphite px-6 py-3 text-white font-semibold hover:bg-[#00b093] transition"
             >
               Got it
             </button>

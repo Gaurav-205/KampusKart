@@ -41,9 +41,9 @@ import { ChatSkeleton } from '../../../components/common/SkeletonLoader';
 // Chat Color Theme Configuration
 // Using the same color scheme as buttons and other feature components
 const CHAT_THEME = {
-  primary: '#181818', // Dark gray/black - matches button default bg
-  primaryHover: '#00C6A7', // Teal - matches button hover state
-  primaryDark: '#009e87', // Darker teal
+  primary: '#0F1012', // Dark gray/black - matches button default bg
+  primaryHover: '#43464B', // Teal - matches button hover state
+  primaryDark: '#0F1012', // Darker teal
   background: '#ffffff', // White background
   cardBg: '#f9fafb', // Light gray for cards
   border: '#e5e7eb', // Border color
@@ -649,7 +649,7 @@ const ChatWindow = () => {
         </ListItemAvatar>
         <Box
           sx={{
-            bgcolor: isOwnMessage ? '#f0fdf4' : CHAT_THEME.background,
+            bgcolor: isOwnMessage ? 'rgba(218, 218, 218, 0.5)' : CHAT_THEME.background,
             border: `2px solid ${CHAT_THEME.border}`,
             borderRadius: '12px',
             p: { xs: 1.5, sm: 1.75 },
@@ -1112,7 +1112,7 @@ const ChatWindow = () => {
             sx={{
               p: 1.5,
               mb: 1.5,
-              bgcolor: '#f0fdf4',
+              bgcolor: 'rgba(218, 218, 218, 0.5)',
               borderRadius: '8px',
               border: `2px solid ${CHAT_THEME.border}`,
               position: 'relative',

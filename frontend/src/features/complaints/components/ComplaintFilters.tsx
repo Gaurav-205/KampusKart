@@ -36,7 +36,7 @@ export const ComplaintFilters: React.FC<ComplaintFiltersProps> = ({
             aria-label="Filter by category"
             value={filters.category}
             onChange={e => onFilterChange({ category: e.target.value as any })}
-            className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-all duration-200 cursor-pointer"
+            className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent transition-all duration-200 cursor-pointer"
           >
             <option value="all">All Categories</option>
             <option value="Academic">Academic</option>
@@ -58,7 +58,7 @@ export const ComplaintFilters: React.FC<ComplaintFiltersProps> = ({
             aria-label="Filter by status"
             value={filters.status}
             onChange={e => onFilterChange({ status: e.target.value as any })}
-            className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] focus:border-transparent transition-all duration-200 cursor-pointer"
+            className="appearance-none w-full sm:w-auto px-5 py-3 pr-10 rounded-lg bg-white text-gray-700 font-semibold border-2 border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-kk-accent focus:border-transparent transition-all duration-200 cursor-pointer"
           >
             <option value="All">All Statuses</option>
             <option value="Open">Open</option>
@@ -75,7 +75,7 @@ export const ComplaintFilters: React.FC<ComplaintFiltersProps> = ({
       </div>
 
       <div className="relative w-full sm:w-[380px] md:w-[440px] lg:w-[520px]" ref={searchRef}>
-        <div className="relative w-full rounded-lg border-2 border-gray-200 bg-white hover:border-gray-300 focus-within:ring-2 focus-within:ring-[#00C6A7] focus-within:border-transparent transition-all duration-200 flex items-center">
+        <div className="relative w-full rounded-lg border-2 border-gray-200 bg-white hover:border-gray-300 focus-within:ring-2 focus-within:ring-kk-accent focus-within:border-transparent transition-all duration-200 flex items-center">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           <input
             type="text"
@@ -92,7 +92,7 @@ export const ComplaintFilters: React.FC<ComplaintFiltersProps> = ({
           <button
             type="button"
             onClick={handleSearchSubmit}
-            className="px-6 py-3.5 bg-[#181818] text-white font-bold text-sm hover:bg-[#00C6A7] active:bg-[#181818] flex items-center justify-center gap-2 transition-all duration-200 border-l-2 border-gray-200 rounded-r-lg"
+            className="px-6 py-3.5 bg-kk-ink text-white font-bold text-sm hover:bg-kk-graphite active:bg-kk-ink flex items-center justify-center gap-2 transition-all duration-200 border-l-2 border-gray-200 rounded-r-lg"
           >
             <FiSearch className="w-4 h-4" />
             <span className="hidden sm:inline">Search</span>

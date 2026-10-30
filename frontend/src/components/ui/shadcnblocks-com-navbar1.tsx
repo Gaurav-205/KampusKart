@@ -118,7 +118,7 @@ const Navbar1 = ({
             {auth.signup.onClick ? (
               <Button
                 onClick={auth.signup.onClick}
-                className="h-10 px-4 text-sm font-semibold bg-[#181818] text-white hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
+                className="h-10 px-4 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
                 aria-label={auth.signup.text}
               >
                 {auth.signup.text}
@@ -126,7 +126,7 @@ const Navbar1 = ({
             ) : (
               <Button
                 asChild
-                className="h-10 px-4 text-sm font-semibold bg-[#181818] text-white hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
+                className="h-10 px-4 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 focus:outline-none focus:ring-0 rounded-lg border-0"
               >
                 <Link to={auth.signup.url}>{auth.signup.text}</Link>
               </Button>
@@ -209,7 +209,7 @@ const Navbar1 = ({
                             to={link.url}
                             className={`inline-flex h-11 items-center justify-center rounded-lg px-4 py-3 text-sm font-semibold border transition-colors duration-200 focus:outline-none focus:ring-0 ${
                               isActivePath(pathname, link.url)
-                                ? "text-[#00C6A7] bg-[#E6FFFA] border-[#00C6A7]"
+                                ? "text-kk-accent bg-kk-tint/40 border-kk-accent"
                                 : "text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-900 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700"
                             }`}
                             aria-label={`Go to ${link.name}`}
@@ -235,7 +235,7 @@ const Navbar1 = ({
                     <SheetClose asChild>
                       <Button
                         onClick={auth.signup.onClick}
-                        className="w-full h-11 text-sm font-semibold bg-[#181818] text-white hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
+                        className="w-full h-11 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
                         aria-label={auth.signup.text}
                       >
                         {auth.signup.text}
@@ -245,7 +245,7 @@ const Navbar1 = ({
                     <SheetClose asChild>
                       <Button
                         asChild
-                        className="w-full h-11 text-sm font-semibold bg-[#181818] text-white hover:bg-[#00C6A7] active:bg-[#181818] transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
+                        className="w-full h-11 text-sm font-semibold bg-kk-ink text-white hover:bg-kk-graphite active:bg-kk-ink transition-colors duration-200 rounded-lg focus:outline-none focus:ring-0"
                       >
                         <Link to={auth.signup.url}>{auth.signup.text}</Link>
                       </Button>
@@ -389,13 +389,13 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
                     to={subItem.url}
                     className={`flex select-none gap-3 rounded-lg p-3 leading-none outline-none transition-colors duration-200 border focus:ring-0 ${
                       isActivePath(pathname, subItem.url)
-                        ? "bg-[#E6FFFA] text-[#00C6A7] border-[#00C6A7]"
+                        ? "bg-kk-tint/40 text-kk-accent border-kk-accent"
                         : "bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-950 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
                     }`}
                     aria-label={`Go to ${subItem.title}`}
                   >
                     <div className="flex-1">
-                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-[#00A489] dark:text-[#00C6A7]' : 'text-gray-900 dark:text-white'}`}>
+                      <div className={`text-sm font-semibold flex items-center gap-2 mb-1 ${isActivePath(pathname, subItem.url) ? 'text-[#00A489] dark:text-kk-accent' : 'text-gray-900 dark:text-white'}`}>
                         {subItem.title}
                       </div>
                       {subItem.description && (
@@ -420,7 +420,7 @@ const renderMobileMenuItem = (item: MenuItem, pathname: string) => {
         to={item.url}
         className={`flex h-11 items-center rounded-lg px-4 text-sm font-semibold transition-colors duration-200 border focus:outline-none focus:ring-0 ${
           isActivePath(pathname, item.url)
-            ? "text-[#00C6A7] bg-[#E6FFFA] border-[#00C6A7]"
+            ? "text-kk-accent bg-kk-tint/40 border-kk-accent"
             : "text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-950 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
         }`}
         aria-label={`Go to ${item.title}`}

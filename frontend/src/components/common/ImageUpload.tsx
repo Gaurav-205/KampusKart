@@ -142,14 +142,14 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`mt-1 flex justify-center px-4 pt-4 pb-5 sm:px-6 sm:pt-5 sm:pb-6 border-2 rounded-md transition-colors ${
-          isDragging ? 'border-[#00C6A7] bg-[#F3FFFC]' : 'border-gray-200'
+          isDragging ? 'border-kk-accent bg-kk-tint/40' : 'border-gray-200'
         }`}
       >
         <div className="space-y-1 text-center">
           <div className="flex text-sm text-gray-600">
             <label
               htmlFor={id}
-              className={`relative cursor-pointer bg-white rounded-md font-medium text-[#3FA9F6] hover:text-blue-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 ${
+              className={`relative cursor-pointer bg-white rounded-md font-medium text-kk-accent hover:text-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gray-500 ${
                 disabled || isMaxReached ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >

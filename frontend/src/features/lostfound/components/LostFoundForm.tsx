@@ -141,7 +141,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
                         type: e.target.value as LostFoundItem['type'],
                       }))
                     }
-                    className="w-4 h-4 text-[#00C6A7] focus:ring-[#00C6A7]"
+                    className="w-4 h-4 text-kk-accent focus:ring-kk-accent"
                   />
                   <span className="text-sm font-semibold capitalize">{t} Item</span>
                 </label>
@@ -156,7 +156,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
               value={formData.title}
               onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
               onBlur={(e) => handleBlur('title', e.target.value)}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.title ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="What did you lose/find?"
@@ -173,7 +173,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
               onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               onBlur={(e) => handleBlur('description', e.target.value)}
               rows={4}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.description ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Provide details like color, brand, etc."
@@ -190,7 +190,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
                 type="text"
                 value={formData.location}
                 onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all"
                 placeholder="Where?"
               />
             </div>
@@ -201,7 +201,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
                 value={formData.date}
                 onChange={(e) => setFormData((prev) => ({ ...prev, date: e.target.value }))}
                 onBlur={(e) => handleBlur('date', e.target.value)}
-                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                   fieldErrors.date ? 'border-red-500' : 'border-gray-200'
                 }`}
               />
@@ -229,7 +229,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
           value={formData.contact}
           onChange={(e) => setFormData((prev) => ({ ...prev, contact: e.target.value }))}
           onBlur={(e) => handleBlur('contact', e.target.value)}
-          className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+          className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
             fieldErrors.contact ? 'border-red-500' : 'border-gray-200'
           }`}
           placeholder="Email or Phone Number"
@@ -249,7 +249,7 @@ export const LostFoundForm: React.FC<LostFoundFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-[#181818] text-white font-bold rounded-lg hover:bg-[#00C6A7] transition-colors disabled:opacity-50"
+          className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
           {isSubmitting ? 'Saving...' : item ? 'Update Item' : 'Post Item'}
         </button>

@@ -127,7 +127,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
               value={formData.title}
               onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
               onBlur={(e) => handleBlur('title', e.target.value)}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.title ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Brief summary of the issue"
@@ -144,7 +144,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
               onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               onBlur={(e) => handleBlur('description', e.target.value)}
               rows={4}
-              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7] transition-all ${
+              className={`w-full px-4 py-3 rounded-lg border-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent transition-all ${
                 fieldErrors.description ? 'border-red-500' : 'border-gray-200'
               }`}
               placeholder="Describe the problem in detail..."
@@ -165,7 +165,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
                     category: e.target.value as Complaint['category'],
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               >
                 <option value="Academic">Academic</option>
                 <option value="Administrative">Administrative</option>
@@ -185,7 +185,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
                     department: e.target.value as Complaint['department'],
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               >
                 <option value="Academic Affairs">Academic Affairs</option>
                 <option value="Administration">Administration</option>
@@ -208,7 +208,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
                     priority: e.target.value as Complaint['priority'],
                   }))
                 }
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
               >
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
@@ -229,7 +229,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
                       status: e.target.value as Complaint['status'],
                     }))
                   }
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00C6A7]"
+                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-kk-accent"
                 >
                   <option value="Open">Open</option>
                   <option value="In Progress">In Progress</option>
@@ -243,12 +243,12 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
       </div>
 
       {isAdmin && complaint && formData.status !== complaint.status && (
-        <div className="border-2 border-blue-200 bg-blue-50 rounded-lg p-6">
-          <label className="block text-sm font-bold text-blue-700 mb-2">Status Update Note *</label>
+        <div className="border-2 border-gray-200 bg-gray-50 rounded-lg p-6">
+          <label className="block text-sm font-bold text-gray-700 mb-2">Status Update Note *</label>
           <textarea
             value={formData.statusComment}
             onChange={(e) => setFormData((prev) => ({ ...prev, statusComment: e.target.value }))}
-            className="w-full px-4 py-3 rounded-lg border-2 border-blue-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="Explain why the status is being changed..."
             rows={3}
           />
@@ -270,7 +270,7 @@ export const ComplaintForm: React.FC<ComplaintFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3 bg-[#181818] text-white font-bold rounded-lg hover:bg-[#00C6A7] transition-colors disabled:opacity-50"
+          className="px-8 py-3 bg-kk-ink text-white font-bold rounded-lg hover:bg-kk-graphite transition-colors disabled:opacity-50"
         >
           {isSubmitting ? 'Saving...' : complaint ? 'Update Complaint' : 'Submit Complaint'}
         </button>

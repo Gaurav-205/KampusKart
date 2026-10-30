@@ -65,7 +65,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
             <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
               complaint.priority === 'Urgent' ? 'bg-red-600 text-white' :
               complaint.priority === 'High' ? 'bg-orange-100 text-orange-700' :
-              complaint.priority === 'Medium' ? 'bg-blue-100 text-blue-700' :
+              complaint.priority === 'Medium' ? 'bg-gray-100 text-gray-700' :
               'bg-gray-100 text-gray-700'
             }`}>
               {complaint.priority} Priority
@@ -81,7 +81,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-2xl border-2 border-gray-100">
           <div className="space-y-4">
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiTag />
               </div>
               <div>
@@ -90,7 +90,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
               </div>
             </div>
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiActivity />
               </div>
               <div>
@@ -101,7 +101,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
           </div>
           <div className="space-y-4">
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiUser />
               </div>
               <div>
@@ -110,7 +110,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
               </div>
             </div>
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiClock />
               </div>
               <div>
@@ -123,7 +123,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
 
         <div className="space-y-3">
           <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <FiFileText className="text-[#00C6A7]" /> Description
+            <FiFileText className="text-kk-accent" /> Description
           </h3>
           <p className="text-gray-600 leading-relaxed text-lg bg-white p-6 rounded-2xl border-2 border-gray-100 whitespace-pre-wrap">
             {complaint.description}
@@ -133,7 +133,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
         {/* Status History Timeline */}
         <div className="space-y-4">
           <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <FiActivity className="text-[#00C6A7]" /> Status History
+            <FiActivity className="text-kk-accent" /> Status History
           </h3>
           <div className="relative pl-8 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200">
             {complaint.statusHistory.slice().reverse().map((history, idx) => (
@@ -168,7 +168,7 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({
           {!['Resolved', 'Closed'].includes(complaint.status) && (
             <button
               onClick={() => onEdit(complaint)}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gray-600 text-white rounded-xl font-bold hover:bg-gray-700 transition-all shadow-lg shadow-gray-100"
             >
               <FiEdit2 /> Edit Complaint
             </button>

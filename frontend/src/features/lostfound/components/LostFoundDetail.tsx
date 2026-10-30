@@ -60,7 +60,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
               {item.type} Item
             </span>
             <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-              item.resolved ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'
+              item.resolved ? 'bg-gray-100 text-gray-700' : 'bg-yellow-100 text-yellow-700'
             }`}>
               {item.resolved ? 'Resolved' : 'Unresolved'}
             </span>
@@ -75,7 +75,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-2xl border-2 border-gray-100">
           <div className="space-y-4">
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiMapPin />
               </div>
               <div>
@@ -84,7 +84,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
               </div>
             </div>
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiCalendar />
               </div>
               <div>
@@ -95,7 +95,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
           </div>
           <div className="space-y-4">
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiUser />
               </div>
               <div>
@@ -104,7 +104,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
               </div>
             </div>
             <div className="flex items-start">
-              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-[#00C6A7]">
+              <div className="mt-1 p-2 bg-white rounded-lg border-2 border-gray-100 mr-3 text-kk-accent">
                 <FiMail />
               </div>
               <div>
@@ -117,7 +117,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
 
         <div className="space-y-3">
           <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <FiFileText className="text-[#00C6A7]" /> Description
+            <FiFileText className="text-kk-accent" /> Description
           </h3>
           <p className="text-gray-600 leading-relaxed text-lg bg-white p-6 rounded-2xl border-2 border-gray-100">
             {item.description}
@@ -139,7 +139,7 @@ export const LostFoundDetail: React.FC<LostFoundDetailProps> = ({
           {!item.resolved && (
             <button
               onClick={() => onEdit(item)}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gray-600 text-white rounded-xl font-bold hover:bg-gray-700 transition-all shadow-lg shadow-gray-100"
             >
               <FiEdit2 className="w-5 h-5" /> Edit Post
             </button>

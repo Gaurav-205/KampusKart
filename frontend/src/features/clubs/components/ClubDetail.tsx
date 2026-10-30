@@ -74,7 +74,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
               </span>
             </div>
             <h2 className="text-3xl font-extrabold text-gray-900 leading-tight mb-2">{club.title}</h2>
-            <div className="flex items-center text-[#00C6A7] font-bold text-lg">
+            <div className="flex items-center text-kk-accent font-bold text-lg">
               <FiTag className="mr-2" />
               <span>{club.clubName}</span>
             </div>
@@ -115,7 +115,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-              <FiFileText className="text-[#00C6A7]" /> Recruitment Details
+              <FiFileText className="text-kk-accent" /> Recruitment Details
             </h3>
             <p className="text-gray-600 leading-relaxed bg-white p-6 rounded-2xl border-2 border-gray-100 whitespace-pre-wrap">
               {club.description}
@@ -126,7 +126,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-              <FiUser className="text-[#00C6A7]" /> Contact Information
+              <FiUser className="text-kk-accent" /> Contact Information
             </h3>
             <div className="bg-gray-50 p-6 rounded-2xl border-2 border-gray-100 space-y-4">
               {club.contactInfo?.name && (
@@ -143,7 +143,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
                   <FiMail className="text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Email</p>
-                    <a href={`mailto:${club.contactInfo.email}`} className="text-[#00C6A7] font-bold hover:underline">{club.contactInfo.email}</a>
+                    <a href={`mailto:${club.contactInfo.email}`} className="text-kk-accent font-bold hover:underline">{club.contactInfo.email}</a>
                   </div>
                 </div>
               )}
@@ -152,7 +152,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
                   <FiPhone className="text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Phone</p>
-                    <a href={`tel:${club.contactInfo.phone}`} className="text-[#00C6A7] font-bold hover:underline">{club.contactInfo.phone}</a>
+                    <a href={`tel:${club.contactInfo.phone}`} className="text-kk-accent font-bold hover:underline">{club.contactInfo.phone}</a>
                   </div>
                 </div>
               )}
@@ -166,7 +166,7 @@ export const ClubDetail: React.FC<ClubDetailProps> = ({
             <div className="pt-6 border-t-2 border-gray-100 flex flex-wrap gap-4">
               <button
                 onClick={() => onEdit(club)}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-[#181818] text-white rounded-xl font-bold hover:bg-[#00C6A7] transition-all shadow-lg shadow-gray-100"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-kk-ink text-white rounded-xl font-bold hover:bg-kk-graphite transition-all shadow-lg shadow-gray-100"
               >
                 <FiEdit2 /> Edit Recruitment
               </button>

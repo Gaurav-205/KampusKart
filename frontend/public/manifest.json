@@ -4,8 +4,8 @@
   "description": "Your campus life, simplified — events, news, lost & found, chat and more.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#00C6A7",
+  "background_color": "#FAFAF8",
+  "theme_color": "#0F1012",
   "orientation": "portrait-primary",
   "scope": "/",
   "icons": [

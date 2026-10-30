@@ -7,7 +7,7 @@ const TermsOfService: React.FC = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col pt-[72px]">
       <main className="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 py-10 sm:py-16">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-[#00C6A7] mb-8 transition-colors">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-kk-accent mb-8 transition-colors">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           Back
         </Link>

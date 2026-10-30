@@ -66,7 +66,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
           <div className="flex flex-row gap-2 pt-4 border-t-2 border-gray-200">
             <button
               onClick={(e) => { e.stopPropagation(); onEdit(news); }}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-xs font-bold"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-xs font-bold"
             >
               <FiEdit2 className="w-4 h-4" />
               <span>Edit</span>
