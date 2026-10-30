@@ -40,7 +40,7 @@ const { isGoogleAuthConfigured } = require('../config/passport');
 
 const requireGoogleAuth = (req, res, next) => {
   if (!isGoogleAuthConfigured) {
-    return res.status(503).json({ message: 'Google sign-in is not configured on this server' });
+    return res.status(503).json({ message: 'Google sign-in is disabled on this server' });
   }
   return next();
 };

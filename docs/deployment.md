@@ -31,8 +31,10 @@ Environment variables (Production and Preview):
 Backend changes required on Render before switching traffic:
 
 - Add the Vercel origins to `ALLOWED_ORIGINS` (the wildcard covers preview deployments)
-- Set `FRONTEND_URL` to the production Vercel URL so Google sign-in redirects back to it
-- Add the Vercel URL to the Google OAuth client's authorized JavaScript origins
+- Set `FRONTEND_URL` to the production Vercel URL
+- Google sign-in is disabled by default. To turn it on, set `GOOGLE_AUTH_ENABLED=true` (plus the client
+  credentials) on Render and `VITE_ENABLE_GOOGLE_AUTH=true` on Vercel, and add the Vercel URL to the
+  Google OAuth client's authorized JavaScript origins
 
 Values for the current Vercel project (`kampuskart`, team `orbit-s-projects71`):
 
