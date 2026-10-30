@@ -39,7 +39,7 @@
 | Facilities        | Directory with type, opening hours, contact details and images                               |
 | Clubs Recruitment | Open recruitment drives with deadlines and application links                                 |
 | Global Chat       | Real-time chat with replies, reactions, read receipts and attachments                        |
-| Accounts          | Email/password or Google sign-in, JWT sessions, OTP password reset, profiles                 |
+| Accounts          | Email/password sign-in (Google optional), JWT sessions, OTP password reset, profiles         |
 
 Admins are configured by email (`ADMIN_EMAILS`) and can manage news, events, facilities and clubs, review every complaint and Lost & Found item, and restore or permanently delete soft-deleted records.
 
@@ -105,7 +105,7 @@ The frontend runs at <http://localhost:5173> and the API at <http://localhost:50
 | `JWT_SECRET`                                                           | Yes         | Token signing secret, 32+ characters                                                                                 |
 | `PORT`, `NODE_ENV`                                                     | No          | Defaults: `5000`, `development`                                                                                      |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | For uploads | Image and attachment storage                                                                                         |
-| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`                             | Optional    | Google sign-in; disabled (not fatal) when unset                                                                      |
+| `GOOGLE_AUTH_ENABLED`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`      | Optional    | Google sign-in; off unless `GOOGLE_AUTH_ENABLED=true`                                                                |
 | `EMAIL_SERVICE`, `EMAIL_USER`, `EMAIL_PASS`                            | For reset   | Sends password-reset OTPs (use a Gmail app password)                                                                 |
 | `FRONTEND_URL`, `BACKEND_URL`                                          | Production  | OAuth redirect and callback URLs                                                                                     |
 | `ALLOWED_ORIGINS`                                                      | Production  | Extra CORS origins, comma-separated. `*` matches one hostname fragment (e.g. `https://kampuskart-*-team.vercel.app`) |
@@ -122,6 +122,7 @@ The full list, including keep-alive and seeding options, is in [docs/environment
 | `VITE_SOCKET_URL`          | Yes      | Socket.IO URL (usually the same as `VITE_API_URL`) |
 | `VITE_GOOGLE_MAPS_API_KEY` | For maps | Google Maps JavaScript API key                     |
 | `VITE_GOOGLE_MAPS_MAP_ID`  | Optional | Custom map style                                   |
+| `VITE_ENABLE_GOOGLE_AUTH`  | Optional | `true` shows the Google sign-in button             |
 
 All uploads go through the authenticated backend, so the frontend needs no Cloudinary credentials.
 

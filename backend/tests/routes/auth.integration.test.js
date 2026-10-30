@@ -21,6 +21,12 @@ describe('Auth integration routes', () => {
     jest.clearAllMocks();
   });
 
+  test('GET /api/auth/google is disabled unless GOOGLE_AUTH_ENABLED=true', async () => {
+    const res = await request(app).get('/api/auth/google');
+    expect(res.status).toBe(503);
+    expect(res.body.message).toMatch(/disabled/i);
+  });
+
   test('POST /api/auth/signup should create user (flow stubbed)', async () => {
     const payload = { email: 'inttest@example.com', password: 'Pass1234!', name: 'Int Test' };
     const mockUser = {

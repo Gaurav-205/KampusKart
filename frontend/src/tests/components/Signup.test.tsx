@@ -50,4 +50,13 @@ describe('Signup confirm password', () => {
 
     expect(signup).toHaveBeenCalledWith('asha@example.com', 'Str0ng!pass', 'Asha Rao', false);
   });
+
+  it('hides Google sign-up while Google auth is disabled', () => {
+    render(
+      <MemoryRouter>
+        <Signup />
+      </MemoryRouter>
+    );
+    expect(screen.queryByText('Sign up with Google')).not.toBeInTheDocument();
+  });
 });

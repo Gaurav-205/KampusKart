@@ -11,7 +11,8 @@ Required for full feature set:
 - CLOUDINARY_CLOUD_NAME
 - CLOUDINARY_API_KEY
 - CLOUDINARY_API_SECRET
-- GOOGLE_CLIENT_ID (Google sign-in is disabled, not fatal, when unset)
+- GOOGLE_AUTH_ENABLED (`true` to turn on Google sign-in; off by default)
+- GOOGLE_CLIENT_ID (used only when Google sign-in is enabled)
 - GOOGLE_CLIENT_SECRET
 - EMAIL_USER
 - EMAIL_PASS
@@ -41,6 +42,7 @@ JWT_SECRET=change-me
 CLOUDINARY_CLOUD_NAME=your_cloud
 CLOUDINARY_API_KEY=your_key
 CLOUDINARY_API_SECRET=your_secret
+GOOGLE_AUTH_ENABLED=false
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 EMAIL_SERVICE=gmail
@@ -56,6 +58,7 @@ ENABLE_KEEP_ALIVE=false
 ## Frontend (.env)
 Required in development:
 - VITE_GOOGLE_MAPS_API_KEY
+- VITE_ENABLE_GOOGLE_AUTH (`true` shows the Google sign-in button; off by default)
 
 Optional:
 - VITE_API_URL (defaults to localhost in dev, Render in prod)

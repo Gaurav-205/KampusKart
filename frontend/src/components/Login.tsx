@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { GOOGLE_AUTH_ENABLED } from '../config';
 
 const imageUrl = '/login-side.jpg';
 
@@ -161,25 +162,29 @@ const Login: React.FC = () => {
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
 
-            {/* Divider */}
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t-2 border-gray-200 dark:border-gray-800" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white dark:bg-gray-900 text-gray-400 font-medium">or continue with</span>
-              </div>
-            </div>
+            {GOOGLE_AUTH_ENABLED && (
+              <>
+                {/* Divider */}
+                <div className="relative py-2">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t-2 border-gray-200 dark:border-gray-800" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-white dark:bg-gray-900 text-gray-400 font-medium">or continue with</span>
+                  </div>
+                </div>
 
-            {/* Google */}
-            <button
-              type="button"
-              onClick={() => loginWithGoogle()}
-              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-base font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 min-h-touch"
-            >
-              <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
-              Sign in with Google
-            </button>
+                {/* Google */}
+                <button
+                  type="button"
+                  onClick={() => loginWithGoogle()}
+                  className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg text-base font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 min-h-touch"
+                >
+                  <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
+                  Sign in with Google
+                </button>
+              </>
+            )}
 
             <p className="text-center text-sm text-gray-600 pt-2">
               Don't have an account?{' '}

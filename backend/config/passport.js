@@ -15,16 +15,16 @@ const getCallbackURL = () => {
   return 'http://localhost:5000/api/auth/google/callback';
 };
 
-// Google sign-in is optional: without credentials the server must still boot (email/password
-// auth keeps working) instead of crashing on the strategy constructor.
-const isGoogleAuthConfigured = Boolean(
-  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
-);
+// Google sign-in is opt-in: it runs only when GOOGLE_AUTH_ENABLED=true and the client credentials
+// are set. Otherwise the server still boots and email/password auth keeps working.
+const isGoogleAuthConfigured =
+  process.env.GOOGLE_AUTH_ENABLED === 'true' &&
+  Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
 if (isGoogleAuthConfigured) {
   console.log('Google OAuth Callback URL:', getCallbackURL());
 } else if (process.env.NODE_ENV !== 'test') {
-  console.warn('Google OAuth is not configured (GOOGLE_CLIENT_ID/SECRET missing); Google sign-in is disabled.');
+  console.warn('Google sign-in is disabled (set GOOGLE_AUTH_ENABLED=true with GOOGLE_CLIENT_ID/SECRET to enable).');
 }
 
 if (isGoogleAuthConfigured) passport.use(
