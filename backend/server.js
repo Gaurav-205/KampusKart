@@ -240,10 +240,11 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
-    // Check if seeding is needed (e.g., if no facilities exist)
+    // Auto-seed only when explicitly opted in: seedData deletes Events, News, Facilities,
+    // LostFound, Complaints, ClubRecruitments and Chats before inserting dummy data.
     const Facility = require('./models/Facility');
     const facilityCount = await Facility.countDocuments();
-    if (facilityCount === 0) {
+    if (facilityCount === 0 && process.env.SEED_ON_START === 'true') {
       console.log('No facilities found. Seeding dummy data...');
       try {
         const seedData = require('./scripts/seedData');
