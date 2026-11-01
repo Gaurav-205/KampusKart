@@ -28,11 +28,24 @@ const GOOGLE_MAPS_OPTIONS = {
 };
 
 const CampusMap: React.FC = () => {
-  // Only call useLoadScript when not in demo mode
+  // In demo mode, skip Google Maps entirely — no API key means no script load.
+  // We render the interactive vector fallback instead (see isDemoMode branch below).
+  // The useLoadScript hook is only called inside GoogleMapsLoader to respect the
+  // rules-of-hooks constraint while keeping the API script off the page.
+
+  return isDemoMode ? <CampusMapInner isLoaded={false} loadError={undefined} /> : <GoogleMapsLoader />;
+};
+
+/** Loads the Google Maps JS API and delegates to CampusMapInner. */
+const GoogleMapsLoader: React.FC = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: isDemoMode ? 'dummy-key' : apiKey,
+    googleMapsApiKey: apiKey,
     libraries: GOOGLE_MAPS_LIBRARIES,
   });
+  return <CampusMapInner isLoaded={isLoaded} loadError={loadError} />;
+};
+
+const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined }> = ({ isLoaded, loadError }) => {
 
   const {
     mapRef,
