@@ -23,6 +23,8 @@ yarn.lock
 .env.test.local
 .env.production.local
 .env*.local
+.env.render
+.env.vercel
 
 # Debug logs
 npm-debug.log*
