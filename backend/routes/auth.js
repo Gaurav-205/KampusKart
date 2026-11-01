@@ -6,8 +6,6 @@ const rateLimit = require('express-rate-limit');
 const {
   validateSignup,
   validateLogin,
-  validateForgotPassword,
-  validateResetPassword,
   sanitizeInput
 } = require('../middleware/validation');
 const authController = require('../controllers/authController');
@@ -22,18 +20,6 @@ const signupLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   max: 5,
   message: { message: 'Too many signup attempts, please try again after an hour' }
-});
-
-const forgotPasswordLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 5,
-  message: { message: 'Too many password reset requests, please try again after an hour' }
-});
-
-const resetPasswordLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 10,
-  message: { message: 'Too many password reset attempts, please try again after an hour' }
 });
 
 const { isGoogleAuthConfigured } = require('../config/passport');
@@ -72,20 +58,10 @@ const refreshLimiter = rateLimit({
   message: { message: 'Too many token refresh requests, please try again later' }
 });
 
-router.post(
-  '/forgot-password',
-  forgotPasswordLimiter,
-  sanitizeInput,
-  validateForgotPassword,
-  authController.requestPasswordReset
-);
-router.post(
-  '/reset-password',
-  resetPasswordLimiter,
-  sanitizeInput,
-  validateResetPassword,
-  authController.resetPassword
-);
+// Password reset is disabled. authController.requestPasswordReset and resetPassword stay for re-enabling.
+router.post(['/forgot-password', '/reset-password'], (req, res) => {
+  res.status(503).json({ message: 'Password reset is currently disabled' });
+});
 router.post('/refresh', refreshLimiter, authController.refreshToken);
 
 module.exports = router;

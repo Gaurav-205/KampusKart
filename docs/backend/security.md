@@ -21,8 +21,6 @@ Limits use `express-rate-limit` and are keyed by client IP. Behind a reverse pro
 | --- | --- |
 | `POST /api/auth/login` | 10 per 15 min |
 | `POST /api/auth/signup` | 5 per hour |
-| `POST /api/auth/forgot-password` | 5 per hour |
-| `POST /api/auth/reset-password` | 10 per hour, plus 5 wrong guesses per issued OTP |
 | `POST /api/auth/refresh` | 30 per 15 min |
 | `POST /api/ai/semantic-search` | 20 per minute |
 | `POST /api/chat/messages` | 30 per minute (the Socket.IO `send-message` path has the same per-socket limit) |

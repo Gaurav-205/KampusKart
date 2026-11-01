@@ -139,7 +139,7 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-            {/* Forgot password + Remember me row */}
+            {/* Remember me row */}
             <div className="flex items-center justify-between pt-1">
               <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
                 <input
@@ -150,7 +150,6 @@ const Login: React.FC = () => {
                 />
                 Remember me
               </label>
-              <Link to="/forgot-password" className="text-sm text-kk-accent hover:underline font-semibold">Forgot password?</Link>
             </div>
 
             {/* Submit */}

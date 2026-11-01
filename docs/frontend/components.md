@@ -15,7 +15,7 @@ This section describes the primary route components and the major shared UI elem
 ## Authentication screens
 - Login: email and password login, remember me, Google login button, and right panel image fallback.
 - Signup: account creation with password strength guidance and Google login.
-- ForgotPassword: two step OTP flow for password reset with countdown timer.
+- ForgotPassword: two step OTP flow for password reset with countdown timer. Disabled: not routed.
 
 ## Profile
 - Profile: shows user details, completion meter, edit mode, and Cloudinary profile image upload.

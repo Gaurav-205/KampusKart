@@ -23,15 +23,10 @@ All endpoints are prefixed with /api. Auth required means send Authorization: Be
 - Redirects to the frontend with a token query param
 
 ### POST /api/auth/forgot-password
-- Auth: No
-- Body: { email }
-- Response: { message }
-- Notes: OTP is emailed if EMAIL_USER and EMAIL_PASS are configured.
+- Disabled: returns 503 { message }
 
 ### POST /api/auth/reset-password
-- Auth: No
-- Body: { email, otp, newPassword }
-- Response: { message }
+- Disabled: returns 503 { message }
 
 ### POST /api/auth/refresh
 - Auth: Yes
@@ -265,8 +260,6 @@ All endpoints are prefixed with /api. Auth required means send Authorization: Be
 ## Rate limiting (summary)
 - /api/auth/login: 10 requests per 15 minutes
 - /api/auth/signup: 5 requests per hour
-- /api/auth/forgot-password: 5 requests per hour
-- /api/auth/reset-password: 10 requests per hour
 - /api/lostfound writes: 100 requests per 15 minutes
 - /api/news, /api/events, /api/facilities, /api/clubs writes: 50 requests per 15 minutes
 - /api/chat/messages: 30 messages per minute

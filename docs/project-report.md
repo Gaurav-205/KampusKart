@@ -362,7 +362,7 @@ Stores recruitment announcements:
 
 | API Prefix        | Responsibility                                                                |
 | ----------------- | ----------------------------------------------------------------------------- |
-| `/api/auth`       | Signup, login, Google OAuth, forgot password, reset password, token refresh   |
+| `/api/auth`       | Signup, login, Google OAuth, token refresh                                    |
 | `/api/profile`    | Full profile read/update with profile image upload                            |
 | `/api/user`       | Basic profile read/update                                                     |
 | `/api/lostfound`  | Lost/found CRUD, search, filters, resolve, admin restore/delete/cleanup       |
@@ -387,7 +387,6 @@ Public routes:
 - `/`
 - `/login`
 - `/signup`
-- `/forgot-password`
 - `/auth/google/callback`
 - `/privacy`
 - `/terms`

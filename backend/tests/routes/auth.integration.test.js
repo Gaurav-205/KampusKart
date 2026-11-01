@@ -27,6 +27,12 @@ describe('Auth integration routes', () => {
     expect(res.body.message).toMatch(/disabled/i);
   });
 
+  test.each(['forgot-password', 'reset-password'])('POST /api/auth/%s is disabled', async (route) => {
+    const res = await request(app).post(`/api/auth/${route}`).send({ email: 'a@example.com' });
+    expect(res.status).toBe(503);
+    expect(res.body.message).toMatch(/disabled/i);
+  });
+
   test('POST /api/auth/signup should create user (flow stubbed)', async () => {
     const payload = { email: 'inttest@example.com', password: 'Pass1234!', name: 'Int Test' };
     const mockUser = {

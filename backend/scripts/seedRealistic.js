@@ -216,7 +216,7 @@ async function main() {
   console.log(`Chat messages: ${chats.length}`);
 
   console.log('Done. Test login: testuser@mitadt.edu / Test@12345');
-  console.log('Student passwords are random and not stored anywhere; use the forgot-password flow to reset a student account.');
+  console.log('Student passwords are random and not stored anywhere.');
   await mongoose.disconnect();
 }
 

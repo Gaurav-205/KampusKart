@@ -5,7 +5,6 @@ Public routes:
 - /
 - /login
 - /signup
-- /forgot-password
 - /auth/google/callback
 - /privacy
 - /terms
@@ -27,7 +26,7 @@ Protected routes:
 ProtectedRoute checks AuthContext token. If no token is present, it redirects to /login.
 
 ## Navbar visibility
-The navbar is hidden on /login, /signup, and /forgot-password to support full screen auth layouts.
+The navbar is hidden on /login and /signup to support full screen auth layouts.
 
 ## Google OAuth callback
 The /auth/google/callback route reads token from the query string and passes it to AuthContext.handleGoogleCallback. On success, the user is redirected to /home.
