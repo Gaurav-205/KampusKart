@@ -33,7 +33,23 @@ const CampusMap: React.FC = () => {
   // The useLoadScript hook is only called inside GoogleMapsLoader to respect the
   // rules-of-hooks constraint while keeping the API script off the page.
 
-  return isDemoMode ? <CampusMapInner isLoaded={false} loadError={undefined} /> : <GoogleMapsLoader />;
+  // Google calls window.gm_authFailure when it rejects the key (typo, referrer, billing) and
+  // otherwise leaves its own error page in the map; switch to the vector fallback instead.
+  const [authFailed, setAuthFailed] = useState(false);
+  useEffect(() => {
+    if (isDemoMode) return;
+    const w = window as Window & { gm_authFailure?: () => void };
+    w.gm_authFailure = () => setAuthFailed(true);
+    return () => {
+      delete w.gm_authFailure;
+    };
+  }, []);
+
+  return isDemoMode || authFailed ? (
+    <CampusMapInner demoMode isLoaded={false} loadError={undefined} />
+  ) : (
+    <GoogleMapsLoader />
+  );
 };
 
 /** Loads the Google Maps JS API and delegates to CampusMapInner. */
@@ -42,10 +58,14 @@ const GoogleMapsLoader: React.FC = () => {
     googleMapsApiKey: apiKey,
     libraries: GOOGLE_MAPS_LIBRARIES,
   });
-  return <CampusMapInner isLoaded={isLoaded} loadError={loadError} />;
+  return <CampusMapInner demoMode={false} isLoaded={isLoaded} loadError={loadError} />;
 };
 
-const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined }> = ({ isLoaded, loadError }) => {
+const CampusMapInner: React.FC<{
+  demoMode: boolean;
+  isLoaded: boolean;
+  loadError: Error | undefined;
+}> = ({ demoMode, isLoaded, loadError }) => {
 
   const {
     mapRef,
@@ -156,17 +176,17 @@ const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined
   // Map Sidebar Recenter/Nav wrapper that works with both Modes
   const handleLocationSelect = useCallback(
     (loc: Location) => {
-      if (isDemoMode) {
+      if (demoMode) {
         setSelectedLocation(loc);
         setInfoWindowPosition({ lat: loc.lat, lng: loc.lng });
       } else {
         navigateToLocation(loc);
       }
     },
-    [navigateToLocation, setSelectedLocation, setInfoWindowPosition]
+    [demoMode, navigateToLocation, setSelectedLocation, setInfoWindowPosition]
   );
 
-  if (!isDemoMode && loadError) {
+  if (!demoMode && loadError) {
     return (
       <div className="h-screen flex flex-col items-center justify-center p-8 text-center bg-white">
         <h3 className="text-2xl font-black text-gray-900 mb-4">Map Loading Failed</h3>
@@ -183,12 +203,12 @@ const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined
     );
   }
 
-  if (!isDemoMode && !isLoaded) return <MapSkeleton />;
+  if (!demoMode && !isLoaded) return <MapSkeleton />;
 
   return (
     <div className="h-screen w-full flex flex-col pt-[72px] bg-white overflow-hidden select-none">
       {/* Demo Warning Banner */}
-      {isDemoMode && (
+      {demoMode && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center justify-between text-xs text-amber-800 font-medium z-20 shrink-0">
           <div className="flex items-center gap-2">
             <FiInfo className="w-4 h-4 text-amber-600 shrink-0" />
@@ -204,7 +224,7 @@ const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined
       <div className="flex-grow flex flex-col md:flex-row min-h-0 relative">
         {/* Map Container */}
         <div className="flex-grow relative h-full bg-gray-50 overflow-hidden">
-          {isDemoMode ? (
+          {demoMode ? (
             /* Interactive Vector Fallback Map */
             <div className="absolute inset-0 w-full h-full bg-[#fafbfc] overflow-hidden flex items-center justify-center">
               {/* Grid Background Effect */}
@@ -367,7 +387,7 @@ const CampusMapInner: React.FC<{ isLoaded: boolean; loadError: Error | undefined
 
           {/* Map Controls */}
           <div className="absolute right-4 bottom-6 flex flex-col gap-3 z-10">
-            {!isDemoMode && (
+            {!demoMode && (
               <button
                 onClick={recenterToUser}
                 className="p-4 bg-white text-gray-900 rounded-2xl shadow-2xl border-2 border-gray-100 hover:text-kk-accent transition-all"
