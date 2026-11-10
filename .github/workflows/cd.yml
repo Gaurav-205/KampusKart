@@ -1,8 +1,10 @@
 name: CD - Continuous Deployment
 
+# Manual only: production deploys come from the Vercel (frontend) and Render (backend) Git
+# integrations. On push this job failed every time (Netlify "Unauthorized", Render API 400)
+# and would double-deploy the backend if its secrets were fixed.
 on:
-  push:
-    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   deploy-frontend:
