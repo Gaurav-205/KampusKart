@@ -14,7 +14,7 @@ app.use(Sentry.Handlers.errorHandler());
 ```
 
 - Tracing / metrics: add OpenTelemetry + exporter (OTLP) if you need distributed traces and metrics.
-- Uptime / Error dashboard: use Render / Netlify health checks plus an external monitoring service (UptimeRobot, Grafana Cloud, or a simple GitHub Actions cron that hits `/api/health`).
+- Uptime / Error dashboard: use Render / Vercel health checks plus an external monitoring service (UptimeRobot, Grafana Cloud, or a simple GitHub Actions cron that hits `/api/health`).
 
 Quick steps to enable:
 1. Rotate exposed API keys immediately (Google Maps, Cloudinary, email). Replace in hosting provider secrets.

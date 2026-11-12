@@ -20,14 +20,14 @@ git push origin <branch>
 - Google Maps (Browser key):
   - In Google Cloud Console -> APIs & Services -> Credentials
   - Delete the exposed API key (or restrict and regenerate); create a new browser key.
-  - Restrict to HTTP referrers for production domains (e.g., `https://kampuskart.netlify.app`) and to localhost for development.
+  - Restrict to HTTP referrers for production domains (e.g., `https://kampuskartmitadt.vercel.app`) and to localhost for development.
 - Cloudinary:
   - In Cloudinary console -> Settings -> Security, rotate the API key/secret.
   - For client-side uploads use an *unsigned upload preset* that is restricted to a folder, allowed formats, and maximum file size. Prefer server-side signed uploads when possible.
 - Email (Gmail app password): rotate the app password or service credential.
 
 4) Update hosting and CI secrets
-- Update secrets in Render/Netlify/GitHub Actions/other deployment platforms (replace old keys immediately).
+- Update secrets in Render/Vercel/GitHub Actions/other deployment platforms (replace old keys immediately).
 - In GitHub repo: Settings -> Secrets -> Actions — update or add `VITE_GOOGLE_MAPS_API_KEY`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `SENTRY_DSN`, etc.
 
 5) Purge secrets from Git history (optional, disruptive)
@@ -70,7 +70,7 @@ git grep -n "AIzaSy\|CLOUDINARY_API_KEY\|CLOUDINARY_API_SECRET" || true
 
 7) Post-rotation checks and redeploy
 - Update `frontend/.env` and `backend/.env` in the deployment platform (use secrets, not committed files).
-- Trigger a redeploy (Netlify / Render) and confirm the app functions.
+- Trigger a redeploy (Vercel / Render) and confirm the app functions.
 - Monitor logs and Sentry for new errors.
 
 8) Optional: short message for README

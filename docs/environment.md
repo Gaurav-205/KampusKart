@@ -71,8 +71,7 @@ VITE_API_URL=http://localhost:5000
 VITE_SOCKET_URL=http://localhost:5000
 ```
 
-## Netlify build environment
-Netlify sets build env vars in netlify.toml:
+## Vercel build environment
+Set these in the Vercel project settings (build time, so a change needs a redeploy):
 - VITE_API_URL
 - VITE_SOCKET_URL
-- NODE_VERSION

@@ -2,7 +2,7 @@
 
 ## Hosting
 
-- Frontend: Vercel (<https://kampuskartmitadt.vercel.app>), Netlify (<https://kampuskart.netlify.app>)
+- Frontend: Vercel (<https://kampuskartmitadt.vercel.app>)
 - Backend: Render (<https://kampuskart.onrender.com>, service `KampusKart`)
 
 ## Vercel (frontend)
@@ -39,7 +39,7 @@ Backend changes required on Render before switching traffic:
 Values for the current Vercel project (`kampuskart`, team `orbit-s-projects71`):
 
 ```env
-ALLOWED_ORIGINS=https://kampuskartmitadt.vercel.app,https://kampuskart-navy.vercel.app,https://kampuskart.netlify.app,https://kampuskart-*-orbit-s-projects71.vercel.app
+ALLOWED_ORIGINS=https://kampuskartmitadt.vercel.app,https://kampuskart-navy.vercel.app,https://kampuskart-*-orbit-s-projects71.vercel.app
 FRONTEND_URL=https://kampuskartmitadt.vercel.app
 TRUST_PROXY=1
 ```
@@ -53,14 +53,6 @@ Deploy with the Vercel GitHub integration (previews per PR, production from `mai
 npx vercel deploy            # preview
 npx vercel deploy --prod     # production, after the preview is verified
 ```
-
-## Netlify
-
-- Build command: npm run build:verify
-- Publish directory: dist (base directory: frontend)
-- SPA redirect to /index.html
-- Cache headers set for assets, service worker, and manifest
-- Production API URLs set in netlify.toml
 
 ## Render
 
@@ -83,8 +75,7 @@ npx vercel deploy --prod     # production, after the preview is verified
 
 ### CD workflow
 
-- Deploys frontend to Netlify on main and master
-- Triggers Render deploy via Render API
+- Manual only (`workflow_dispatch`): triggers a Render deploy via the Render API
 
 ### Keep alive workflow
 

@@ -196,7 +196,7 @@ const buildGoogleRedirectUrl = ({ user }) => {
   const frontendUrl = (
     process.env.FRONTEND_URL ||
     (process.env.NODE_ENV === 'production'
-      ? 'https://kampuskart.netlify.app'
+      ? 'https://kampuskartmitadt.vercel.app'
       : 'http://localhost:3000')
   ).replace(/\/$/, '');
 

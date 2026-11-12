@@ -59,7 +59,7 @@ Admins are configured by email (`ADMIN_EMAILS`) and can manage news, events, fac
 | Frontend | React 18, TypeScript, Vite 6, Tailwind CSS 3, Material UI 7, Socket.IO client |
 | Backend  | Node.js 20 (CommonJS), Express 5, MongoDB + Mongoose, Passport, Socket.IO     |
 | Services | Cloudinary (media), Nodemailer (OTP email), Google OAuth, Google Maps         |
-| Hosting  | Netlify or Vercel (frontend), Render (backend), MongoDB Atlas                 |
+| Hosting  | Vercel (frontend), Render (backend), MongoDB Atlas                            |
 | Quality  | Vitest + Testing Library, Jest + Supertest, ESLint, Prettier, GitHub Actions  |
 
 ## Quick start
@@ -153,7 +153,7 @@ KampusKart/
 ├── docs/                     Architecture, API, deployment and operations handbook
 ├── scripts/                  Setup and maintenance scripts
 ├── .github/                  CI/CD workflows, issue and PR templates
-├── netlify.toml  vercel.json Frontend hosting config
+├── vercel.json   Frontend hosting config
 └── docker-compose.yml        Local MongoDB
 ```
 
@@ -186,10 +186,10 @@ Backend tests need MongoDB. They use `MONGODB_URI` if set, then a local MongoDB 
 
 | Part     | Host             | Config                                                       |
 | -------- | ---------------- | ------------------------------------------------------------ |
-| Frontend | Netlify / Vercel | [`netlify.toml`](netlify.toml), [`vercel.json`](vercel.json) |
+| Frontend | Vercel           | [`vercel.json`](vercel.json)                                 |
 | Backend  | Render           | Root `backend/`, `npm install`, `node server.js`             |
 
-Pushing to `main` runs the CD workflow, which deploys the frontend to Netlify and triggers a Render deploy. Required GitHub secrets: `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`, `RENDER_API_KEY`, `RENDER_SERVICE_ID` and `VITE_GOOGLE_MAPS_API_KEY`. The full guide, including Vercel and Google OAuth setup, is in [docs/deployment.md](docs/deployment.md).
+Pushing to `main` deploys the frontend through the Vercel Git integration and the backend through the Render Git integration. The manual CD workflow can trigger a Render deploy; it needs the GitHub secrets `RENDER_API_KEY` and `RENDER_SERVICE_ID`. The full guide, including Vercel and Google OAuth setup, is in [docs/deployment.md](docs/deployment.md).
 
 ## Documentation
 

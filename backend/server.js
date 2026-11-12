@@ -95,7 +95,7 @@ const aiRoutes = require('./routes/ai');
 
 const app = express();
 
-// Render/Vercel/Netlify sit behind a reverse proxy. Without this, req.ip is the proxy's
+// Render/Vercel sit behind a reverse proxy. Without this, req.ip is the proxy's
 // address and every IP-based rate limiter shares one bucket across all users.
 // TRUST_PROXY accepts a hop count (default 1 in production) or 'false' to disable.
 const trustProxy = process.env.TRUST_PROXY ?? (process.env.NODE_ENV === 'production' ? '1' : 'false');

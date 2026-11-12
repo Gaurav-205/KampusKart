@@ -58,7 +58,7 @@ We take the security of KampusKart seriously. If you discover a security vulnera
 - Soft delete for data retention
 
 ### Infrastructure
-- Secure deployment on Netlify and Render
+- Secure deployment on Vercel and Render
 - Environment variable encryption
 - Regular dependency updates
 - Security patches applied promptly

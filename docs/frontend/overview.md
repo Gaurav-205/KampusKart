@@ -21,4 +21,4 @@
 
 ## Asset and build tooling
 - build:verify runs Vite build plus asset verification
-- Netlify configuration defines caching headers and SPA redirects
+- vercel.json defines caching headers and SPA rewrites

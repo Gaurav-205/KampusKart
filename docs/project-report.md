@@ -12,7 +12,7 @@ A full technical handbook now lives under the `docs/` folder. Start with `docs/R
 
 KampusKart is a full-stack campus portal built for MIT ADT University. The core idea is to bring common student and faculty needs into one web application: campus navigation, announcements, events, complaints, lost and found, facilities, club recruitment, profile management, and real-time campus chat.
 
-The project is implemented as a MERN-style application with a React + TypeScript frontend and a Node.js + Express + MongoDB backend. It also integrates Google Maps for campus navigation, Google OAuth for authentication, Cloudinary for image and file storage, Socket.IO for real-time chat, Nodemailer for OTP password reset, Netlify for frontend deployment, Render for backend deployment, and GitHub Actions for CI/CD.
+The project is implemented as a MERN-style application with a React + TypeScript frontend and a Node.js + Express + MongoDB backend. It also integrates Google Maps for campus navigation, Google OAuth for authentication, Cloudinary for image and file storage, Socket.IO for real-time chat, Nodemailer for OTP password reset, Vercel for frontend deployment, Render for backend deployment, and GitHub Actions for CI/CD.
 
 From an interview perspective, KampusKart is a strong capstone project because it demonstrates:
 
@@ -79,13 +79,13 @@ MongoDB stores users, chat messages, lost and found items, complaints, news, eve
 
 ### Deployment
 
-The frontend is configured for Netlify, while the backend is configured for Render. GitHub Actions handle linting, testing, builds, deployment, security audits, and backend keep-alive pings.
+The frontend is configured for Vercel, while the backend is configured for Render. GitHub Actions handle linting, testing, builds, deployment, security audits, and backend keep-alive pings.
 
 ## 5. Repository Structure
 
 ```text
 S72_Gaurav_Capstone_KampusKart/
-  netlify.toml
+  vercel.json
   docs/
     README.md
     architecture.md
@@ -182,7 +182,7 @@ S72_Gaurav_Capstone_KampusKart/
 | Email          | Nodemailer for OTP password reset                                                  |
 | Maps           | Google Maps JavaScript API, React Google Maps libraries                            |
 | Testing        | Vitest, React Testing Library, Jest, Supertest                                     |
-| DevOps         | GitHub Actions, Netlify, Render                                                    |
+| DevOps         | GitHub Actions, Vercel, Render                                                     |
 | Security       | Helmet, CORS whitelist, HPP protection, custom Mongo sanitization, rate limiting   |
 
 ## 7. Backend Implementation
@@ -788,11 +788,10 @@ Jobs:
 
 File: `.github/workflows/cd.yml`
 
-Runs on pushes to `main` and `master`.
+Runs manually (`workflow_dispatch`).
 
 Jobs:
 
-- Build and deploy frontend to Netlify.
 - Trigger backend deployment on Render through Render API.
 
 ### Keep-Alive Workflow
@@ -801,18 +800,19 @@ File: `.github/workflows/keep-alive.yml`
 
 Runs every 14 minutes and pings the backend health endpoint. This helps reduce Render free-tier cold starts.
 
-### Netlify Configuration
+### Vercel Configuration
 
-File: `netlify.toml`
+File: `vercel.json`
 
 Defines:
 
-- Build command: `npm run build:verify`
-- Publish directory: `dist` (base directory: `frontend`)
-- Production API and socket URLs
-- SPA fallback redirect to `index.html`
+- Build command: `npm --workspace frontend run build:verify`
+- Output directory: `frontend/dist`
+- SPA fallback rewrite to `index.html`
 - Cache headers for static assets
 - Fresh caching rules for service worker and manifest
+
+The production API and socket URLs are set as Vercel environment variables.
 
 ## 19. PWA and Performance Features
 
@@ -884,7 +884,7 @@ KampusKart delivers a production-oriented campus portal with:
 - Cloud file upload and cleanup.
 - Responsive design with consistent UI standards.
 - Automated testing and CI/CD workflows.
-- Deployment configuration for Netlify and Render.
+- Deployment configuration for Vercel and Render.
 
 The project demonstrates the ability to build, organize, secure, deploy, and maintain a complex full-stack application.
 
@@ -896,7 +896,7 @@ KampusKart is an all-in-one campus portal for MIT ADT University. It centralizes
 
 ### Architecture Answer
 
-The frontend is a React single-page app built with Vite and TypeScript. It communicates with an Express backend through REST APIs and Socket.IO. MongoDB stores user and feature data, Cloudinary stores uploaded media, Google OAuth handles social login, Google Maps powers campus navigation, and Nodemailer supports OTP password reset. The frontend is configured for Netlify deployment, and the backend is configured for Render.
+The frontend is a React single-page app built with Vite and TypeScript. It communicates with an Express backend through REST APIs and Socket.IO. MongoDB stores user and feature data, Cloudinary stores uploaded media, Google OAuth handles social login, Google Maps powers campus navigation, and Nodemailer supports OTP password reset. The frontend is configured for Vercel deployment, and the backend is configured for Render.
 
 ### Security Answer
 
@@ -912,7 +912,7 @@ I modeled the database around feature entities: User, LostFoundItem, Complaint, 
 
 ### Deployment Answer
 
-The project uses Netlify for the frontend and Render for the backend. GitHub Actions runs CI for linting, testing, builds, and dependency audits. CD builds and deploys the frontend to Netlify and triggers Render deployment through the Render API. There is also a keep-alive workflow that pings the backend health endpoint every 14 minutes.
+The project uses Vercel for the frontend and Render for the backend. GitHub Actions runs CI for linting, testing, builds, and dependency audits. The frontend deploys through the Vercel Git integration; a manual CD workflow can trigger Render deployment through the Render API. There is also a keep-alive workflow that pings the backend health endpoint every 14 minutes.
 
 ## 24. Possible Interview Questions and Strong Answers
 

@@ -19,7 +19,7 @@ flowchart LR
 
 ## Key data flows
 ### Web request flow
-1. Browser loads the SPA from Netlify.
+1. Browser loads the SPA from Vercel.
 2. React app calls REST endpoints on the Express server.
 3. Express validates JWTs, runs middleware, and routes requests.
 4. Mongoose reads or writes data in MongoDB.
@@ -33,7 +33,7 @@ flowchart LR
 5. The chat UI uses REST for pagination, edits, deletes, reactions, and read receipts.
 
 ## Deployment topology
-- Frontend: Netlify build and deploy using Vite
+- Frontend: Vercel build and deploy using Vite
 - Backend: Render service running the Express server
 - CI and CD: GitHub Actions for linting, testing, builds, and deploy triggers
 
